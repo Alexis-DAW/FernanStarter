@@ -1,3 +1,4 @@
+package usuario;
 public abstract class Usuario {
 
     private String nombre;
@@ -21,6 +22,4 @@ public abstract class Usuario {
     public String getCorreo() {
         return correo;
     }
-    public void setNombre(String nombre) {}
-
 }
