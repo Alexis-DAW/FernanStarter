@@ -10,5 +10,15 @@ public abstract class Usuario {
         this.correo = correo;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
 
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
 }
