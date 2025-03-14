@@ -1,6 +1,6 @@
+package gestor;
 import java.time.LocalDate;
-
-public class Proyecto {
+public final class Proyecto {
 
     private static int contadorProyectos;
     private int id;
