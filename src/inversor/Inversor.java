@@ -1,6 +1,5 @@
 package inversor;
 import inversion.Inversion;
-import proyecto.Proyecto;
 import usuario.*;
 
 public final class Inversor extends Usuario {
