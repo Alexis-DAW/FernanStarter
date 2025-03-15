@@ -8,6 +8,14 @@ public final class GestionUsuarios {
         numUsuarios = 0;
     }
 
+    public String toString() {
+        String cadena = "";
+        for (int i=0; i<numUsuarios; i++){
+            cadena += (usuarios[i]+"\n");
+        }
+        return cadena;
+    }
+
     public boolean agregarUsuario(Usuario usuario){
         if (numUsuarios < usuarios.length){
             usuarios[numUsuarios++] = usuario;

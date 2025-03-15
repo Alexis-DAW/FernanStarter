@@ -7,9 +7,9 @@ import gestor.*;
 import inversor.*;
 
 public final class Funciones {
-    public static void registroUsuarios(){
-        GestionUsuarios usuarios= new GestionUsuarios(10);
+    public static void registroUsuarios(GestionUsuarios usuarios){
         Scanner s = new Scanner(System.in);
+
         System.out.println("REGISTRO DE USUARIOS");
         int opcion;
         do{
