@@ -1,5 +1,4 @@
 package inversor;
-import inversion.Inversion;
 import usuario.*;
 
 public final class Inversor extends Usuario {
@@ -9,7 +8,7 @@ public final class Inversor extends Usuario {
     private int numInversiones;
 
     public Inversor(String nombre, String contrasena, String correo) {
-        super(nombre, contrasena, correo);
+        super(nombre, contrasena, correo, TipoUsuario.INVERSOR);
         this.saldo = 0;
         this.inversiones = new Inversion[10];
         this.numInversiones = 0;
@@ -19,8 +18,13 @@ public final class Inversor extends Usuario {
         return "Inversor " + super.getNombre() + "\nSaldo disponible: "+ saldo;
     }
 
-    /* todo metodo para invertir
-    public void invertir(Proyecto proyecto, double cantidad) {
+    public boolean invertir(Inversion inversion) {
+        if (numInversiones < inversiones.length){
+            inversiones[numInversiones++] = inversion;
+            return true;
+        }
+        return false;
+
     }
-    */
+
 }

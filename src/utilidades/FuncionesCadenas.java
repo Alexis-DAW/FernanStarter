@@ -9,7 +9,8 @@ public final class FuncionesCadenas {
         int contSimbolos=0;
         for (int i=0; i< contrasena.length(); i++){
             if (contrasena.charAt(i)=='+' || contrasena.charAt(i)=='-' || contrasena.charAt(i)=='_' ||
-                    contrasena.charAt(i)=='*' || contrasena.charAt(i)=='.' || contrasena.charAt(i)==',' || contrasena.charAt(i)=='@'){
+                    contrasena.charAt(i)=='*' || contrasena.charAt(i)=='.' || contrasena.charAt(i)==',' ||
+                    contrasena.charAt(i)=='@' || contrasena.charAt(i)=='¡' || contrasena.charAt(i)=='!'){
                 contSimbolos++;
             }else{
                 if (contrasena.charAt(i)==contrasena.toUpperCase().charAt(i)) contMayusculas++;
@@ -21,10 +22,9 @@ public final class FuncionesCadenas {
         else return false;
     }
 
-    public static boolean compararContrasena(String contrasenaUsuario, String contrasenaUsuario2){
+    public static boolean compararContrasenas(String contrasenaUsuario, String contrasenaUsuario2){
         for (int i=0; i< contrasenaUsuario.length(); i++){
-            if (contrasenaUsuario.charAt(i)==contrasenaUsuario2.charAt(i));
-            else return false;
+            if (contrasenaUsuario.charAt(i)!=contrasenaUsuario2.charAt(i)) return false;
         }
         return true;
     }

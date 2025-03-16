@@ -8,6 +8,9 @@ public final class GestionUsuarios {
         numUsuarios = 0;
     }
 
+    public int getNumUsuarios() { return numUsuarios; }
+
+
     public String toString() {
         String cadena = "";
         for (int i=0; i<numUsuarios; i++){
@@ -40,4 +43,12 @@ public final class GestionUsuarios {
         }
         return false;
     }
+
+    public Usuario devuelveUsuario(String nombreUsuario){
+        for (int i = 0; i < numUsuarios; i++){
+            if (usuarios[i].getNombre().equals(nombreUsuario)) return usuarios[i];
+        }
+        return null;
+    }
+
 }

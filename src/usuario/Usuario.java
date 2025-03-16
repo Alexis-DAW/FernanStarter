@@ -1,14 +1,25 @@
 package usuario;
+
+import gestor.Gestor;
+
 public abstract class Usuario {
 
     private String nombre;
     private String contrasena;
     private String correo;
+    private final TipoUsuario tipo;
+    private boolean bloqueo;
 
-    public Usuario (String nombre, String contrasena, String correo){
+    public Usuario (String nombre, String contrasena, String correo, TipoUsuario tipo) {
         this.nombre = nombre;
         this.contrasena = contrasena;
         this.correo = correo;
+        this.tipo = tipo;
+        this.bloqueo = false;
+    }
+
+    public void bloquear() {
+        this.bloqueo = true;
     }
 
     public String getNombre() {
@@ -22,6 +33,14 @@ public abstract class Usuario {
     public String getCorreo() {
         return correo;
     }
+
+    public TipoUsuario getTipoUsuario() { return tipo;}
+
+    public void setNombre(String nombre) { this.nombre = nombre; }
+
+    public void setContrasena(String contrasena) { this.contrasena = contrasena; }
+
+    public void setCorreo(String correo) { this.correo = correo;}
 
     public abstract String toString();
 

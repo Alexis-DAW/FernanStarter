@@ -1,11 +1,11 @@
 package proyecto;
-import inversion.Inversion;
+import inversor.Inversion;
 
 import java.time.LocalDate;
 
 public final class Proyecto {
 
-    private static int contadorProyectos;
+    private static int contadorProyectos=0;
     private final int id;
     private String nombre;
     private String descripcion;
@@ -71,12 +71,15 @@ public final class Proyecto {
         return numInversiones;
     }
 
+    public void setNumRecompensas(int numRecompensas) {
+        this.numRecompensas = numRecompensas;
+    }
+
     @Override
     public String toString() {
-        return "PROYECTO\n" +
-                "ID: " + id + ", nombre: " + nombre + ", descripción: " + descripcion + ", cantidad necesaria: "
+        return "PROYECTO " + id + "\nNombre: " + nombre + ", descripción: " + descripcion + ", cantidad necesaria: "
                 + cantidadNecesaria + ", cantidad financiada: " + cantidadFinanciada + ", fecha inicio: " + fechaInicio
-                + ", fecha fin: " + fechaFin + ", categoría: " + categoria + ", recompensas: " + recompensas;
+                + ", fecha fin: " + fechaFin + ", categoría: " + categoria + ", recompensas: " + numRecompensas ;
     }
 
     public void agregarRecompensa(Recompensa recompensa) {
