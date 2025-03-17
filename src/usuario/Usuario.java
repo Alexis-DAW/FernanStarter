@@ -1,25 +1,23 @@
 package usuario;
 
-import gestor.Gestor;
-
 public abstract class Usuario {
 
     private String nombre;
     private String contrasena;
     private String correo;
     private final TipoUsuario tipo;
-    private boolean bloqueo;
+    private boolean bloqueado;
 
     public Usuario (String nombre, String contrasena, String correo, TipoUsuario tipo) {
         this.nombre = nombre;
         this.contrasena = contrasena;
         this.correo = correo;
         this.tipo = tipo;
-        this.bloqueo = false;
+        this.bloqueado = false;
     }
 
     public void bloquear() {
-        this.bloqueo = true;
+        this.bloqueado = true;
     }
 
     public String getNombre() {

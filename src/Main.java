@@ -41,7 +41,7 @@ public class Main {
             System.out.println(intentos + " intentos restantes.");
             contrasenaIntroducida = s.nextLine();
             intentos--;
-        } while (!contrasenaIntroducida.equalsIgnoreCase(contrasenaUsuario));
+        } while (contrasenaIntroducida.equalsIgnoreCase(contrasenaUsuario));
 
         switch (usuario.getTipoUsuario()){
             case GESTOR -> apartadoGestor(usuario);
