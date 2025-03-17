@@ -1,6 +1,6 @@
 package usuario;
 
-public abstract class Usuario {
+public abstract class Usuario implements Bloqueable {
 
     private String nombre;
     private String contrasena;
@@ -18,6 +18,9 @@ public abstract class Usuario {
 
     public void bloquear() {
         this.bloqueado = true;
+    }
+    public void desbloquear(){
+        this.bloqueado = false;
     }
 
     public String getNombre() {
