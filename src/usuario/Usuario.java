@@ -1,25 +1,18 @@
 package usuario;
 
-public abstract class Usuario implements Bloqueable {
+public abstract class Usuario implements Bloqueable{
 
     private String nombre;
     private String contrasena;
     private String correo;
-    private final TipoUsuario tipo;
+    private final Tipo tipo;
     private boolean bloqueado;
 
-    public Usuario (String nombre, String contrasena, String correo, TipoUsuario tipo) {
+    public Usuario (String nombre, String contrasena, String correo, Tipo tipo) {
         this.nombre = nombre;
         this.contrasena = contrasena;
         this.correo = correo;
         this.tipo = tipo;
-        this.bloqueado = false;
-    }
-
-    public void bloquear() {
-        this.bloqueado = true;
-    }
-    public void desbloquear(){
         this.bloqueado = false;
     }
 
@@ -35,7 +28,7 @@ public abstract class Usuario implements Bloqueable {
         return correo;
     }
 
-    public TipoUsuario getTipoUsuario() { return tipo;}
+    public Tipo getTipoUsuario() { return tipo;}
 
     public void setNombre(String nombre) { this.nombre = nombre; }
 
@@ -44,5 +37,12 @@ public abstract class Usuario implements Bloqueable {
     public void setCorreo(String correo) { this.correo = correo;}
 
     public abstract String toString();
+
+    public void bloquear() {
+        this.bloqueado = true;
+    }
+    public void desbloquear(){
+        this.bloqueado = false;
+    }
 
 }

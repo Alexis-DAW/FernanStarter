@@ -1,54 +1,62 @@
 package usuario;
-public final class GestionUsuarios {
-    private Usuario[] usuarios;
-    private int numUsuarios;
+import java.util.ArrayList;
 
-    public GestionUsuarios(int max) {
-        usuarios = new Usuario[max];
-        numUsuarios = 0;
+public final class GestionUsuarios{
+    private ArrayList<Usuario> usuarios;
+
+    public GestionUsuarios() {
+        this.usuarios = new ArrayList<>();
     }
 
-    public int getNumUsuarios() { return numUsuarios; }
+    public ArrayList<Usuario> getUsuarios() { return usuarios; }
 
-
-    public String toString() {
-        String cadena = "";
-        for (int i=0; i<numUsuarios; i++){
-            cadena += (usuarios[i]+"\n");
-        }
-        return cadena;
+    public boolean agregarUsuario(Usuario usuario) {
+        return usuarios.add(usuario);
     }
 
-    public boolean agregarUsuario(Usuario usuario){
-        if (numUsuarios < usuarios.length){
-            usuarios[numUsuarios++] = usuario;
-            return true;
-        }
-        return false;
-    }
-
-    public int buscarUsuario(String nombreUsuario){
-        for (int i = 0; i < numUsuarios; i++){
-            if (usuarios[i].getNombre().equals(nombreUsuario)) return i;
+    public int buscarUsuario(String nombreUsuario) {
+        for (int i = 0; i < usuarios.size(); i++) {
+            if (usuarios.get(i).getNombre().equals(nombreUsuario)) {
+                return i;
+            }
         }
         return -1;
     }
 
-    public boolean eliminarUsuario(String nombreUsuario){
-        int posicion= buscarUsuario(nombreUsuario);
-        if (posicion>=0 ){
-            usuarios[posicion] = null;
-            numUsuarios--;
+    public boolean eliminarUsuario(String nombreUsuario) {
+        int posicion = buscarUsuario(nombreUsuario);
+        if (posicion != -1) {
+            usuarios.remove(posicion);
             return true;
         }
         return false;
     }
 
-    public Usuario devuelveUsuario(String nombreUsuario){
-        for (int i = 0; i < numUsuarios; i++){
-            if (usuarios[i].getNombre().equals(nombreUsuario)) return usuarios[i];
+    public Usuario devuelveUsuario(String nombreUsuario) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getNombre().equals(nombreUsuario)) {
+                return usuario;
+            }
         }
         return null;
+    }
+
+    public boolean bloquearUsuario(String nombreUsuario) {
+        int posicion = buscarUsuario(nombreUsuario);
+        if (posicion != -1) {
+            usuarios.get(posicion).bloquear();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean desbloquearUsuario(String nombreUsuario) {
+        int posicion = buscarUsuario(nombreUsuario);
+        if (posicion != -1) {
+            usuarios.get(posicion).desbloquear();
+            return true;
+        }
+        return false;
     }
 
 }

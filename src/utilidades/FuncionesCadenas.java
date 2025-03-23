@@ -28,4 +28,24 @@ public final class FuncionesCadenas {
         }
         return true;
     }
+
+    public static boolean comprobarLongitud(String texto){
+        if (texto.length()<5){
+            System.out.println("Por favor, introduzca un mínimo de 5 carácteres");
+            return false;
+        }
+        if (texto.length()>50){
+            System.out.println("Por favor, introduzca un máximo de 50 carácteres");
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean simboloMoneda(String cantidadIntroducida){
+        if(!cantidadIntroducida.endsWith("€")){
+            System.out.println("Usted debe introducir € al final de la cantidad)");
+            return false;
+        }
+        return true;
+    }
 }

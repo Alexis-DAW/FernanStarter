@@ -1,9 +1,9 @@
 package utilidades;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import static utilidades.FuncionesCadenas.*;
+import static utilidades.FuncionesFechas.*;
 
 import proyecto.Categoria;
 import proyecto.Proyecto;
@@ -12,6 +12,8 @@ import gestor.*;
 import inversor.*;
 
 public final class Funciones {
+
+
     public static void registroUsuarios(GestionUsuarios usuarios){
         Scanner s = new Scanner(System.in);
 
@@ -66,33 +68,40 @@ public final class Funciones {
 
     public static Proyecto datosProyecto(){
         Scanner s = new Scanner(System.in);
+        String titulo, descripcion;
+        do{
+            System.out.print("Introduzca el título del proyecto");
+            titulo= s.nextLine();
+        }while(!comprobarLongitud(titulo));
 
-        System.out.print("Introduzca el nombre del proyecto: ");
-        String nombre= s.nextLine();
+        do{
+            System.out.println("Introduzca la descripción del proyecto");
+            descripcion = s.nextLine();
+        }while(!comprobarLongitud(descripcion));
 
-        System.out.println("Introduzca la descripción del proyecto: ");
-        String descripcion = s.nextLine();
+        System.out.print("Escoja una de las siguientes categorías: ");
+        System.out.println("-> Arte");
+        System.out.println("-> Tecnología");
+        System.out.println("-> Cine");
+        System.out.println("-> Música");
+        System.out.println("-> Juegos");
+        System.out.println("-> Comida");
+        System.out.println("-> Moda");
+        Categoria categoriaElegida= Categoria.valueOf(s.nextLine().toUpperCase());
 
-        System.out.print("Escoja una de las siguientes categorías");
-        System.out.println("Arte");
-        System.out.println("Tecnología");
-        System.out.println("Cine");
-        System.out.println("Música");
-        System.out.println("Juegos");
-        System.out.println("Comida");
-        System.out.println("Moda");
-        Categoria categoria= Categoria.valueOf(s.nextLine().toUpperCase());
+        String cantidadIntroducida;
+        do{
+            System.out.print("Introduzca la cantidad de inversión necesaria para el proyecto: ");
+            cantidadIntroducida= s.nextLine();
+        }while(!simboloMoneda(cantidadIntroducida));
+        double cantidad= Double.parseDouble(cantidadIntroducida);
 
-        System.out.print("Introduzca la cantidad de inversión necesaria: ");
-        double cantidadNecesaria= Double.parseDouble(s.nextLine());
-
-        DateTimeFormatter formato= DateTimeFormatter.ofPattern("dd/MM/yyyy");
         System.out.println("Introduzca la fecha de apertura para recibir inversiones (dd/MM/yyy)");
-        LocalDate fechaInicio= LocalDate.parse(s.nextLine(), formato);
+        LocalDate fechaInicio= convertirAFecha(s.nextLine());
         System.out.println("Introduzca la fecha de cierre (dd/MM/yyy)");
-        LocalDate fechaCierre= LocalDate.parse(s.nextLine(), formato);
+        LocalDate fechaCierre= convertirAFecha(s.nextLine());
 
-        Proyecto nuevoProyecto= new Proyecto(nombre, descripcion, cantidadNecesaria, fechaInicio, fechaCierre, categoria);
+        Proyecto nuevoProyecto= new Proyecto(titulo, descripcion, cantidad, fechaInicio, fechaCierre, categoriaElegida);
 
         System.out.println("¿Cuantas recompensas desea añadir al proyecto?");
         nuevoProyecto.setNumRecompensas(s.nextInt());

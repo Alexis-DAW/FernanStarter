@@ -1,27 +1,36 @@
 import java.util.Scanner;
 
+import administrador.Administrador;
 import gestor.Gestor;
+import gestor.GestorControlador;
+import gestor.GestorVista;
 import usuario.*;
 import static utilidades.Funciones.*;
 public class Main {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
-        GestionUsuarios usuarios = new GestionUsuarios(100);
-
+        GestionUsuarios usuarios = new GestionUsuarios();
+        UsuarioVista vista= new UsuarioVista("✅","❌");
+        UsuarioControlador controlador= new UsuarioControlador(usuarios, vista);
         int opcion;
         do {
             System.out.println("Bienvenido ༼ つ ◕_◕ ༽つ");
             System.out.println("1. Iniciar sesión");
             System.out.println("2. Registrarse");
             System.out.println("3. Mostrar usuarios actuales (para pruebas internas)");
+            System.out.println("4. Salir del programa");
             opcion = Integer.parseInt(s.nextLine());
-            if (opcion == 1 && usuarios.getNumUsuarios() == 0 || opcion == 2)
+            if (opcion == 1) inicioSesion(usuarios);
+            if (opcion == 2){
                 registroUsuarios(usuarios);
-            if (opcion == 3) System.out.println(usuarios);
-        } while (opcion != 1);
+            }
+            if (opcion == 3) controlador.muestraUsuarios();
+        } while (opcion != 4);
+    }
 
+    public static void inicioSesion(GestionUsuarios usuarios) {
+        Scanner s = new Scanner(System.in);
         System.out.println("INICIO DE SESIÓN");
-
         Usuario usuario;
         do {
             System.out.println("Introduzca su nombre de usuario: ");
@@ -45,9 +54,26 @@ public class Main {
 
         switch (usuario.getTipoUsuario()){
             case GESTOR -> apartadoGestor(usuario);
-//          case INVERSOR ->
-//          case ADMINISTRADOR ->
+//            case INVERSOR ->
+            case ADMINISTRADOR -> apartadoAdministrador(usuario);
         }
+    }
+
+    public static void apartadoAdministrador(Usuario usuario) {
+        Scanner s = new Scanner(System.in);
+        Administrador administrador = (Administrador) usuario;
+        int opcion;
+        do{
+            System.out.println("MENÚ - " + "Administrador " + usuario.getNombre());
+            System.out.println("1. Panel de control");
+            System.out.println("2. Proyectos"); // todo apartado de todosMisProyectos, que trabaja con una lista de proyectos globales
+            System.out.println("3. Configuración");
+            System.out.println("4. Cerrar sesión");
+            opcion = Integer.parseInt(s.next());
+            if (opcion == 1) panelDeControl();
+            if (opcion == 2); //todosMisProyectos(administrador)
+            if (opcion == 3) configuracion(administrador);
+        }while (opcion !=4);
     }
 
     public static void apartadoGestor(Usuario usuario) {
@@ -67,27 +93,36 @@ public class Main {
 
     public static void misProyectos(Gestor gestor) {
         Scanner s = new Scanner(System.in);
+        GestorVista vista = new GestorVista("✅","❌");
+        GestorControlador controlador = new GestorControlador(gestor, vista);
 
         System.out.println("MIS PROYECTOS");
-        int opcion;
+        int opcion, indice;
         do {
             System.out.println("1. Crear Proyectos");
             System.out.println("2. Consultar proyectos");
             System.out.println("3. Modificar proyectos");
-            System.out.println("4. Salir");
+            System.out.println("4. Eliminar proyectos");
+            System.out.println("5. Salir");
             opcion = Integer.parseInt(s.nextLine());
             switch (opcion) {
                 case 1:
-                    gestor.agregarProyecto(datosProyecto());
+                    controlador.agregarProyecto(datosProyecto());
                     break;
                 case 2:
-                    gestor.mostrarProyectos();
+                    controlador.mostrarProyectos();
                     break;
                 case 3:
-                    System.out.println("Introduzca la ID del proyecto a eliminar");
-                    gestor.modificarProyecto(s.nextInt(), datosProyecto());
+                    controlador.mostrarProyectos();
+                    System.out.println("Introduzca la ID del proyecto a modificar");
+                    indice = Integer.parseInt(s.nextLine());
+                    gestor.modificarProyecto(indice, datosProyecto());
                     break;
                 case 4:
+                    System.out.println("Introduzca la ID del proyecto a modificar");
+                    indice = Integer.parseInt(s.nextLine());
+                    controlador.eliminarProyecto(indice);
+                case 5:
                     System.out.println("Salir.");
                     return;
                 default:
@@ -134,5 +169,16 @@ public class Main {
                     break;
             }
         }while (opcion!=3);
+    }
+
+    // Incompleto
+    public static void panelDeControl() {
+        Scanner s = new Scanner(System.in);
+        System.out.println("PANEL DE CONTROL");
+        System.out.println("Listado de todos los usuarios");
+
+        System.out.println("=====================================================================");
+        System.out.println("Introduzca un nombre de usuario para bloquearlo/desbloquearlo");
+
     }
 }

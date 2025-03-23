@@ -8,7 +8,7 @@ public final class Inversor extends Usuario {
     private int numInversiones;
 
     public Inversor(String nombre, String contrasena, String correo) {
-        super(nombre, contrasena, correo, TipoUsuario.INVERSOR);
+        super(nombre, contrasena, correo, Tipo.INVERSOR);
         this.saldo = 0;
         this.inversiones = new Inversion[10];
         this.numInversiones = 0;

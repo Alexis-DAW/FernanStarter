@@ -1,5 +1,5 @@
 package usuario;
 
-public enum TipoUsuario {
+public enum Tipo {
     GESTOR, INVERSOR, ADMINISTRADOR
 }
