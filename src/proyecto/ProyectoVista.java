@@ -1,12 +1,11 @@
-package gestor;
-import proyecto.Proyecto;
+package proyecto;
 import java.util.ArrayList;
 
-public final class GestorVista {
+public final class ProyectoVista {
     private String iconoExito;
     private String iconoError;
 
-    public GestorVista(String iconoExito, String iconoError) {
+    public ProyectoVista(String iconoExito, String iconoError) {
         this.iconoExito = iconoExito;
         this.iconoError = iconoError;
     }

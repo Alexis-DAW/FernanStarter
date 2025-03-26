@@ -4,9 +4,9 @@ import java.util.ArrayList;
 public final class GestionProyectos {
     private ArrayList<Proyecto> proyectosDeLaPlataforma;
 
-    public GestionProyectos() {
-        this.proyectosDeLaPlataforma = new ArrayList<>();
-    }
+    public GestionProyectos() { this.proyectosDeLaPlataforma = new ArrayList<>(); }
+
+    public ArrayList<Proyecto> getProyectos() { return proyectosDeLaPlataforma; }
 
     /**
      * Agrega un nuevo proyecto a la lista

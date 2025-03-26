@@ -1,8 +1,6 @@
 package utilidades;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
@@ -37,5 +35,4 @@ public class FuncionesFechas {
         LocalDateTime fechaActual= LocalDateTime.now();
         return ChronoUnit.DAYS.between(fecha, fechaActual);
     }
-
 }

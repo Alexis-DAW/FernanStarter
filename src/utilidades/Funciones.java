@@ -12,23 +12,58 @@ import gestor.*;
 import inversor.*;
 
 public final class Funciones {
+    // Incompleto, panel de control del administrador donde se bloqueará a los usuarios y demás
+    public static void panelDeControl() {
+        System.out.println("PANEL DE CONTROL");
+        System.out.println("Listado de todos los usuarios");
+
+        System.out.println("=====================================================================");
+        System.out.println("Introduzca un nombre de usuario para bloquearlo/desbloquearlo");
 
 
-    public static void registroUsuarios(GestionUsuarios usuarios){
-        Scanner s = new Scanner(System.in);
-
-        System.out.println("REGISTRO DE USUARIOS");
-        int opcion;
-        do{
-            System.out.println("Seleccione el tipo de usuario");
-            System.out.println("1. Inversor");
-            System.out.println("2. Gestor");
-            opcion= Integer.parseInt(s.nextLine());
-        }while (opcion!=1 && opcion!=2);
-
-        usuarios.agregarUsuario(datosUsuario(opcion));
     }
 
+    //Apartado de configuración de usuarios (es igual para todos)
+    public static void configuracion(Usuario usuario) {
+        Scanner s = new Scanner(System.in);
+        System.out.println("CONFIGURACION");
+        int opcion;
+        do {
+            System.out.println("1. Cambiar usuario");
+            System.out.println("2. Cambiar contraseña");
+            System.out.println("3. Modificar correo electrónico");
+            System.out.println("3. Guardar cambios");
+            opcion = Integer.parseInt(s.nextLine());
+            switch (opcion) {
+                case 1:
+                    System.out.println("Usuario " + usuario.getNombre());
+                    System.out.println("Introduzca su nuevo nombre de usuario: ");
+                    usuario.setNombre(s.nextLine());
+                    System.out.println("Nombre de usuario modificado-> " + usuario.getNombre());
+                    break;
+                case 2:
+                    System.out.println("Contraseña actual ->" + usuario.getContrasena());
+                    System.out.println("Introduzca su nueva contraseña: ");
+                    usuario.setContrasena(s.nextLine());
+                    System.out.println("Nueva contraseña -> " + usuario.getContrasena());
+                    break;
+                case 3:
+                    System.out.println("Correo electrónico -> " + usuario.getCorreo());
+                    System.out.println("Introduzca su nuevo correo electrónico: ");
+                    usuario.setCorreo(s.nextLine());
+                    System.out.println("Nuevo correo electrónico -> " + usuario.getCorreo());
+                    break;
+                case 4:
+                    System.out.println("Cambios guardados");
+                    break;
+                default:
+                    System.out.println("Por favor, introduzca una opción válida.");
+                    break;
+            }
+        }while (opcion!=3);
+    }
+
+    //Crea una nueva contraseña, comprobando que esta cumpla con los requisitos de seguridad
     public static String crearcontrasena(){
         Scanner s = new Scanner(System.in);
         String contrasena;
@@ -50,6 +85,7 @@ public final class Funciones {
         return contrasena;
     }
 
+    //Crea un usuario, gestor o inversor, según lo que se haya indicado en el programa principal
     public static Usuario datosUsuario(int opcion){
         Scanner s = new Scanner(System.in);
         System.out.println("Introduzca su correo electrónico");
@@ -66,6 +102,7 @@ public final class Funciones {
         }
     }
 
+   //Esta función devuelve un proyecto, se usa para agregar un proyecto nuevo o para modificar uno existente
     public static Proyecto datosProyecto(){
         Scanner s = new Scanner(System.in);
         String titulo, descripcion;

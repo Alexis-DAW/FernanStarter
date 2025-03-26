@@ -1,4 +1,7 @@
 package usuario;
+import gestor.Gestor;
+import proyecto.Proyecto;
+
 import java.util.ArrayList;
 
 public final class GestionUsuarios{
@@ -56,6 +59,24 @@ public final class GestionUsuarios{
             usuarios.get(posicion).desbloquear();
             return true;
         }
+        return false;
+    }
+
+    public boolean agregarProyectoGestor(Proyecto proyecto, String nombreUsuario){
+        Gestor usuarioGestor= (Gestor) devuelveUsuario(nombreUsuario);
+        usuarioGestor.agregarProyecto(proyecto);
+        return true;
+    }
+
+    public boolean eliminarProyectoGestor(int idProyecto, String nombreUsuario){
+        Gestor usuarioGestor= (Gestor) devuelveUsuario(nombreUsuario);
+        if(usuarioGestor.eliminarProyecto(idProyecto)) return true;
+        return false;
+    }
+
+    public boolean modificarProyectoGestor(Proyecto proyecto, int idProyecto, String nombreUsuario){
+        Gestor usuarioGestor= (Gestor) devuelveUsuario(nombreUsuario);
+        if(usuarioGestor.modificarProyecto(idProyecto, proyecto)) return true;
         return false;
     }
 

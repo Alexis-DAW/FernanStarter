@@ -12,5 +12,4 @@ public final class Administrador extends Usuario {
         return "Administrador " + super.getNombre();
     }
 
-
 }
