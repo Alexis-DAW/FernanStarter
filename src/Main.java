@@ -4,6 +4,7 @@ import administrador.Administrador;
 import gestor.Gestor;
 import gestor.GestorControlador;
 import gestor.GestorVista;
+import inversor.Inversor;
 import proyecto.GestionProyectos;
 import usuario.*;
 import static utilidades.Funciones.*;
@@ -14,6 +15,15 @@ public class Main {
         GestionProyectos proyectosDeLaPlataforma = new GestionProyectos();
         UsuarioVista vista = new UsuarioVista("✅","❌");
         UsuarioControlador controlador = new UsuarioControlador(usuarios, vista);
+
+        // Una instancia de cada tipo de usuario para hacer pruebas sin tener que crear el usuario cada vez
+        Administrador admin = new Administrador("admin", "admin", "admin@gmail.com");
+        Gestor gestor = new Gestor ("gestor", "gestor", "gestor@gmail.com");
+        Inversor inversor = new Inversor ("inversor", "inversor", "inversor@gmail.com");
+        usuarios.agregarUsuario(admin);
+        usuarios.agregarUsuario(gestor);
+        usuarios.agregarUsuario(inversor);
+
         int opcion;
         do {
             System.out.println("Bienvenido ༼ つ ◕_◕ ༽つ");
@@ -52,7 +62,7 @@ public class Main {
             System.out.println(intentos + " intentos restantes.");
             contrasenaIntroducida = s.nextLine();
             intentos--;
-        } while (contrasenaIntroducida.equalsIgnoreCase(contrasenaUsuario));
+        } while (!contrasenaIntroducida.equalsIgnoreCase(contrasenaUsuario));
 
         switch (usuario.getTipoUsuario()){
             case GESTOR -> apartadoGestor(usuario, proyectosDeLaPlataforma);
@@ -110,8 +120,6 @@ public class Main {
             switch (opcion) {
                 case 1:
                     controlador.agregarProyecto(datosProyecto());
-
-
                     break;
                 case 2:
                     controlador.mostrarProyectos();
