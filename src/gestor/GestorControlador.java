@@ -1,14 +1,17 @@
 package gestor;
+import proyecto.GestionProyectos;
 import proyecto.Proyecto;
 
 public final class GestorControlador {
 
+    private GestionProyectos proyectosDeLaPlataforma;
     private Gestor modelo;
     private GestorVista vista;
 
-    public GestorControlador(Gestor modelo, GestorVista vista) {
+    public GestorControlador(Gestor modelo, GestorVista vista, GestionProyectos proyectosDeLaPlataforma) {
         this.modelo = modelo;
         this.vista = vista;
+        this.proyectosDeLaPlataforma = proyectosDeLaPlataforma;
     }
 
     public void mostrarProyectos(){
@@ -17,6 +20,7 @@ public final class GestorControlador {
 
     public void agregarProyecto(Proyecto proyecto){
         modelo.agregarProyecto(proyecto);
+        proyectosDeLaPlataforma.agregarProyecto(proyecto);
         vista.operacionExitosa();
     }
 

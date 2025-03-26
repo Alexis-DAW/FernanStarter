@@ -4,14 +4,16 @@ import administrador.Administrador;
 import gestor.Gestor;
 import gestor.GestorControlador;
 import gestor.GestorVista;
+import proyecto.GestionProyectos;
 import usuario.*;
 import static utilidades.Funciones.*;
 public class Main {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         GestionUsuarios usuarios = new GestionUsuarios();
-        UsuarioVista vista= new UsuarioVista("✅","❌");
-        UsuarioControlador controlador= new UsuarioControlador(usuarios, vista);
+        GestionProyectos proyectosDeLaPlataforma = new GestionProyectos();
+        UsuarioVista vista = new UsuarioVista("✅","❌");
+        UsuarioControlador controlador = new UsuarioControlador(usuarios, vista);
         int opcion;
         do {
             System.out.println("Bienvenido ༼ つ ◕_◕ ༽つ");
@@ -20,7 +22,7 @@ public class Main {
             System.out.println("3. Mostrar usuarios actuales (para pruebas internas)");
             System.out.println("4. Salir del programa");
             opcion = Integer.parseInt(s.nextLine());
-            if (opcion == 1) inicioSesion(usuarios);
+            if (opcion == 1) inicioSesion(usuarios, proyectosDeLaPlataforma);
             if (opcion == 2){
                 registroUsuarios(usuarios);
             }
@@ -28,7 +30,7 @@ public class Main {
         } while (opcion != 4);
     }
 
-    public static void inicioSesion(GestionUsuarios usuarios) {
+    public static void inicioSesion(GestionUsuarios usuarios, GestionProyectos proyectosDeLaPlataforma) {
         Scanner s = new Scanner(System.in);
         System.out.println("INICIO DE SESIÓN");
         Usuario usuario;
@@ -53,7 +55,7 @@ public class Main {
         } while (contrasenaIntroducida.equalsIgnoreCase(contrasenaUsuario));
 
         switch (usuario.getTipoUsuario()){
-            case GESTOR -> apartadoGestor(usuario);
+            case GESTOR -> apartadoGestor(usuario, proyectosDeLaPlataforma);
 //            case INVERSOR ->
             case ADMINISTRADOR -> apartadoAdministrador(usuario);
         }
@@ -76,7 +78,7 @@ public class Main {
         }while (opcion !=4);
     }
 
-    public static void apartadoGestor(Usuario usuario) {
+    public static void apartadoGestor(Usuario usuario, GestionProyectos proyectosDeLaPlataforma) {
         Scanner s = new Scanner(System.in);
         Gestor gestor = (Gestor) usuario;
         int opcion;
@@ -86,15 +88,15 @@ public class Main {
             System.out.println("2. Configuración");
             System.out.println("3. Cerrar sesión");
             opcion= Integer.parseInt(s.nextLine());
-            if (opcion == 1) misProyectos(gestor);
+            if (opcion == 1) misProyectos(gestor, proyectosDeLaPlataforma);
             if (opcion == 2) configuracion(gestor);
         }while (opcion !=3);
     }
 
-    public static void misProyectos(Gestor gestor) {
+    public static void misProyectos(Gestor gestor, GestionProyectos proyectosDeLaPlataforma) {
         Scanner s = new Scanner(System.in);
         GestorVista vista = new GestorVista("✅","❌");
-        GestorControlador controlador = new GestorControlador(gestor, vista);
+        GestorControlador controlador = new GestorControlador(gestor, vista, proyectosDeLaPlataforma);
 
         System.out.println("MIS PROYECTOS");
         int opcion, indice;
@@ -108,6 +110,8 @@ public class Main {
             switch (opcion) {
                 case 1:
                     controlador.agregarProyecto(datosProyecto());
+
+
                     break;
                 case 2:
                     controlador.mostrarProyectos();

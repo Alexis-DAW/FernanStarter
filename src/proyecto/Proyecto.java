@@ -1,5 +1,5 @@
 package proyecto;
-import inversor.Inversion;
+import inversion.Inversion;
 
 import java.time.LocalDate;
 

@@ -2,10 +2,10 @@ package proyecto;
 import java.util.ArrayList;
 
 public final class GestionProyectos {
-    private ArrayList<Proyecto> listaProyectos;
+    private ArrayList<Proyecto> proyectosDeLaPlataforma;
 
     public GestionProyectos() {
-        this.listaProyectos = new ArrayList<>();
+        this.proyectosDeLaPlataforma = new ArrayList<>();
     }
 
     /**
@@ -14,7 +14,7 @@ public final class GestionProyectos {
      * @param proyecto que se va a añadir
      */
     public void agregarProyecto(Proyecto proyecto) {
-        listaProyectos.add(proyecto);
+        proyectosDeLaPlataforma.add(proyecto);
     }
 
     /**
@@ -25,8 +25,8 @@ public final class GestionProyectos {
      * @return -1 si no se ha encontrado la ID
      */
     public int buscarProyecto(int idProyecto) {
-        for (int i=0 ; i<listaProyectos.size(); i++){
-            if (listaProyectos.get(i).getId() == idProyecto) return i;
+        for (int i = 0; i< proyectosDeLaPlataforma.size(); i++){
+            if (proyectosDeLaPlataforma.get(i).getId() == idProyecto) return i;
         }
         return -1;
     }
@@ -40,7 +40,7 @@ public final class GestionProyectos {
     public boolean eliminarProyecto(int idProyecto) {
         int indice= buscarProyecto(idProyecto);
         if (indice != -1) {
-            listaProyectos.remove(indice);
+            proyectosDeLaPlataforma.remove(indice);
             return true;
         }
         return false;
@@ -57,14 +57,14 @@ public final class GestionProyectos {
     public boolean modificarProyecto(int idProyecto, Proyecto proyecto) {
         int posicion= buscarProyecto(idProyecto);
         if (posicion !=-1){
-            listaProyectos.set(posicion, proyecto);
+            proyectosDeLaPlataforma.set(posicion, proyecto);
             return true;
         }
         return false;
     }
 
     public void mostrarProyectos() {
-        for (Proyecto proyecto : listaProyectos) {
+        for (Proyecto proyecto : proyectosDeLaPlataforma) {
             System.out.println(proyecto);
         }
     }
