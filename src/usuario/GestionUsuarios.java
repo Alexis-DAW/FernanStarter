@@ -1,7 +1,6 @@
 package usuario;
 import gestor.Gestor;
 import proyecto.Proyecto;
-
 import java.util.ArrayList;
 
 public final class GestionUsuarios{

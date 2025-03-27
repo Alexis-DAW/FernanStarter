@@ -14,11 +14,11 @@ public class Main {
         Scanner s = new Scanner(System.in);
         GestionUsuarios listaUsuarios = new GestionUsuarios(); //Modelo
         UsuarioVista vistaUsuarios = new UsuarioVista("✅","❌"); //Vista
-        UsuarioControlador controlador = new UsuarioControlador(listaUsuarios, vistaUsuarios);
+        UsuarioControlador controladorUsuario = new UsuarioControlador(listaUsuarios, vistaUsuarios);
 
         GestionProyectos proyectosDeLaPlataforma = new GestionProyectos(); //Modelo
         ProyectoVista vistaDeProyectos = new ProyectoVista("✅","❌"); //Vista
-        ProyectoControlador controladorp = new ProyectoControlador(proyectosDeLaPlataforma, vistaDeProyectos);
+        ProyectoControlador controladorProyecto = new ProyectoControlador(proyectosDeLaPlataforma, vistaDeProyectos);
 
 
         // Una instancia de cada tipo de usuario para hacer pruebas sin tener que crear el usuario cada vez
@@ -37,7 +37,7 @@ public class Main {
             System.out.println("3. Mostrar listaUsuarios actuales (para pruebas internas)");
             System.out.println("4. Salir del programa");
             opcion = Integer.parseInt(s.nextLine());
-            if (opcion == 3) controlador.muestraUsuarios();
+            if (opcion == 3) controladorUsuario.muestraUsuarios();
             if (opcion == 1){
                 System.out.println("REGISTRO DE USUARIOS");
                 do{
@@ -106,13 +106,13 @@ public class Main {
                                     opcion = Integer.parseInt(s.nextLine());
                                     switch (opcion) {
                                         case 1:
-                                            controladorp.agregarProyecto(datosProyecto());
+                                            controladorProyecto.agregarProyecto(datosProyecto());
                                             break;
                                         case 2:
-                                            controladorp.mostrarProyectos();
+                                            controladorProyecto.mostrarProyectos();
                                             break;
                                         case 3:
-                                            controladorp.mostrarProyectos();
+                                            controladorProyecto.mostrarProyectos();
                                             System.out.println("Introduzca la ID del proyecto a modificar");
                                             indice = Integer.parseInt(s.nextLine());
                                             gestor.modificarProyecto(indice, datosProyecto());
@@ -120,7 +120,7 @@ public class Main {
                                         case 4:
                                             System.out.println("Introduzca la ID del proyecto a modificar");
                                             indice = Integer.parseInt(s.nextLine());
-                                            controladorp.eliminarProyecto(indice);
+                                            controladorProyecto.eliminarProyecto(indice);
                                         case 5:
                                             System.out.println("Salir.");
                                             return;
