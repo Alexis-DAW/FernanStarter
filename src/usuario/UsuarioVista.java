@@ -1,5 +1,7 @@
 package usuario;
 
+import proyecto.Proyecto;
+
 import java.util.ArrayList;
 
 public class UsuarioVista {
@@ -17,6 +19,11 @@ public class UsuarioVista {
         }
     }
 
+    public void mostrarProyectos(ArrayList<Proyecto> proyectos){
+        for (Proyecto proyecto : proyectos){
+            System.out.println(proyecto);
+        }
+    }
     public void operacionExitosa(){
         System.out.println(iconoExito + " Se ha completado la operación con éxito");
     }

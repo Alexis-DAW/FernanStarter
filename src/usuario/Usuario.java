@@ -30,6 +30,10 @@ public abstract class Usuario implements Bloqueable{
 
     public Tipo getTipoUsuario() { return tipo;}
 
+    public boolean estaBloqueado() {
+        return bloqueado;
+    }
+
     public void setNombre(String nombre) { this.nombre = nombre; }
 
     public void setContrasena(String contrasena) { this.contrasena = contrasena; }

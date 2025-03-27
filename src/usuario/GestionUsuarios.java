@@ -9,14 +9,36 @@ public final class GestionUsuarios{
     public GestionUsuarios() {
         this.usuarios = new ArrayList<>();
     }
-
     public ArrayList<Usuario> getUsuarios() { return usuarios; }
+
+    //Esta función nos devuelve el arraylist de proyectos perteneciente a un gestor de la lista.
+    public ArrayList<Proyecto> getProyectos(String nombreUsuario){
+        int indice= buscarNombreDeUsuario(nombreUsuario);
+        Gestor gestor= (Gestor) usuarios.get(indice);
+        return gestor.getProyectos();
+    }
+
+    public Tipo getTipoDeUsuario(Usuario usuario){
+        int indice= buscarUsuario(usuario);
+        return usuarios.get(indice).getTipoUsuario();
+    }
+
+    public boolean estaBloqueado(String nombreUsuario){
+        int indice= buscarNombreDeUsuario(nombreUsuario);
+        return usuarios.get(indice).estaBloqueado();
+    }
 
     public boolean agregarUsuario(Usuario usuario) {
         return usuarios.add(usuario);
     }
 
-    public int buscarUsuario(String nombreUsuario) {
+    //Devuelve el indice (la posición) donde se encuentra un usuario en el arraylist
+    public int buscarUsuario(Usuario usuario){
+        return usuarios.indexOf(usuario);
+    }
+
+   //Funcion son sobrecarga, devuelve el indice donde se encuentra un nombre de usuario en el arraylist
+    public int buscarNombreDeUsuario(String nombreUsuario) {
         for (int i = 0; i < usuarios.size(); i++) {
             if (usuarios.get(i).getNombre().equals(nombreUsuario)) {
                 return i;
@@ -26,9 +48,9 @@ public final class GestionUsuarios{
     }
 
     public boolean eliminarUsuario(String nombreUsuario) {
-        int posicion = buscarUsuario(nombreUsuario);
-        if (posicion != -1) {
-            usuarios.remove(posicion);
+        int indice = buscarNombreDeUsuario(nombreUsuario);
+        if (indice!= -1) {
+            usuarios.remove(indice);
             return true;
         }
         return false;
@@ -44,16 +66,16 @@ public final class GestionUsuarios{
     }
 
     public boolean bloquearUsuario(String nombreUsuario) {
-        int posicion = buscarUsuario(nombreUsuario);
-        if (posicion != -1) {
-            usuarios.get(posicion).bloquear();
+        int indice= buscarNombreDeUsuario(nombreUsuario);
+        if (indice != -1) {
+            usuarios.get(indice).bloquear();
             return true;
         }
         return false;
     }
 
     public boolean desbloquearUsuario(String nombreUsuario) {
-        int posicion = buscarUsuario(nombreUsuario);
+        int posicion = buscarNombreDeUsuario(nombreUsuario);
         if (posicion != -1) {
             usuarios.get(posicion).desbloquear();
             return true;
@@ -78,5 +100,4 @@ public final class GestionUsuarios{
         if(usuarioGestor.modificarProyecto(idProyecto, proyecto)) return true;
         return false;
     }
-
 }

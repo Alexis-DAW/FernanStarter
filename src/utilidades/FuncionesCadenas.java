@@ -25,8 +25,9 @@ public final class FuncionesCadenas {
 
     //Compara que dos contraseñas sean iguales (para el inicio de sesión)
     public static boolean compararContrasenas(String contrasenaUsuario, String contrasenaUsuario2){
+        if (contrasenaUsuario.length() != contrasenaUsuario2.length()) return false;
         for (int i=0; i< contrasenaUsuario.length(); i++){
-            if (contrasenaUsuario.charAt(i)!=contrasenaUsuario2.charAt(i)) return false;
+            if(contrasenaUsuario.charAt(i)!=contrasenaUsuario2.charAt(i)) return false;
         }
         return true;
     }

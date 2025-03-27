@@ -15,14 +15,40 @@ public class UsuarioControlador {
 
     }
 
-    public void bloquearUsuario(String nombreUsuario){
-        if(modelo.bloquearUsuario(nombreUsuario)) vista.operacionExitosa();
-        else vista.operacionErronea();
+    public void agregarUsuario(Usuario usuario){
+        if (modelo.agregarUsuario(usuario)) vista.operacionExitosa();
+        vista.operacionErronea();
     }
 
-    public void desbloquearUsuario(String nombreUsuario){
-        if(modelo.desbloquearUsuario(nombreUsuario)) vista.operacionExitosa();
-        else vista.operacionErronea();
+    public Usuario devuelveUsuario(String nombreUsuario){
+        Usuario usuario= modelo.devuelveUsuario(nombreUsuario);
+        if (usuario != null) {
+            vista.operacionExitosa();
+            return usuario;
+        }
+        vista.operacionErronea();
+        return null;
+    }
+
+    public Tipo getTipoDeUsuario(Usuario usuario) {
+        Tipo tipoDeUsuario= modelo.getTipoDeUsuario(usuario);
+        if (tipoDeUsuario != null) {
+            vista.operacionExitosa();
+            return tipoDeUsuario;
+        }
+        vista.operacionErronea();
+        return null;
+    }
+
+    public void cambiarEstadoUsuario(String nombreUsuario){
+        if(modelo.estaBloqueado(nombreUsuario)) {
+            modelo.desbloquearUsuario(nombreUsuario);
+            vista.operacionExitosa();
+        }else{
+            modelo.bloquearUsuario(nombreUsuario);
+            vista.operacionErronea();
+        }
+        vista.operacionExitosa();
     }
 
     public void agregarProyectoGestor(Proyecto proyecto, String nombreUsuario){
@@ -38,5 +64,7 @@ public class UsuarioControlador {
         else vista.operacionErronea();
     }
 
-
+    public void mostrarProyectosGestor(String nombreUsuario){
+        vista.mostrarProyectos(modelo.getProyectos(nombreUsuario));
+    }
 }

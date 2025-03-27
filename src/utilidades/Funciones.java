@@ -12,16 +12,6 @@ import gestor.*;
 import inversor.*;
 
 public final class Funciones {
-    // Incompleto, panel de control del administrador donde se bloqueará a los usuarios y demás
-    public static void panelDeControl() {
-        System.out.println("PANEL DE CONTROL");
-        System.out.println("Listado de todos los usuarios");
-
-        System.out.println("=====================================================================");
-        System.out.println("Introduzca un nombre de usuario para bloquearlo/desbloquearlo");
-
-
-    }
 
     //Apartado de configuración de usuarios (es igual para todos)
     public static void configuracion(Usuario usuario) {
@@ -85,7 +75,7 @@ public final class Funciones {
         return contrasena;
     }
 
-    //Crea un usuario, gestor o inversor, según lo que se haya indicado en el programa principal
+    //Crea un usuario, gestor o inversor, según lo que se haya elegido en el programa principal
     public static Usuario datosUsuario(int opcion){
         Scanner s = new Scanner(System.in);
         System.out.println("Introduzca su correo electrónico");

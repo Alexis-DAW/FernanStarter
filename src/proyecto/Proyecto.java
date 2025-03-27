@@ -77,9 +77,9 @@ public final class Proyecto {
 
     @Override
     public String toString() {
-        return "PROYECTO " + id + "\nNombre: " + nombre + ", descripción: " + descripcion + ", cantidad necesaria: "
-                + cantidadNecesaria + ", cantidad financiada: " + cantidadFinanciada + ", fecha inicio: " + fechaInicio
-                + ", fecha fin: " + fechaFin + ", categoría: " + categoria + ", recompensas: " + numRecompensas ;
+        return "PROYECTO " + id + "\nNombre: " + nombre + ", descripción: " + descripcion + "\nCantidad necesaria: "
+                + cantidadNecesaria + "\nCantidad financiada: " + cantidadFinanciada + "\nFecha inicio: " + fechaInicio
+                + ", fecha fin: " + fechaFin + "\nCategoría: " + categoria + "\nRecompensas: " + numRecompensas ;
     }
 
     public void agregarRecompensa(Recompensa recompensa) {
