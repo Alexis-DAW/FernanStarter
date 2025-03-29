@@ -2,102 +2,103 @@ package usuario;
 import gestor.Gestor;
 import proyecto.Proyecto;
 import java.util.ArrayList;
+import java.util.HashMap;
+import static usuario.Tipo.*;
 
 public final class GestionUsuarios{
-    private ArrayList<Usuario> usuarios;
+
+    private HashMap<String, Usuario> usuarios;
 
     public GestionUsuarios() {
-        this.usuarios = new ArrayList<>();
-    }
-    public ArrayList<Usuario> getUsuarios() { return usuarios; }
-
-    //Esta función nos devuelve el arraylist de proyectos perteneciente a un gestor de la lista.
-    public ArrayList<Proyecto> getProyectos(String nombreUsuario){
-        int indice= buscarNombreDeUsuario(nombreUsuario);
-        Gestor gestor= (Gestor) usuarios.get(indice);
-        return gestor.getProyectos();
+        this.usuarios = new HashMap<>();
     }
 
-    public Tipo getTipoDeUsuario(Usuario usuario){
-        int indice= buscarUsuario(usuario);
-        return usuarios.get(indice).getTipoUsuario();
-    }
-
-    public boolean estaBloqueado(String nombreUsuario){
-        int indice= buscarNombreDeUsuario(nombreUsuario);
-        return usuarios.get(indice).estaBloqueado();
+    public HashMap<String, Usuario> getUsuarios() {
+        return usuarios;
     }
 
     public boolean agregarUsuario(Usuario usuario) {
-        return usuarios.add(usuario);
-    }
-
-    //Devuelve el indice (la posición) donde se encuentra un usuario en el arraylist
-    public int buscarUsuario(Usuario usuario){
-        return usuarios.indexOf(usuario);
-    }
-
-   //Funcion son sobrecarga, devuelve el indice donde se encuentra un nombre de usuario en el arraylist
-    public int buscarNombreDeUsuario(String nombreUsuario) {
-        for (int i = 0; i < usuarios.size(); i++) {
-            if (usuarios.get(i).getNombre().equals(nombreUsuario)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    public boolean eliminarUsuario(String nombreUsuario) {
-        int indice = buscarNombreDeUsuario(nombreUsuario);
-        if (indice!= -1) {
-            usuarios.remove(indice);
+        if (!usuarios.containsKey(usuario.getNombre())) {
+            usuarios.put(usuario.getNombre(), usuario);
             return true;
         }
         return false;
     }
 
     public Usuario devuelveUsuario(String nombreUsuario) {
-        for (Usuario usuario : usuarios) {
-            if (usuario.getNombre().equals(nombreUsuario)) {
-                return usuario;
-            }
-        }
-        return null;
+        return usuarios.get(nombreUsuario);
+    }
+
+    public boolean eliminarUsuario(String nombreUsuario) {
+        return usuarios.remove(nombreUsuario) != null;
+    }
+
+    public Tipo getTipoDeUsuario(String nombreUsuario){
+        return usuarios.get(nombreUsuario).getTipoUsuario();
+    }
+
+    public Tipo getTipoDeUsuario(Usuario usuario){
+        return usuarios.get(usuario.getNombre()).getTipoUsuario();
+    }
+
+    public boolean estaBloqueado(String nombreUsuario) {
+        Usuario usuario = usuarios.get(nombreUsuario);
+        return usuario != null && usuario.estaBloqueado();
     }
 
     public boolean bloquearUsuario(String nombreUsuario) {
-        int indice= buscarNombreDeUsuario(nombreUsuario);
-        if (indice != -1) {
-            usuarios.get(indice).bloquear();
+        Usuario usuario = usuarios.get(nombreUsuario);
+        if (usuario != null) {
+            usuario.bloquear();
             return true;
         }
         return false;
     }
 
     public boolean desbloquearUsuario(String nombreUsuario) {
-        int posicion = buscarNombreDeUsuario(nombreUsuario);
-        if (posicion != -1) {
-            usuarios.get(posicion).desbloquear();
+        Usuario usuario = usuarios.get(nombreUsuario);
+        if (usuario != null) {
+            usuario.desbloquear();
             return true;
         }
         return false;
     }
 
-    public boolean agregarProyectoGestor(Proyecto proyecto, String nombreUsuario){
-        Gestor usuarioGestor= (Gestor) devuelveUsuario(nombreUsuario);
-        usuarioGestor.agregarProyecto(proyecto);
-        return true;
+    //Esta función nos devuelve el arraylist de proyectos perteneciente a un gestor del Hashmap de usuarios.
+    public ArrayList<Proyecto> getProyectos(String nombreGestor){
+        Gestor gestor = (Gestor) usuarios.get(nombreGestor);
+        return gestor.getProyectos();
+    }
+
+    public boolean agregarProyectoGestor(Proyecto proyecto, String nombreUsuario) {
+        Usuario usuario = usuarios.get(nombreUsuario);
+        if (usuario.getTipoUsuario() == GESTOR) {
+            Gestor gestor = (Gestor) usuario;
+            gestor.agregarProyecto(proyecto);
+            return true;
+        }
+        return false;
     }
 
     public boolean eliminarProyectoGestor(int idProyecto, String nombreUsuario){
-        Gestor usuarioGestor= (Gestor) devuelveUsuario(nombreUsuario);
-        if(usuarioGestor.eliminarProyecto(idProyecto)) return true;
+        Usuario usuario = usuarios.get(nombreUsuario);
+        if (usuario.getTipoUsuario() == GESTOR) {
+            Gestor gestor = (Gestor) usuario;
+            gestor.eliminarProyecto(idProyecto);
+            return true;
+        }
         return false;
     }
 
     public boolean modificarProyectoGestor(Proyecto proyecto, int idProyecto, String nombreUsuario){
-        Gestor usuarioGestor= (Gestor) devuelveUsuario(nombreUsuario);
-        if(usuarioGestor.modificarProyecto(idProyecto, proyecto)) return true;
+        Usuario usuario = usuarios.get(nombreUsuario);
+        if (usuario.getTipoUsuario() == GESTOR) {
+            Gestor gestor = (Gestor) usuario;
+            gestor.modificarProyecto(idProyecto, proyecto);
+            return true;
+        }
         return false;
     }
+
+
 }

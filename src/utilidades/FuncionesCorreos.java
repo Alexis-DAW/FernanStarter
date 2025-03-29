@@ -35,34 +35,28 @@ public class FuncionesCorreos {
     }
 
     public static void enviarConGMail(String destinatario, String asunto, String cuerpo) {
-        String remitente = "jose.vilchez.1106@fernando3martos.com";
-        String clave = "yddn fzyh khgr ywka";
-        // Propiedades de la conexión que se va a establecer con el servidor de correo SMTP
+        final String remitente = "alexis.lopez.1506@fernando3martos.com";
+        final String clave = "gphj dsbt qryu ugvs";
         Properties props = System.getProperties();
-        props.put("mail.smtp.host", "smtp.gmail.com"); // Servidor SMTP de Google
+        props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.user", remitente);
         props.put("mail.smtp.clave", clave);
-        props.put("mail.smtp.auth", "true"); // Usar autenticación mediante usuario y clave
-        props.put("mail.smtp.starttls.enable", "true"); // Conectar de manera segura
-        props.put("mail.smtp.port", "587"); // Puerto SMTP seguro de Google
-        // Se obtiene la sesión en el servidor de correo
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.port", "587");
         Session session = Session.getDefaultInstance(props);
         try {
-            // Creación del mensaje a enviar
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(remitente));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(destinatario));
             message.setSubject(asunto);
-            //message.setText(cuerpo); // Para enviar texto plano
-            message.setContent(cuerpo, "text/html; charset=utf-8"); // Para enviar html
-            // Definición de los parámetros del protocolo de transporte
+            message.setContent(cuerpo, "text/html; charset=utf-8");
             Transport transport = session.getTransport("smtp");
             transport.connect("smtp.gmail.com", remitente, clave);
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
-        }
-        catch (Exception me) {
+        } catch (Exception me) {
             me.printStackTrace();
         }
     }

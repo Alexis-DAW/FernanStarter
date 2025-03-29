@@ -18,7 +18,9 @@ public final class Gestor extends Usuario {
                 " con " + proyectos.size() + " proyectos.";
     }
 
-    public ArrayList<Proyecto> getProyectos() { return proyectos; }
+    public ArrayList<Proyecto> getProyectos() {
+        return proyectos;
+    }
 
     /**
      * Agrega un nuevo proyecto a la lista

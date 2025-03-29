@@ -1,6 +1,9 @@
 package usuario;
 import proyecto.Proyecto;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class UsuarioControlador {
     GestionUsuarios modelo;
     UsuarioVista vista;
@@ -11,17 +14,17 @@ public class UsuarioControlador {
     }
 
     public void muestraUsuarios(){
-        vista.mostrarUsuarios(modelo.getUsuarios());
-
+        ArrayList<Usuario> listaUsuarios = new ArrayList<>(modelo.getUsuarios().values());
+        vista.mostrarUsuarios(listaUsuarios);
     }
 
     public void agregarUsuario(Usuario usuario){
         if (modelo.agregarUsuario(usuario)) vista.operacionExitosa();
-        vista.operacionErronea();
+        else vista.operacionErronea();
     }
 
     public Usuario devuelveUsuario(String nombreUsuario){
-        Usuario usuario= modelo.devuelveUsuario(nombreUsuario);
+        Usuario usuario = modelo.devuelveUsuario(nombreUsuario);
         if (usuario != null) {
             vista.operacionExitosa();
             return usuario;
@@ -31,7 +34,7 @@ public class UsuarioControlador {
     }
 
     public Tipo getTipoDeUsuario(Usuario usuario) {
-        Tipo tipoDeUsuario= modelo.getTipoDeUsuario(usuario);
+        Tipo tipoDeUsuario = modelo.getTipoDeUsuario(usuario);
         if (tipoDeUsuario != null) {
             vista.operacionExitosa();
             return tipoDeUsuario;

@@ -49,7 +49,14 @@ public class Main {
                     System.out.println("2. Gestor");
                     entrada= Integer.parseInt(s.nextLine());
                 }while (entrada!=1 && entrada!=2);
-                controladorUsuario.agregarUsuario(datosUsuario(opcion));
+                // Autentiicación doble factor
+                autentificacionDeUsuario();
+
+                Usuario nuevoUsuario = datosUsuario(entrada); // Aquí se crea el nuevo usuario
+                // Asegúrate de agregarlo correctamente al modelo (GestionUsuarios)
+                controladorUsuario.agregarUsuario(nuevoUsuario);
+
+
             }
             if (opcion == 2){
                 System.out.println("INICIO DE SESIÓN");
@@ -61,17 +68,26 @@ public class Main {
 
                 String contrasenaUsuario = usuario.getContrasena();
                 String contrasenaIntroducida;
-                int intentos=3;
+                int intentos = 3;
+
                 do {
                     System.out.println("» Introduzca su contraseña: ");
                     System.out.println(intentos + " intentos restantes.");
                     contrasenaIntroducida = s.nextLine();
                     intentos--;
-                    if (intentos==0) usuario.bloquear();
-                } while (!contrasenaIntroducida.equalsIgnoreCase(contrasenaUsuario) && intentos>0);
 
-                //Autentiicación doble factor, todavía no la he probado.
-                autentificacionDeUsuario();
+                    if (contrasenaIntroducida.equals(contrasenaUsuario)) {
+                        System.out.println("Contraseña correcta. ¡Bienvenido!");
+                        break;
+                    }
+
+                    if (intentos == 0) {
+                        usuario.bloquear();
+                        System.out.println("Usuario bloqueado por intentos fallidos.");
+                    } else {
+                        System.out.println("Contraseña incorrecta. Inténtelo de nuevo.");
+                    }
+                } while (intentos > 0);
 
                 switch (controladorUsuario.getTipoDeUsuario(usuario)){
                     case ADMINISTRADOR -> {
