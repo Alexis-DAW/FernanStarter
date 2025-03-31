@@ -66,7 +66,6 @@ public class Main {
                 } while (usuario == null);
 
                 String contrasenaUsuario = controladorUsuario.getContrasena(usuario);
-
                 String contrasenaIntroducida;
                 int intentos = 3;
                 do {
@@ -243,8 +242,6 @@ public class Main {
             }
             if (opcion == 3) controladorUsuario.muestraUsuarios();
         } while (opcion != 4);
-
         System.out.println("SALIENDO...");
-
     }
 }

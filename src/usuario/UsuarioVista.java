@@ -16,14 +16,14 @@ public class UsuarioVista {
 
     public void mostrarUsuarios(ArrayList<Usuario> usuarios){
         for (Usuario usuario : usuarios) {
-            System.out.println(usuario.getNombre()
-                    + (usuario.estaBloqueado() ? iconoExito : iconoError));
+            System.out.println(usuario);
         }
     }
 
     public void mostrarEstadoUsuarios(ArrayList<Usuario> usuarios){
         for (Usuario usuario : usuarios) {
-            System.out.println(usuario);
+            System.out.println(usuario.getNombre()
+                    + (usuario.estaBloqueado() ? iconoError : iconoExito));
         }
     }
 
