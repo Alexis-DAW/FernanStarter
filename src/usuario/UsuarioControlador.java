@@ -49,10 +49,8 @@ public class UsuarioControlador {
     public Tipo getTipoDeUsuario(Usuario usuario) {
         Tipo tipoDeUsuario = modelo.getTipoDeUsuario(usuario);
         if (tipoDeUsuario != null) {
-            vista.operacionExitosa();
             return tipoDeUsuario;
         }
-        vista.operacionErronea();
         return null;
     }
     public boolean estaBloqueado(Usuario usuario){

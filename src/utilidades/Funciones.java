@@ -23,7 +23,7 @@ public final class Funciones {
             System.out.println("1. Cambiar usuario");
             System.out.println("2. Cambiar contraseña");
             System.out.println("3. Modificar correo electrónico");
-            System.out.println("3. Guardar cambios");
+            System.out.println("4. Guardar cambios");
             opcion = Integer.parseInt(s.nextLine());
             switch (opcion) {
                 case 1:
@@ -51,7 +51,7 @@ public final class Funciones {
                     System.out.println("Por favor, introduzca una opción válida.");
                     break;
             }
-        }while (opcion!=3);
+        }while (opcion!=4);
     }
 
     //Crea una nueva contraseña, comprobando que esta cumpla con los requisitos de seguridad

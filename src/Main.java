@@ -138,6 +138,7 @@ public class Main {
                                 configuracion(administrador);
                             }
                         } while (opcionAdmin != 4);
+                        System.out.println("Cerrando la sesión...");
                     }
 
                     case GESTOR -> {
@@ -187,6 +188,7 @@ public class Main {
                                 } while (entrada != 5);
                             }
                         } while (opcionGestor != 3);
+                        System.out.println("Cerrando la sesión...");
                     }
                     case INVERSOR -> {
                         if(controladorUsuario.estaBloqueado(usuario)){
@@ -234,13 +236,10 @@ public class Main {
                             }
 
                         } while (opcionInversor != 6);
-
-
+                        System.out.println("Cerrando la sesión...");
                     }
-
                 }
             }
-
             if (opcion == 3) controladorUsuario.muestraUsuarios();
         } while (opcion != 4);
 
