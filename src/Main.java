@@ -183,6 +183,29 @@ public class Main {
                             }
                         } while (opcionGestor != 3);
                     }
+                    case INVERSOR -> {
+                        Inversor inversor = (Inversor) usuario;
+                        int opcionInversor;
+                        do {
+                            System.out.println("MENÚ - INVERSOR " + inversor.getNombre());
+                            System.out.println("1. Configuración");
+                            System.out.println("2. Ver proyectos");
+                            System.out.println("3. Ver inversiones");
+                            System.out.println("4. Cartera digital");
+                            System.out.println("5. Cerrar sesión");
+                            opcionInversor = Integer.parseInt(s.nextLine());
+
+                            if (opcionInversor == 1) configuracion(inversor);
+                            if (opcionInversor == 2) {
+                                controladorProyecto.mostrarProyectos();
+
+                            }
+
+                        } while (opcionInversor != 5);
+
+
+                    }
+
                 }
             }
 
@@ -190,7 +213,6 @@ public class Main {
         } while (opcion != 4);
 
         System.out.println("SALIENDO...");
-
 
     }
 }
