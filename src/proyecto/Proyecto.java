@@ -102,7 +102,8 @@ public final class Proyecto {
 
     public boolean recibirInversion(Inversion inversion) {
         boolean esAnterior = esFechaAnterior(fechaFin);
-        if (cantidadFinanciada < cantidadNecesaria && esAnterior){
+        if (cantidadFinanciada <= cantidadNecesaria && !esAnterior){
+            cantidadFinanciada += inversion.getCantidad();
             inversiones.add(inversion);
             return true;
         } else {
