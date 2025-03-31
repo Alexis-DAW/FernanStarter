@@ -23,6 +23,10 @@ public final class Inversor extends Usuario {
         return saldo;
     }
 
+    public ArrayList<Inversion> getInversiones() {
+        return inversiones;
+    }
+
     public void invertir(Inversion inversion) {
         inversiones.add(inversion);
     }
@@ -34,5 +38,15 @@ public final class Inversor extends Usuario {
         }
         return false;
     }
+
+    public boolean aumentaInversion(double cantidad, Inversion inversion) {
+        return inversion.aumentaInversion(cantidad);
+    }
+
+    public boolean disminuyeInversion(double cantidad, Inversion inversion) {
+        return inversion.disminuyeInversion(cantidad);
+    }
+
+
 
 }

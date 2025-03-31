@@ -1,5 +1,6 @@
 package usuario;
 
+import inversion.Inversion;
 import proyecto.Proyecto;
 
 import java.util.ArrayList;
@@ -50,5 +51,11 @@ public class UsuarioVista {
 
     public void bloqueado(){
         System.out.println(iconoError + " Este usuario se encuentra bloqueado " );
+    }
+
+    public void mostrarInversiones(ArrayList<Inversion> inversiones){
+        for (Inversion inversion : inversiones){
+            System.out.println(inversion);
+        }
     }
 }

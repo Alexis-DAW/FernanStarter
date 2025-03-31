@@ -6,7 +6,7 @@ import proyecto.Recompensa;
 
 import java.time.LocalDate;
 
-public final class Inversion {
+public final class Inversion implements Invertible {
     private Inversor inversor;
     private Proyecto proyecto;
     private double cantidad;
@@ -30,5 +30,21 @@ public final class Inversion {
                 " → Proyecto: " + proyecto.getNombre() +
                 " | Cantidad: " + cantidad +
                 " | Fecha: " + fecha;
+    }
+
+    public boolean aumentaInversion(double cantidad) {
+        if (cantidad > 0) {
+            this.cantidad += cantidad;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean disminuyeInversion(double cantidad) {
+        if (cantidad <= this.cantidad){
+            this.cantidad -= cantidad;
+            return true;
+        }
+        return false;
     }
 }

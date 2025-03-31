@@ -1,4 +1,5 @@
 package usuario;
+import inversion.Inversion;
 import inversor.Inversor;
 import proyecto.Proyecto;
 
@@ -97,6 +98,23 @@ public class UsuarioControlador {
         boolean recargadoCorrectamente = modelo.recargarSaldo(cantidad, inversor);
         if (recargadoCorrectamente) vista.recargadoConExito(cantidad, inversor.getSaldo());
         else vista.recargadoSinExito(inversor.getSaldo());
+    }
+
+    public void aumentaInversion(double cantidad, Inversion inversion, Inversor inversor) {
+        boolean aumentadaConExito = modelo.aumentaInversion(cantidad, inversion, inversor);
+        if (aumentadaConExito) vista.operacionExitosa();
+        else vista.operacionErronea();
+    }
+
+    public void disminuyeInversion(double cantidad, Inversion inversion, Inversor inversor) {
+        boolean disminuidaConExito = modelo.disminuyeInversion(cantidad, inversion, inversor);
+        if (disminuidaConExito) vista.operacionExitosa();
+        else vista.operacionErronea();
+    }
+
+    public void mostrarInversiones(Inversor inversor){
+        ArrayList<Inversion> inversiones = modelo.devuelveInversiones(inversor);
+        vista.mostrarInversiones(inversiones);
     }
 
 }

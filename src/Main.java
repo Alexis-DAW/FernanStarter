@@ -214,6 +214,7 @@ public class Main {
                                 controladorProyecto.invertirEnProyecto(idProyecto, inversor);
                             }
                             if (opcionInversor == 4){
+                                controladorUsuario.mostrarInversiones(inversor);
 
                             }
                             if (opcionInversor == 5){

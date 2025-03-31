@@ -1,5 +1,6 @@
 package usuario;
 import gestor.Gestor;
+import inversion.Inversion;
 import inversor.Inversor;
 import proyecto.Proyecto;
 import java.util.ArrayList;
@@ -96,5 +97,16 @@ public final class GestionUsuarios{
         return inversor.recargarSaldo(cantidad);
     }
 
+    public boolean aumentaInversion(double cantidad, Inversion inversion, Inversor inversor) {
+        return inversor.aumentaInversion(cantidad, inversion);
+    }
+
+    public boolean disminuyeInversion(double cantidad, Inversion inversion, Inversor inversor) {
+        return inversor.disminuyeInversion(cantidad, inversion);
+    }
+
+    public ArrayList<Inversion> devuelveInversiones(Inversor inversor) {
+        return inversor.getInversiones();
+    }
 
 }
