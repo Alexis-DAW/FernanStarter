@@ -73,10 +73,6 @@ public final class Proyecto {
         return numInversiones;
     }
 
-    public void setNumRecompensas(int numRecompensas) {
-        this.numRecompensas = numRecompensas;
-    }
-
     @Override
     public String toString() {
         return "PROYECTO " + id + "\nNombre: " + nombre + ", descripción: " + descripcion + "\nCantidad necesaria: "
@@ -106,7 +102,7 @@ public final class Proyecto {
 
     public boolean recibirInversion(Inversion inversion) {
         boolean esAnterior = esFechaAnterior(fechaFin);
-        if (cantidadNecesaria < cantidadFinanciada && esAnterior){
+        if (cantidadFinanciada < cantidadNecesaria && esAnterior){
             inversiones.add(inversion);
             return true;
         } else {

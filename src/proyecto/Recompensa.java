@@ -1,14 +1,15 @@
 package proyecto;
 
 public final class Recompensa {
+    private int contadorId;
     private int id;
     private String descripcion;
     private double cantidadMinima; // (para obtener la recompensa)
 
-    public Recompensa(int id, String descripcion, double cantidadMinima) {
-        this.id = id;
+    public Recompensa(String descripcion, double cantidadMinima) {
+        this.id = contadorId++;
         this.descripcion = descripcion;
-        this.cantidadMinima = this.cantidadMinima;
+        this.cantidadMinima = cantidadMinima;
     }
 
     public int getId() {

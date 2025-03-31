@@ -7,6 +7,7 @@ import static utilidades.FuncionesFechas.*;
 
 import proyecto.Categoria;
 import proyecto.Proyecto;
+import proyecto.Recompensa;
 import usuario.*;
 import gestor.*;
 import inversor.*;
@@ -126,8 +127,14 @@ public final class Funciones {
 
         Proyecto nuevoProyecto= new Proyecto(titulo, descripcion, cantidad, fechaInicio, fechaCierre, categoriaElegida);
 
-        System.out.print("¿Cuantas recompensas desea añadir al proyecto?: ");
-        nuevoProyecto.setNumRecompensas(s.nextInt());
+        for (int i = 1; i <= 3; i++) {
+            System.out.print("Descripción de recompensa nº" + i + ": ");
+            String descripcionRecompensa = s.nextLine();
+            System.out.print("Cantidad mínima para obtener la recompensa nº" + i + ": ");
+            double cantidadMinimaRecompensa = Double.parseDouble(s.nextLine());
+            Recompensa recompensa = new Recompensa(descripcionRecompensa, cantidadMinimaRecompensa);
+            nuevoProyecto.agregarRecompensa(recompensa);
+        }
 
         return nuevoProyecto;
     }
