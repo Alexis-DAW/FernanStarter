@@ -97,12 +97,12 @@ public final class Funciones {
         Scanner s = new Scanner(System.in);
         String titulo, descripcion;
         do{
-            System.out.print("Introduzca el título del proyecto");
+            System.out.print("Introduzca el título del proyecto: ");
             titulo= s.nextLine();
         }while(!comprobarLongitud(titulo));
 
         do{
-            System.out.println("Introduzca la descripción del proyecto");
+            System.out.print("Introduzca la descripción del proyecto: ");
             descripcion = s.nextLine();
         }while(!comprobarLongitud(descripcion));
 
@@ -116,21 +116,17 @@ public final class Funciones {
         System.out.println("-> Moda");
         Categoria categoriaElegida= Categoria.valueOf(s.nextLine().toUpperCase());
 
-        String cantidadIntroducida;
-        do{
-            System.out.print("Introduzca la cantidad de inversión necesaria para el proyecto: ");
-            cantidadIntroducida= s.nextLine();
-        }while(!simboloMoneda(cantidadIntroducida));
-        double cantidad= Double.parseDouble(cantidadIntroducida);
+        System.out.print("Introduzca la cantidad de inversión necesaria para el proyecto: ");
+        double cantidad= Double.parseDouble(s.nextLine());
 
-        System.out.println("Introduzca la fecha de apertura para recibir inversiones (dd/MM/yyy)");
+        System.out.print("Introduzca la fecha de apertura para recibir inversiones (dd/MM/yyy): ");
         LocalDate fechaInicio= convertirAFecha(s.nextLine());
-        System.out.println("Introduzca la fecha de cierre (dd/MM/yyy)");
+        System.out.print("Introduzca la fecha de cierre (dd/MM/yyy): ");
         LocalDate fechaCierre= convertirAFecha(s.nextLine());
 
         Proyecto nuevoProyecto= new Proyecto(titulo, descripcion, cantidad, fechaInicio, fechaCierre, categoriaElegida);
 
-        System.out.println("¿Cuantas recompensas desea añadir al proyecto?");
+        System.out.print("¿Cuantas recompensas desea añadir al proyecto?: ");
         nuevoProyecto.setNumRecompensas(s.nextInt());
 
         return nuevoProyecto;

@@ -40,25 +40,24 @@ public class Main {
             System.out.println("3. Mostrar listaUsuarios actuales (para pruebas internas)");
             System.out.println("4. Salir del programa");
             opcion = Integer.parseInt(s.nextLine());
-            if (opcion == 1){
+
+            if (opcion == 1) {
                 System.out.println("REGISTRO DE USUARIOS");
                 int entrada;
-                do{
+                do {
                     System.out.println("Seleccione el tipo de usuario");
                     System.out.println("1. Inversor");
                     System.out.println("2. Gestor");
-                    entrada= Integer.parseInt(s.nextLine());
-                }while (entrada!=1 && entrada!=2);
-                // Autentiicación doble factor
+                    entrada = Integer.parseInt(s.nextLine());
+                } while (entrada != 1 && entrada != 2);
+
                 autentificacionDeUsuario();
 
-                Usuario nuevoUsuario = datosUsuario(entrada); // Aquí se crea el nuevo usuario
-                // Asegúrate de agregarlo correctamente al modelo (GestionUsuarios)
+                Usuario nuevoUsuario = datosUsuario(entrada);
                 controladorUsuario.agregarUsuario(nuevoUsuario);
-
-
             }
-            if (opcion == 2){
+
+            if (opcion == 2) {
                 System.out.println("INICIO DE SESIÓN");
                 Usuario usuario;
                 do {
@@ -89,27 +88,26 @@ public class Main {
                     }
                 } while (intentos > 0);
 
-                switch (controladorUsuario.getTipoDeUsuario(usuario)){
+                switch (controladorUsuario.getTipoDeUsuario(usuario)) {
                     case ADMINISTRADOR -> {
                         Administrador administrador = (Administrador) usuario;
-                        do{
-                            System.out.println("MENÚ - " + "ADMINISTRADOR ");
+                        int opcionAdmin;
+                        do {
+                            System.out.println("MENÚ - ADMINISTRADOR");
                             System.out.println("1. Panel de control");
                             System.out.println("2. Proyectos");
                             System.out.println("3. Configuración");
                             System.out.println("4. Cerrar sesión");
-                            opcion = Integer.parseInt(s.next());
-                            if (opcion == 1){
+                            opcionAdmin = Integer.parseInt(s.nextLine());
+
+                            if (opcionAdmin == 1) {
                                 System.out.println("PANEL DE CONTROL");
-                                System.out.println("Listado de todos los usuarios");
                                 controladorUsuario.muestraUsuarios();
-                                System.out.println("=====================================================================");
-                                System.out.println("Introduzca un nombre de usuario para bloquearlo/desbloquearlo");
+                                System.out.println("Introduzca un nombre de usuario para bloquear/desbloquearlo");
                                 controladorUsuario.cambiarEstadoUsuario(s.nextLine());
-                            }
-                            if (opcion == 2){
+                            } else if (opcionAdmin == 2) {
                                 System.out.println("TODOS LOS PROYECTOS");
-                                int entrada, indice;
+                                int entrada;
                                 do {
                                     System.out.println("1. Crear Proyectos");
                                     System.out.println("2. Consultar proyectos");
@@ -117,50 +115,43 @@ public class Main {
                                     System.out.println("4. Eliminar proyectos");
                                     System.out.println("5. Salir");
                                     entrada = Integer.parseInt(s.nextLine());
+
                                     switch (entrada) {
-                                        case 1:
-                                            controladorProyecto.agregarProyecto(datosProyecto());
-                                            break;
-                                        case 2:
-                                            controladorProyecto.mostrarProyectos();
-                                            break;
-                                        case 3:
+                                        case 1 -> controladorProyecto.agregarProyecto(datosProyecto());
+                                        case 2 -> controladorProyecto.mostrarProyectos();
+                                        case 3 -> {
                                             controladorProyecto.mostrarProyectos();
                                             System.out.println("Introduzca la ID del proyecto a modificar");
-                                            indice = Integer.parseInt(s.nextLine());
+                                            int indice = Integer.parseInt(s.nextLine());
                                             controladorProyecto.modificarProyecto(indice, datosProyecto());
-                                            break;
-                                        case 4:
+                                        }
+                                        case 4 -> {
                                             System.out.println("Introduzca la ID del proyecto a eliminar");
-                                            indice = Integer.parseInt(s.nextLine());
+                                            int indice = Integer.parseInt(s.nextLine());
                                             controladorProyecto.eliminarProyecto(indice);
-                                        case 5:
-                                            System.out.println("Salir.");
-                                            break;
-                                        default:
-                                            System.out.println("Por, favor, introduzca una opción correcta.");
-                                            break;
+                                        }
                                     }
                                 } while (entrada != 5);
-
+                            } else if (opcionAdmin == 3) {
+                                configuracion(administrador);
                             }
-                            if (opcion == 3) configuracion(administrador);
-                        }while (opcion !=4);
+                        } while (opcionAdmin != 4);
                     }
+
                     case GESTOR -> {
                         Gestor gestor = (Gestor) usuario;
-                        String nombreUsuario= gestor.getNombre();
-                        do{
-                            System.out.println("MENÚ - " + "Gestor " + nombreUsuario);
+                        int opcionGestor;
+                        do {
+                            System.out.println("MENÚ - GESTOR " + gestor.getNombre());
                             System.out.println("1. Configuración");
                             System.out.println("2. Mis proyectos");
                             System.out.println("3. Cerrar sesión");
-                            opcion= Integer.parseInt(s.nextLine());
-                            if (opcion == 1) configuracion(gestor);;
-                            if (opcion == 2){
+                            opcionGestor = Integer.parseInt(s.nextLine());
+
+                            if (opcionGestor == 1) configuracion(gestor);
+                            if (opcionGestor == 2) {
                                 System.out.println("MIS PROYECTOS");
-                                Proyecto nuevoProyecto;
-                                int entrada, indice;
+                                int entrada;
                                 do {
                                     System.out.println("1. Crear Proyectos");
                                     System.out.println("2. Consultar proyectos");
@@ -168,42 +159,38 @@ public class Main {
                                     System.out.println("4. Eliminar proyectos");
                                     System.out.println("5. Salir");
                                     entrada = Integer.parseInt(s.nextLine());
+
                                     switch (entrada) {
-                                        case 1:
-                                            nuevoProyecto = datosProyecto();
+                                        case 1 -> {
+                                            Proyecto nuevoProyecto = datosProyecto();
                                             controladorProyecto.agregarProyecto(nuevoProyecto);
-                                            controladorUsuario.agregarProyectoGestor(nuevoProyecto, nombreUsuario);
-                                            break;
-                                        case 2:
-                                            controladorUsuario.mostrarProyectosGestor(nombreUsuario);
-                                            break;
-                                        case 3:
-                                            controladorUsuario.mostrarProyectosGestor(nombreUsuario);
-                                            System.out.println("Introduzca la ID del proyecto que desea modificar");
-                                            indice = Integer.parseInt(s.nextLine());
-                                            nuevoProyecto= datosProyecto();
-                                            controladorUsuario.modificarProyectoGestor(nuevoProyecto, indice, nombreUsuario);
-                                            break;
-                                        case 4:
+                                            controladorUsuario.agregarProyectoGestor(nuevoProyecto, gestor.getNombre());
+                                        }
+                                        case 2 -> controladorUsuario.mostrarProyectosGestor(gestor.getNombre());
+                                        case 3 -> {
+                                            controladorUsuario.mostrarProyectosGestor(gestor.getNombre());
+                                            System.out.println("Introduzca la ID del proyecto a modificar");
+                                            int indice = Integer.parseInt(s.nextLine());
+                                            controladorUsuario.modificarProyectoGestor(datosProyecto(), indice, gestor.getNombre());
+                                        }
+                                        case 4 -> {
                                             System.out.println("Introduzca la ID del proyecto a eliminar");
-                                            indice = Integer.parseInt(s.nextLine());
-                                            controladorUsuario.eliminarProyectoGestor(indice, nombreUsuario);
-                                        case 5:
-                                            System.out.println("Salir.");
-                                            break;
-                                        default:
-                                            System.out.println("Por, favor, introduzca una opción correcta.");
-                                            break;
+                                            int indice = Integer.parseInt(s.nextLine());
+                                            controladorUsuario.eliminarProyectoGestor(indice, gestor.getNombre());
+                                        }
                                     }
                                 } while (entrada != 5);
                             }
-                        }while (opcion !=3);
+                        } while (opcionGestor != 3);
                     }
                 }
             }
+
             if (opcion == 3) controladorUsuario.muestraUsuarios();
-        }while (opcion != 4);
+        } while (opcion != 4);
 
         System.out.println("SALIENDO...");
+
+
     }
 }
