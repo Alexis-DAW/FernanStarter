@@ -70,7 +70,6 @@ public class Main {
                 String contrasenaIntroducida;
                 int intentos = 3;
                 do {
-
                     System.out.println("» Introduzca su contraseña: ");
                     System.out.println(intentos + " intentos restantes.");
                     contrasenaIntroducida = s.nextLine();
@@ -100,10 +99,14 @@ public class Main {
 
                             if (opcionAdmin == 1) {
                                 System.out.println("PANEL DE CONTROL");
-                                controladorUsuario.muestraUsuarios();
-                                System.out.println("Introduzca un nombre de usuario para bloquear/desbloquearlo");
-                                controladorUsuario.devuelveUsuario(s.nextLine());
-                                controladorUsuario.cambiarEstadoUsuario(usuario);
+                                controladorUsuario.muestraEstadoUsuarios();
+                                String nombreUsuario;
+                                do{
+                                    System.out.println("Introduzca un nombre de usuario para bloquearlo/desbloquearlo");
+                                    nombreUsuario= s.nextLine();
+                                }while (controladorUsuario.devuelveUsuario(nombreUsuario) == null);
+
+                                controladorUsuario.cambiarEstadoUsuario(nombreUsuario);
                             } else if (opcionAdmin == 2) {
                                 System.out.println("TODOS LOS PROYECTOS");
                                 int entrada;
@@ -138,7 +141,9 @@ public class Main {
                     }
 
                     case GESTOR -> {
-
+                        if(controladorUsuario.estaBloqueado(usuario)){
+                            break;
+                        }
                         Gestor gestor = (Gestor) usuario;
                         int opcionGestor;
                         do {
@@ -184,6 +189,9 @@ public class Main {
                         } while (opcionGestor != 3);
                     }
                     case INVERSOR -> {
+                        if(controladorUsuario.estaBloqueado(usuario)){
+                            break;
+                        }
                         Inversor inversor = (Inversor) usuario;
                         int opcionInversor;
                         do {

@@ -19,6 +19,11 @@ public class UsuarioControlador {
         vista.mostrarUsuarios(listaUsuarios);
     }
 
+    public void muestraEstadoUsuarios(){
+        ArrayList<Usuario> listaUsuarios = new ArrayList<>(modelo.getUsuarios().values());
+        vista.mostrarEstadoUsuarios(listaUsuarios);
+    }
+
     public void agregarUsuario(Usuario usuario){
         if (modelo.agregarUsuario(usuario)) vista.operacionExitosa();
         else vista.operacionErronea();
@@ -27,17 +32,14 @@ public class UsuarioControlador {
     public Usuario devuelveUsuario(String nombreUsuario){
         Usuario usuario = modelo.devuelveUsuario(nombreUsuario);
         if (usuario != null) {
-            vista.operacionExitosa();
             return usuario;
         }
-        vista.operacionErronea();
         return null;
     }
 
     public String getContrasena (Usuario usuario){
         String contrasena= modelo.getContrasena(usuario);
         if (contrasena != null) {
-            vista.operacionExitosa();
             return contrasena;
         }
         vista.operacionErronea();
@@ -53,12 +55,20 @@ public class UsuarioControlador {
         vista.operacionErronea();
         return null;
     }
+    public boolean estaBloqueado(Usuario usuario){
+        if(modelo.estaBloqueado(usuario)){
+            vista.bloqueado();
+            return true;
+        }
+        return false;
+    }
 
     public void bloquearUsuario(Usuario usuario){
         modelo.bloquearUsuario(usuario);
     }
 
-    public void cambiarEstadoUsuario(Usuario usuario){
+    public void cambiarEstadoUsuario(String nombreUsuario){
+        Usuario usuario = modelo.devuelveUsuario(nombreUsuario);
         if(modelo.estaBloqueado(usuario)) {
             modelo.desbloquearUsuario(usuario);
             vista.operacionExitosa();

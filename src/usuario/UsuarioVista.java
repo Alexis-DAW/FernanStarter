@@ -15,6 +15,13 @@ public class UsuarioVista {
 
     public void mostrarUsuarios(ArrayList<Usuario> usuarios){
         for (Usuario usuario : usuarios) {
+            System.out.println(usuario.getNombre()
+                    + (usuario.estaBloqueado() ? iconoExito : iconoError));
+        }
+    }
+
+    public void mostrarEstadoUsuarios(ArrayList<Usuario> usuarios){
+        for (Usuario usuario : usuarios) {
             System.out.println(usuario);
         }
     }
@@ -24,6 +31,7 @@ public class UsuarioVista {
             System.out.println(proyecto);
         }
     }
+
     public void operacionExitosa(){
         System.out.println(iconoExito + " Se ha completado la operación con éxito");
     }
@@ -40,5 +48,7 @@ public class UsuarioVista {
         System.out.println(iconoError + " no se puede recargar con una cantidad inferior a 0. Su saldo sigue siendo de "+saldo+"€");
     }
 
-
+    public void bloqueado(){
+        System.out.println(iconoError + " Este usuario se encuentra bloqueado " );
+    }
 }
