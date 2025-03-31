@@ -1,4 +1,5 @@
 package usuario;
+import inversor.Inversor;
 import proyecto.Proyecto;
 
 import java.util.ArrayList;
@@ -70,4 +71,11 @@ public class UsuarioControlador {
     public void mostrarProyectosGestor(String nombreUsuario){
         vista.mostrarProyectos(modelo.getProyectos(nombreUsuario));
     }
+
+    public void recargarSaldo (double cantidad, Inversor inversor){
+        boolean recargadoCorrectamente = modelo.recargarSaldo(cantidad, inversor);
+        if (recargadoCorrectamente) vista.recargadoConExito(cantidad, inversor.getSaldo());
+        else vista.recargadoSinExito(inversor.getSaldo());
+    }
+
 }

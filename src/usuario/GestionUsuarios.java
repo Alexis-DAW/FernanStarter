@@ -1,5 +1,6 @@
 package usuario;
 import gestor.Gestor;
+import inversor.Inversor;
 import proyecto.Proyecto;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -98,6 +99,10 @@ public final class GestionUsuarios{
             return true;
         }
         return false;
+    }
+
+    public boolean recargarSaldo (double cantidad, Inversor inversor){
+        return inversor.recargarSaldo(cantidad);
     }
 
 

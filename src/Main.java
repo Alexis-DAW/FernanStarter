@@ -202,7 +202,27 @@ public class Main {
                                 System.out.print("Introduce el ID del proyecto donde sea invertir: ");
                                 int idProyecto = Integer.parseInt(s.nextLine());
                                 controladorProyecto.invertirEnProyecto(idProyecto, inversor);
+                            }
+                            if (opcionInversor == 4){
 
+                            }
+                            if (opcionInversor == 5){
+                                int opcionCartera;
+                                do {
+                                    System.out.println("CARTERA DIGITAL \n" +
+                                            "1. Ver saldo \n" +
+                                            "2. Recargar saldo\n" +
+                                            "3. Salir");
+                                    opcionCartera = Integer.parseInt(s.nextLine());
+                                    switch (opcionCartera){
+                                        case 1 -> System.out.println("Saldo actual: " + inversor.getSaldo());
+                                        case 2 -> {
+                                            System.out.print("Cantidad: ");
+                                            double cantidad = Double.parseDouble(s.nextLine());
+                                            controladorUsuario.recargarSaldo(cantidad, inversor);
+                                        }
+                                    }
+                                }while (opcionCartera != 3);
                             }
 
                         } while (opcionInversor != 6);

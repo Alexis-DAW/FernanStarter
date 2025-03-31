@@ -31,4 +31,14 @@ public class UsuarioVista {
     public void operacionErronea(){
         System.out.println(iconoError + " No se ha completado la operación");
     }
+
+    public void recargadoConExito(double cantidad, double saldo){
+        System.out.println(iconoExito + " se recargó su cartera con " +cantidad+ ". Ahora tiene un total de "+saldo+"€");
+    }
+
+    public void recargadoSinExito(double saldo){
+        System.out.println(iconoError + " no se puede recargar con una cantidad inferior a 0. Su saldo sigue siendo de "+saldo+"€");
+    }
+
+
 }
