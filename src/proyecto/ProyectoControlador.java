@@ -1,5 +1,7 @@
 package proyecto;
 
+import inversor.Inversor;
+
 public final class ProyectoControlador {
 
     private GestionProyectos modelo;
@@ -31,10 +33,15 @@ public final class ProyectoControlador {
         else vista.operacionErronea();
     }
 
-    public void invertirEnProyecto(int idProyecto){
+    public void invertirEnProyecto(int idProyecto, Inversor inversor){
         int posicionProyecto = modelo.buscarProyecto(idProyecto);
         if(posicionProyecto != -1){
-            modelo.invertirEnProyecto(posicionProyecto);
+            boolean invertidoCorrectamente = modelo.invertirEnProyecto(posicionProyecto, inversor);
+            if (invertidoCorrectamente){
+                System.out.println("Invertido correctamente.");
+            } else {
+                System.out.println("No se puedo invertir.");
+            }
         }
 
 

@@ -201,7 +201,7 @@ public class Main {
                             if (opcionInversor == 3){
                                 System.out.print("Introduce el ID del proyecto donde sea invertir: ");
                                 int idProyecto = Integer.parseInt(s.nextLine());
-
+                                controladorProyecto.invertirEnProyecto(idProyecto, inversor);
 
                             }
 

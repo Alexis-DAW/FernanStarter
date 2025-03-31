@@ -1,5 +1,9 @@
 package proyecto;
+import inversion.Inversion;
+import inversor.Inversor;
+
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public final class GestionProyectos {
     private ArrayList<Proyecto> proyectosDeLaPlataforma;
@@ -69,12 +73,20 @@ public final class GestionProyectos {
         }
     }
 
-    public void invertirEnProyecto(int posicionProyecto){
+    public boolean invertirEnProyecto(int posicionProyecto, Inversor inversor){
+        Scanner sc = new Scanner(System.in);
         Proyecto proyecto = proyectosDeLaPlataforma.get(posicionProyecto);
-        // QUIZA DEBE DEVOLVER INVERSION, EN EL MAIN COGER LA INVERSION Y GUARDARLO EN EL OBJETO INVERSOR Y EN EL PROYECTO
-        // Y HACER LO QUE SEA
-
-
+        System.out.print("¿Cuánto desea invertir?: ");
+        double cantidadInvertida = Double.parseDouble(sc.nextLine());
+        Recompensa recompensa = proyecto.obtenerRecompensa(cantidadInvertida);
+        Inversion inversion = new Inversion(inversor, proyecto, cantidadInvertida, recompensa);
+        boolean invertidoCorrectamente = proyecto.recibirInversion(inversion);
+        if (invertidoCorrectamente){
+            inversor.invertir(inversion);
+            return true;
+        }
+        return false;
     }
+
 
 }
