@@ -65,28 +65,26 @@ public class Main {
                     usuario = controladorUsuario.devuelveUsuario(s.nextLine());
                 } while (usuario == null);
 
-                String contrasenaUsuario = usuario.getContrasena();
+                String contrasenaUsuario = controladorUsuario.getContrasena(usuario);
+
                 String contrasenaIntroducida;
                 int intentos = 3;
-
                 do {
+
                     System.out.println("» Introduzca su contraseña: ");
                     System.out.println(intentos + " intentos restantes.");
                     contrasenaIntroducida = s.nextLine();
-                    intentos--;
 
                     if (contrasenaIntroducida.equals(contrasenaUsuario)) {
                         System.out.println("Contraseña correcta. ¡Bienvenido!");
-                        break;
+                    }else{
+                        System.out.println("Contraseña incorrecta");
+                        intentos--;
                     }
 
-                    if (intentos == 0) {
-                        usuario.bloquear();
-                        System.out.println("Usuario bloqueado por intentos fallidos.");
-                    } else {
-                        System.out.println("Contraseña incorrecta. Inténtelo de nuevo.");
-                    }
-                } while (intentos > 0);
+                } while (intentos > 0 && !contrasenaIntroducida.equals(contrasenaUsuario));
+
+                if (intentos == 0) controladorUsuario.bloquearUsuario(usuario);
 
                 switch (controladorUsuario.getTipoDeUsuario(usuario)) {
                     case ADMINISTRADOR -> {
@@ -104,7 +102,8 @@ public class Main {
                                 System.out.println("PANEL DE CONTROL");
                                 controladorUsuario.muestraUsuarios();
                                 System.out.println("Introduzca un nombre de usuario para bloquear/desbloquearlo");
-                                controladorUsuario.cambiarEstadoUsuario(s.nextLine());
+                                controladorUsuario.devuelveUsuario(s.nextLine());
+                                controladorUsuario.cambiarEstadoUsuario(usuario);
                             } else if (opcionAdmin == 2) {
                                 System.out.println("TODOS LOS PROYECTOS");
                                 int entrada;
@@ -139,6 +138,7 @@ public class Main {
                     }
 
                     case GESTOR -> {
+
                         Gestor gestor = (Gestor) usuario;
                         int opcionGestor;
                         do {

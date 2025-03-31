@@ -34,6 +34,16 @@ public class UsuarioControlador {
         return null;
     }
 
+    public String getContrasena (Usuario usuario){
+        String contrasena= modelo.getContrasena(usuario);
+        if (contrasena != null) {
+            vista.operacionExitosa();
+            return contrasena;
+        }
+        vista.operacionErronea();
+        return null;
+    }
+
     public Tipo getTipoDeUsuario(Usuario usuario) {
         Tipo tipoDeUsuario = modelo.getTipoDeUsuario(usuario);
         if (tipoDeUsuario != null) {
@@ -44,15 +54,18 @@ public class UsuarioControlador {
         return null;
     }
 
-    public void cambiarEstadoUsuario(String nombreUsuario){
-        if(modelo.estaBloqueado(nombreUsuario)) {
-            modelo.desbloquearUsuario(nombreUsuario);
+    public void bloquearUsuario(Usuario usuario){
+        modelo.bloquearUsuario(usuario);
+    }
+
+    public void cambiarEstadoUsuario(Usuario usuario){
+        if(modelo.estaBloqueado(usuario)) {
+            modelo.desbloquearUsuario(usuario);
             vista.operacionExitosa();
         }else{
-            modelo.bloquearUsuario(nombreUsuario);
+            modelo.bloquearUsuario(usuario);
             vista.operacionErronea();
         }
-        vista.operacionExitosa();
     }
 
     public void agregarProyectoGestor(Proyecto proyecto, String nombreUsuario){

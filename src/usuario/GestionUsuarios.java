@@ -42,27 +42,18 @@ public final class GestionUsuarios{
         return usuarios.get(usuario.getNombre()).getTipoUsuario();
     }
 
-    public boolean estaBloqueado(String nombreUsuario) {
-        Usuario usuario = usuarios.get(nombreUsuario);
+    public String getContrasena (Usuario usuario){ return usuarios.get(usuario.getNombre()).getContrasena(); }
+
+    public boolean estaBloqueado(Usuario usuario) {
         return usuario != null && usuario.estaBloqueado();
     }
 
-    public boolean bloquearUsuario(String nombreUsuario) {
-        Usuario usuario = usuarios.get(nombreUsuario);
-        if (usuario != null) {
-            usuario.bloquear();
-            return true;
-        }
-        return false;
+    public void bloquearUsuario(Usuario usuario) {
+        usuario.bloquear();
     }
 
-    public boolean desbloquearUsuario(String nombreUsuario) {
-        Usuario usuario = usuarios.get(nombreUsuario);
-        if (usuario != null) {
-            usuario.desbloquear();
-            return true;
-        }
-        return false;
+    public void desbloquearUsuario(Usuario usuario) {
+        usuario.desbloquear();
     }
 
     //Esta función nos devuelve el arraylist de proyectos perteneciente a un gestor del Hashmap de usuarios.
