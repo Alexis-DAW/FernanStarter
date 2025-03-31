@@ -190,18 +190,22 @@ public class Main {
                             System.out.println("MENÚ - INVERSOR " + inversor.getNombre());
                             System.out.println("1. Configuración");
                             System.out.println("2. Ver proyectos");
-                            System.out.println("3. Ver inversiones");
-                            System.out.println("4. Cartera digital");
-                            System.out.println("5. Cerrar sesión");
+                            System.out.println("3. Invertir en proyecto");
+                            System.out.println("4. Ver inversiones");
+                            System.out.println("5. Cartera digital");
+                            System.out.println("6. Cerrar sesión");
                             opcionInversor = Integer.parseInt(s.nextLine());
 
                             if (opcionInversor == 1) configuracion(inversor);
-                            if (opcionInversor == 2) {
-                                controladorProyecto.mostrarProyectos();
+                            if (opcionInversor == 2) controladorProyecto.mostrarProyectos();
+                            if (opcionInversor == 3){
+                                System.out.print("Introduce el ID del proyecto donde sea invertir: ");
+                                int idProyecto = Integer.parseInt(s.nextLine());
+
 
                             }
 
-                        } while (opcionInversor != 5);
+                        } while (opcionInversor != 6);
 
 
                     }

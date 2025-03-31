@@ -29,6 +29,17 @@ public final class ProyectoControlador {
     public void modificarProyecto(int idProyecto, Proyecto proyecto){
         if (modelo.modificarProyecto(idProyecto, proyecto))vista.operacionExitosa();
         else vista.operacionErronea();
+    }
+
+    public void invertirEnProyecto(int idProyecto){
+        int posicionProyecto = modelo.buscarProyecto(idProyecto);
+        if(posicionProyecto != -1){
+            modelo.invertirEnProyecto(posicionProyecto);
+        }
+
 
     }
+
+
+
 }

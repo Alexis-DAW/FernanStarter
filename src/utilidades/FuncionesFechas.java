@@ -35,4 +35,8 @@ public class FuncionesFechas {
         LocalDateTime fechaActual= LocalDateTime.now();
         return ChronoUnit.DAYS.between(fecha, fechaActual);
     }
+
+    public static boolean esFechaAnterior(LocalDate fecha) {
+        return fecha.isBefore(LocalDate.now());
+    }
 }

@@ -2,6 +2,8 @@ package proyecto;
 import inversion.Inversion;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import static utilidades.FuncionesFechas.*;
 
 public final class Proyecto {
 
@@ -15,7 +17,7 @@ public final class Proyecto {
     private LocalDate fechaFin;
     private Categoria categoria;
     private Recompensa [] recompensas;
-    private Inversion[] inversiones;
+    private ArrayList<Inversion> inversiones;
     private int numInversiones;
     private int numRecompensas;
 
@@ -29,7 +31,7 @@ public final class Proyecto {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.categoria = categoria;
-        this.inversiones = new Inversion[10];
+        this.inversiones = new ArrayList<>();
         this.recompensas = new Recompensa[3];
         this.numInversiones = 0;
         this.numRecompensas = 0;
@@ -102,22 +104,15 @@ public final class Proyecto {
         return mejorRecompensa;
     }
 
-    public void recibirInversion(Inversion inversion) {
-        if (numInversiones < inversiones.length) {
-            inversiones[numInversiones++] = inversion;
-            cantidadFinanciada += inversion.getCantidad();
+    public boolean recibirInversion(Inversion inversion) {
+        boolean esAnterior = esFechaAnterior(fechaFin);
+        if (cantidadNecesaria < cantidadFinanciada && esAnterior){
+            inversiones.add(inversion);
+            return true;
         } else {
-            System.out.println("Capacidad de inversiones alcanzada. Expandiendo array...");
-            ampliarArrayInversiones();
-            recibirInversion(inversion); // La funcion se llama a sí misma, pero esta vez entrará por el primer if (no entra en bucle)
+            System.out.println("Ya no se puede invertir en este proyecto.");
+            return false;
         }
-    }
-    private void ampliarArrayInversiones() {
-        Inversion[] nuevoArray = new Inversion[inversiones.length * 2];
-        for (int i = 0; i < inversiones.length; i++) {
-            nuevoArray[i] = inversiones[i];
-        }
-        inversiones = nuevoArray;
     }
 
 

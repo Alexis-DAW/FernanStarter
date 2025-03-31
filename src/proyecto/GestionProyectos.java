@@ -68,4 +68,13 @@ public final class GestionProyectos {
             System.out.println(proyecto);
         }
     }
+
+    public void invertirEnProyecto(int posicionProyecto){
+        Proyecto proyecto = proyectosDeLaPlataforma.get(posicionProyecto);
+        // QUIZA DEBE DEVOLVER INVERSION, EN EL MAIN COGER LA INVERSION Y GUARDARLO EN EL OBJETO INVERSOR Y EN EL PROYECTO
+        // Y HACER LO QUE SEA
+
+
+    }
+
 }
