@@ -77,7 +77,15 @@ public final class Proyecto {
     public String toString() {
         return "PROYECTO " + id + "\nNombre: " + nombre + ", descripción: " + descripcion + "\nCantidad necesaria: "
                 + cantidadNecesaria + "\nCantidad financiada: " + cantidadFinanciada + "\nFecha inicio: " + fechaInicio
-                + ", fecha fin: " + fechaFin + "\nCategoría: " + categoria + "\nRecompensas: " + numRecompensas ;
+                + ", fecha fin: " + fechaFin + "\nCategoría: " + categoria + "\nRecompensas: " + muestraRecompensas() ;
+    }
+
+    private String muestraRecompensas(){
+        String muestraRecompensas = "";
+        for (Recompensa recompensa : recompensas){
+            muestraRecompensas += recompensa.toString() + "\n";
+        }
+        return muestraRecompensas;
     }
 
     public void agregarRecompensa(Recompensa recompensa) {

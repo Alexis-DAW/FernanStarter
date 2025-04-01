@@ -29,7 +29,9 @@ public final class Inversion implements Invertible {
         return  " → Inversor: " + inversor.getNombre() +
                 " → Proyecto: " + proyecto.getNombre() +
                 " | Cantidad: " + cantidad +
-                " | Fecha: " + fecha;
+                " | Fecha: " + fecha +
+                " | Recompensa: " + recompensa;
+
     }
 
     public boolean aumentaInversion(double cantidad) {

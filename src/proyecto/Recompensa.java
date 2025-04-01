@@ -7,7 +7,7 @@ public final class Recompensa {
     private double cantidadMinima; // (para obtener la recompensa)
 
     public Recompensa(String descripcion, double cantidadMinima) {
-        this.id = contadorId++;
+        this.id = ++contadorId;
         this.descripcion = descripcion;
         this.cantidadMinima = cantidadMinima;
     }

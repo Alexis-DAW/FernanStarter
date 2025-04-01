@@ -80,6 +80,10 @@ public final class GestionProyectos {
         double cantidadInvertida = Double.parseDouble(sc.nextLine());
         Recompensa recompensa = proyecto.obtenerRecompensa(cantidadInvertida);
         Inversion inversion = new Inversion(inversor, proyecto, cantidadInvertida, recompensa);
+        if (inversor.getSaldo() < cantidadInvertida){
+            System.out.println("Saldo insuficiente.");
+            return false;
+        }
         boolean invertidoCorrectamente = proyecto.recibirInversion(inversion);
         if (invertidoCorrectamente){
             inversor.invertir(inversion);
