@@ -69,6 +69,7 @@ public class Main {
 
                     if (contrasenaIntroducida.equals(contrasenaUsuario)) {
                         System.out.println("Contraseña correcta. ¡Bienvenido!");
+                        controladorUsuario.inicioSesion(usuario);
                     }else{
                         System.out.println("Contraseña incorrecta");
                         intentos--;
@@ -134,6 +135,7 @@ public class Main {
                             }
                         } while (opcionAdmin != 4);
                         System.out.println("Cerrando la sesión...");
+                        controladorUsuario.cierreSesion(administrador);
                     }
 
                     case GESTOR -> {
@@ -184,6 +186,8 @@ public class Main {
                             }
                         } while (opcionGestor != 3);
                         System.out.println("Cerrando la sesión...");
+                        controladorUsuario.cierreSesion(gestor);
+
                     }
                     case INVERSOR -> {
                         if(controladorUsuario.estaBloqueado(usuario)){
@@ -230,9 +234,9 @@ public class Main {
                                     }
                                 }while (opcionCartera != 3);
                             }
-
                         } while (opcionInversor != 6);
                         System.out.println("Cerrando la sesión...");
+                        controladorUsuario.cierreSesion(inversor);
                     }
                 }
             }

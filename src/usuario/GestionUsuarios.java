@@ -6,9 +6,11 @@ import inversor.Inversor;
 import proyecto.Proyecto;
 
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import static usuario.Tipo.*;
+import static utilidades.FuncionesFechas.convertirAString;
 
 public final class GestionUsuarios{
 
@@ -112,6 +114,23 @@ public final class GestionUsuarios{
         return inversor.getInversiones();
     }
 
+    public void nuevoLog(String tipoLog, String nombre, LocalDateTime fecha) {
+        try{
+            BufferedWriter bw = new BufferedWriter(new FileWriter("ficheros/log.txt"));
+            bw.write(tipoLog + " " + nombre + ", " + convertirAString(LocalDateTime.now()) + "\n");
+            bw.close();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void inicioSesion(Usuario usuario){
+        nuevoLog("Inicio de sesión de ", usuario.getNombre(), LocalDateTime.now());
+    }
+
+    public void cierreSesion(Usuario usuario){
+        nuevoLog("Cierre de sesión de ", usuario.getNombre(), LocalDateTime.now());
+    }
 
     public void guardarUsuarios(String ruta) {
         try {

@@ -2,8 +2,12 @@ package proyecto;
 import inversion.Inversion;
 import inversor.Inversor;
 
+import java.io.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import static utilidades.FuncionesFechas.convertirAString;
 
 public final class GestionProyectos {
     private ArrayList<Proyecto> proyectosDeLaPlataforma;
@@ -19,6 +23,7 @@ public final class GestionProyectos {
      */
     public void agregarProyecto(Proyecto proyecto) {
         proyectosDeLaPlataforma.add(proyecto);
+        nuevoLog("Nuevo proyecto", proyecto.getNombre(), LocalDateTime.now());
     }
 
     /**
@@ -45,6 +50,8 @@ public final class GestionProyectos {
         int indice= buscarProyecto(idProyecto);
         if (indice != -1) {
             proyectosDeLaPlataforma.remove(indice);
+            String nombreProyecto= proyectosDeLaPlataforma.get(indice).getNombre();
+            nuevoLog("Eliminación de proyecto", nombreProyecto, LocalDateTime.now());
             return true;
         }
         return false;
@@ -62,6 +69,7 @@ public final class GestionProyectos {
         int posicion= buscarProyecto(idProyecto);
         if (posicion !=-1){
             proyectosDeLaPlataforma.set(posicion, proyecto);
+            nuevoLog("Modificación de proyecto", proyecto.getNombre(), LocalDateTime.now());
             return true;
         }
         return false;
@@ -86,11 +94,22 @@ public final class GestionProyectos {
         }
         boolean invertidoCorrectamente = proyecto.recibirInversion(inversion);
         if (invertidoCorrectamente){
+            nuevoLog("Nueva inversión", inversor.getNombre(), LocalDateTime.now());
             inversor.invertir(inversion);
             return true;
         }
         return false;
     }
 
+    //Esta función registra cada vez que se crea, elimina o se invierte un proyecto
+    public void nuevoLog(String tipoLog, String nombre, LocalDateTime fecha) {
+        try{
+            BufferedWriter bw = new BufferedWriter(new FileWriter("ficheros/log.txt"));
+            bw.write(tipoLog + " " + nombre + ", " + convertirAString(LocalDateTime.now()) + "\n");
+            bw.close();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

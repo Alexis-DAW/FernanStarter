@@ -11,8 +11,8 @@ public class FuncionesFechas {
         return LocalDate.parse(fecha, formato);
     }
 
-    public static String convertirAString(LocalDate fecha){
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static String convertirAString(LocalDateTime fecha){
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         return fecha.format(formato);
     }
 

@@ -3,6 +3,7 @@ import inversion.Inversion;
 import inversor.Inversor;
 import proyecto.Proyecto;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -115,6 +116,14 @@ public class UsuarioControlador {
     public void mostrarInversiones(Inversor inversor){
         ArrayList<Inversion> inversiones = modelo.devuelveInversiones(inversor);
         vista.mostrarInversiones(inversiones);
+    }
+
+    public void inicioSesion(Usuario usuario){
+        modelo.inicioSesion(usuario);
+    }
+
+    public void cierreSesion(Usuario usuario){
+        modelo.cierreSesion(usuario);
     }
 
 }
