@@ -1,0 +1,4 @@
+INVERSOR;inversor;inversor;inversor@gmail.com;false
+INVERSOR;alexisPrueba;@lexis98;isalexis.design@gmail.com;false
+ADMINISTRADOR;admin;admin;admin@gmail.com;false
+GESTOR;gestor;gestor;gestor@gmail.com;false

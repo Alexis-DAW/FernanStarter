@@ -40,6 +40,10 @@ public abstract class Usuario implements Bloqueable{
 
     public void setCorreo(String correo) { this.correo = correo;}
 
+    void setBloqueado(boolean bloqueado){
+        this.bloqueado = bloqueado;
+    } // Esta función se utilizará sólo desde la función cargarUsuarios de GestionUsuarios
+
     public abstract String toString();
 
     public void bloquear() {

@@ -23,14 +23,7 @@ public class Main {
         ProyectoVista vistaDeProyectos = new ProyectoVista("✅","❌"); //Vista
         ProyectoControlador controladorProyecto = new ProyectoControlador(proyectosDeLaPlataforma, vistaDeProyectos);
 
-
-        // Una instancia de cada tipo de usuario para hacer pruebas sin tener que crear el usuario cada vez
-        Administrador adminPruebas = new Administrador("admin", "admin", "admin@gmail.com");
-        Gestor gestorPruebas = new Gestor ("gestor", "gestor", "gestor@gmail.com");
-        Inversor inversorPruebas = new Inversor ("inversor", "inversor", "inversor@gmail.com");
-        listaUsuarios.agregarUsuario(adminPruebas);
-        listaUsuarios.agregarUsuario(gestorPruebas);
-        listaUsuarios.agregarUsuario(inversorPruebas);
+        listaUsuarios.cargarUsuarios("ficheros/usuarios.txt");
 
         int opcion;
         do {
@@ -55,6 +48,7 @@ public class Main {
 
                 Usuario nuevoUsuario = datosUsuario(entrada);
                 controladorUsuario.agregarUsuario(nuevoUsuario);
+                listaUsuarios.guardarUsuarios("ficheros/usuarios.txt");
             }
 
             if (opcion == 2) {
@@ -83,6 +77,7 @@ public class Main {
                 } while (intentos > 0 && !contrasenaIntroducida.equals(contrasenaUsuario));
 
                 if (intentos == 0) controladorUsuario.bloquearUsuario(usuario);
+                listaUsuarios.guardarUsuarios("ficheros/usuarios.txt");
 
                 switch (controladorUsuario.getTipoDeUsuario(usuario)) {
                     case ADMINISTRADOR -> {
@@ -106,6 +101,7 @@ public class Main {
                                 }while (controladorUsuario.devuelveUsuario(nombreUsuario) == null);
 
                                 controladorUsuario.cambiarEstadoUsuario(nombreUsuario);
+                                listaUsuarios.guardarUsuarios("ficheros/usuarios.txt");
                             } else if (opcionAdmin == 2) {
                                 System.out.println("TODOS LOS PROYECTOS");
                                 int entrada;
@@ -242,6 +238,7 @@ public class Main {
             }
             if (opcion == 3) controladorUsuario.muestraUsuarios();
         } while (opcion != 4);
+        listaUsuarios.guardarUsuarios("ficheros/usuarios.txt");
         System.out.println("SALIENDO...");
     }
 }

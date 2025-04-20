@@ -1,8 +1,11 @@
 package usuario;
+import administrador.Administrador;
 import gestor.Gestor;
 import inversion.Inversion;
 import inversor.Inversor;
 import proyecto.Proyecto;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import static usuario.Tipo.*;
@@ -108,5 +111,70 @@ public final class GestionUsuarios{
     public ArrayList<Inversion> devuelveInversiones(Inversor inversor) {
         return inversor.getInversiones();
     }
+
+
+    public void guardarUsuarios(String ruta) {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(ruta));
+
+            for (Usuario u : usuarios.values()) {
+                Tipo tipo = getTipoDeUsuario(u);
+                // Formato: tipo;nombre;contrasena;email;bloqueado
+                String linea = tipo + ";" + u.getNombre() + ";" + u.getContrasena() + ";" + u.getCorreo() + ";" + u.estaBloqueado();
+                bw.write(linea);
+                bw.newLine();
+            }
+            bw.close();
+
+        } catch (FileNotFoundException e) {
+            System.out.println("ERROR. Archivo no encontrado.");
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("Excepción de entrada/salida");
+            e.printStackTrace();
+        }
+    }
+
+    public void cargarUsuarios(String ruta) {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(ruta));
+            String linea;
+
+            while ((linea = br.readLine()) != null) {
+                // Formato: tipo;nombre;contrasena;email;bloqueado
+                String[] partes = linea.split(";");
+
+                if (partes.length == 5) {  // Comprobamos que cada línea tenga 5 partes para evitar errores
+                    String tipo = partes[0];
+                    String nombre = partes[1];
+                    String contrasena = partes[2];
+                    String email = partes[3];
+                    boolean bloqueado = Boolean.parseBoolean(partes[4]);
+
+                    Usuario usuario = null;
+
+                    switch (tipo) {
+                        case "ADMINISTRADOR" -> usuario = new Administrador(nombre, contrasena, email);
+                        case "GESTOR" -> usuario = new Gestor(nombre, contrasena, email);
+                        case "INVERSOR" -> usuario = new Inversor(nombre, contrasena, email);
+                    }
+
+                    if (usuario != null) {
+                        usuario.setBloqueado(bloqueado);
+                        agregarUsuario(usuario);
+                    }
+                }
+            }
+            br.close();
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Archivo de usuarios no encontrado. Se empezará con lista vacía.");
+        } catch (IOException e) {
+            System.out.println("Error de lectura del archivo.");
+            e.printStackTrace();
+        }
+    }
+
+
 
 }

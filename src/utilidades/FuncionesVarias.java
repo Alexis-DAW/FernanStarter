@@ -87,9 +87,9 @@ public final class FuncionesVarias {
         String contrasena = crearcontrasena();
 
         if (opcion==1){
-            return new Inversor(nombreUsuario, correo, contrasena);
+            return new Inversor(nombreUsuario, contrasena, correo);
         }else{
-            return new Gestor(nombreUsuario, correo, contrasena);
+            return new Gestor(nombreUsuario, contrasena, correo);
         }
     }
 
