@@ -9,7 +9,7 @@ import proyecto.ProyectoVista;
 import inversor.Inversor;
 import proyecto.GestionProyectos;
 import usuario.*;
-import static utilidades.Funciones.*;
+import static utilidades.FuncionesVarias.*;
 import static utilidades.FuncionesCorreos.autentificacionDeUsuario;
 
 public class Main {

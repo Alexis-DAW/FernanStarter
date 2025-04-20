@@ -12,7 +12,7 @@ import usuario.*;
 import gestor.*;
 import inversor.*;
 
-public final class Funciones {
+public final class FuncionesVarias {
 
     //Apartado de configuración de usuarios (es igual para todos)
     public static void configuracion(Usuario usuario) {
@@ -137,5 +137,15 @@ public final class Funciones {
         }
 
         return nuevoProyecto;
+    }
+
+    public static void muestraGrafico(int[] cantidad, int[] cantidadAportada, int proyecto) {
+        float grafico = (float) (cantidadAportada[proyecto] * 100) / cantidad[proyecto];
+        System.out.println("Gráfica de financiación");
+        System.out.print(grafico + "% \u2192 ");
+        for (int i = 0; i <= grafico; i++) {
+            System.out.print("\u001B[36m\u275A");
+            if (i == 100) break;
+        }
     }
 }
