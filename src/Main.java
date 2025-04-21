@@ -31,10 +31,10 @@ public class Main {
         ProyectoVista vistaDeProyectos = new ProyectoVista("✅","❌"); //Vista
         ProyectoControlador controladorProyecto = new ProyectoControlador(proyectosDeLaPlataforma, vistaDeProyectos);
 
-//        Administrador adminPrueba = new Administrador("admin", "admin", "admin@gmail.com");
+        Administrador adminPrueba = new Administrador("admin", "admin", "admin@gmail.com");
 //        Gestor gestorPrueba = new Gestor("gestor", "gestor", "gestor@gmail.com");
 //        Inversor inversorPrueba = new Inversor ("inversor", "inversor", "inversor@gmail.com");
-//        controladorUsuario.agregarUsuario(adminPrueba);
+        controladorUsuario.agregarUsuario(adminPrueba);
 //        controladorUsuario.agregarUsuario(gestorPrueba);
 //        controladorUsuario.agregarUsuario(inversorPrueba);
 
@@ -48,8 +48,8 @@ public class Main {
         properties.setProperty("rutaLogs", "ficheros/log.txt");
         properties.store(new FileWriter("./configuracion/setup.properties"), "Configuracion del programa");
 
-        controladorUsuario.cargarUsuarios("ficheros/usuarios.txt");
-        proyectosDeLaPlataforma.cargarProyectos("ficheros/proyectos.txt");
+//        controladorUsuario.cargarUsuarios("ficheros/usuarios.txt");
+//        proyectosDeLaPlataforma.cargarProyectos("ficheros/proyectos.txt");
 
         int opcion;
         do {
@@ -119,8 +119,9 @@ public class Main {
                             System.out.println("1. Panel de control");
                             System.out.println("2. Proyectos");
                             System.out.println("3. Configuración de usuario");
-                            System.out.println("4. Configuración de la plataforma");
-                            System.out.println("5. Cerrar sesión");
+                            System.out.println("4. Configuración del programa");
+                            System.out.println("5. Últimas conexiones");
+                            System.out.println("6. Cerrar sesión");
                             opcionAdmin = Integer.parseInt(s.nextLine());
 
                             if (opcionAdmin == 1) {
@@ -169,27 +170,15 @@ public class Main {
                             } else if (opcionAdmin == 3) {
                                 configuracion(administrador);
                             }else if (opcionAdmin == 4){
+                                System.out.println("==========================");
                                 System.out.println("CONFIGURACIÓN DEL PROGRAMA");
                                 System.out.println("Modo invitado » " + (properties.getProperty("invitado")));
                                 System.out.println("Ruta de usuarios » " + properties.getProperty("rutaUsuarios"));
                                 System.out.println("Ruta de proyectos » " + properties.getProperty("rutaProyectos"));
                                 System.out.println("Ruta de logs » " + properties.getProperty("rutaLogs"));
-
+                                System.out.println("==========================");
                             }else if(opcionAdmin == 5){
-                                System.out.println("ÚLTIMAS CONEXIONES");
-//                               Este apartado lee nuestro archivo de logs y muestra aquellos que nos
-//                               indiquen el inicio de sesión de los usuarios dentro de la plataforma.
-                                String linea;
-                                try{
-                                    FileReader fr = new FileReader("ficheros/ejemplo.txt");
-                                    BufferedReader br = new BufferedReader(fr);
-                                    while ((linea = br.readLine()) != null){
-                                        if(linea.contains("Inicio de sesión")) System.out.println(linea);
-                                    }
-                                    br.close();
-                                }catch (IOException e) {
-                                    e.printStackTrace();
-                                }
+                                ultimasConexiones();
                             }
                         } while (opcionAdmin != 6);
                         System.out.println("Cerrando la sesión...");

@@ -1,4 +1,7 @@
 package utilidades;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -17,7 +20,7 @@ public final class FuncionesVarias {
     //Apartado de configuración de usuarios (es igual para todos)
     public static void configuracion(Usuario usuario) {
         Scanner s = new Scanner(System.in);
-        System.out.println("CONFIGURACION");
+        System.out.println("CONFIGURACION DE USUARIO");
         int opcion;
         do {
             System.out.println("1. Cambiar usuario");
@@ -146,6 +149,25 @@ public final class FuncionesVarias {
         for (int i = 0; i <= grafico; i++) {
             System.out.print("\u001B[36m\u275A");
             if (i == 100) break;
+        }
+    }
+
+    public static void ultimasConexiones(){
+        System.out.println("ÚLTIMAS CONEXIONES");
+        String linea;
+        try{
+            FileReader fr = new FileReader("ficheros/log.txt");
+            BufferedReader br = new BufferedReader(fr);
+            int contador= 0;
+            while ((linea = br.readLine()) != null && contador < 10){
+                if(linea.contains("Inicio de sesión")) {
+                    contador++;
+                    System.out.println(linea);
+                }
+            }
+            br.close();
+        }catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
