@@ -2,6 +2,10 @@ package proyecto;
 
 import inversor.Inversor;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
 public final class ProyectoControlador {
 
     private GestionProyectos modelo;
@@ -43,8 +47,8 @@ public final class ProyectoControlador {
                 System.out.println("No se puedo invertir.");
             }
         }
-
-
     }
+
+
 
 }

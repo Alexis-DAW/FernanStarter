@@ -1,11 +1,12 @@
 package proyecto;
 import inversion.Inversion;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import static utilidades.FuncionesFechas.*;
 
-public final class Proyecto {
+public final class Proyecto implements Serializable {
 
     private static int contadorProyectos=0;
     private final int id;

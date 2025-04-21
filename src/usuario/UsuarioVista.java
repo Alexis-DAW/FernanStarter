@@ -58,4 +58,21 @@ public class UsuarioVista {
             System.out.println(inversion);
         }
     }
+
+    public void guardadoCorrectamente (){
+        System.out.println(iconoExito + " usuarios guardados correctamente.");
+    }
+
+    public void guardadoIncorrectamente (){
+        System.out.println(iconoError + " error al guardar los usuarios.");
+    }
+
+    public void cargadoCorrectamente (){
+        System.out.println(iconoExito + " usuarios cargados correctamente.");
+    }
+
+    public void cargadoIncorrectamente (){
+        System.out.println(iconoError + " error al cargar los usuarios.");
+    }
+
 }

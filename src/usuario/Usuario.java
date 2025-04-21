@@ -1,6 +1,8 @@
 package usuario;
 
-public abstract class Usuario implements Bloqueable{
+import java.io.Serializable;
+
+public abstract class Usuario implements Bloqueable, Serializable {
 
     private String nombre;
     private String contrasena;

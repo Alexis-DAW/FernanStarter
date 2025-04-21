@@ -23,8 +23,8 @@ public class Main {
         ProyectoVista vistaDeProyectos = new ProyectoVista("✅","❌"); //Vista
         ProyectoControlador controladorProyecto = new ProyectoControlador(proyectosDeLaPlataforma, vistaDeProyectos);
 
-        listaUsuarios.cargarUsuarios("ficheros/usuarios.txt");
-        proyectosDeLaPlataforma.cargarProyectos("ficheros/proyectos.txt");
+        controladorUsuario.cargarUsuarios("ficheros/usuarios.txt");
+        //proyectosDeLaPlataforma.cargarProyectos("ficheros/proyectos.txt");
 
         int opcion;
         do {
@@ -49,7 +49,7 @@ public class Main {
 
                 Usuario nuevoUsuario = datosUsuario(entrada);
                 controladorUsuario.agregarUsuario(nuevoUsuario);
-                listaUsuarios.guardarUsuarios("ficheros/usuarios.txt");
+                controladorUsuario.guardarUsuarios("ficheros/usuarios.txt");
             }
 
             if (opcion == 2) {
@@ -79,7 +79,7 @@ public class Main {
                 } while (intentos > 0 && !contrasenaIntroducida.equals(contrasenaUsuario));
 
                 if (intentos == 0) controladorUsuario.bloquearUsuario(usuario);
-                listaUsuarios.guardarUsuarios("ficheros/usuarios.txt");
+                controladorUsuario.guardarUsuarios("ficheros/usuarios.txt"); // cuando un usuario quede bloqueado, se guarda
 
                 switch (controladorUsuario.getTipoDeUsuario(usuario)) {
                     case ADMINISTRADOR -> {
@@ -103,7 +103,7 @@ public class Main {
                                 }while (controladorUsuario.devuelveUsuario(nombreUsuario) == null);
 
                                 controladorUsuario.cambiarEstadoUsuario(nombreUsuario);
-                                listaUsuarios.guardarUsuarios("ficheros/usuarios.txt");
+                                controladorUsuario.guardarUsuarios("ficheros/usuarios.txt");
                             } else if (opcionAdmin == 2) {
                                 System.out.println("TODOS LOS PROYECTOS");
                                 int entrada;
@@ -118,7 +118,7 @@ public class Main {
                                     switch (entrada) {
                                         case 1 -> {
                                             controladorProyecto.agregarProyecto(datosProyecto());
-                                            proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
+                                            //proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
                                         }
                                         case 2 -> controladorProyecto.mostrarProyectos();
                                         case 3 -> {
@@ -126,13 +126,13 @@ public class Main {
                                             System.out.println("Introduzca la ID del proyecto a modificar");
                                             int indice = Integer.parseInt(s.nextLine());
                                             controladorProyecto.modificarProyecto(indice, datosProyecto());
-                                            proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
+                                            //proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
                                         }
                                         case 4 -> {
                                             System.out.println("Introduzca la ID del proyecto a eliminar");
                                             int indice = Integer.parseInt(s.nextLine());
                                             controladorProyecto.eliminarProyecto(indice);
-                                            proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
+                                            //proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
                                         }
                                     }
                                 } while (entrada != 5);
@@ -220,7 +220,7 @@ public class Main {
                                 System.out.print("Introduce el ID del proyecto donde sea invertir: ");
                                 int idProyecto = Integer.parseInt(s.nextLine());
                                 controladorProyecto.invertirEnProyecto(idProyecto, inversor);
-                                proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
+                                //proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
                             }
                             if (opcionInversor == 4){
                                 controladorUsuario.mostrarInversiones(inversor);
@@ -252,8 +252,8 @@ public class Main {
             }
             if (opcion == 3) controladorUsuario.muestraUsuarios();
         } while (opcion != 4);
-        listaUsuarios.guardarUsuarios("ficheros/usuarios.txt");
-        proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
+        controladorUsuario.guardarUsuarios("ficheros/usuarios.txt");
+        //proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
         System.out.println("SALIENDO...");
     }
 }

@@ -2,10 +2,10 @@ package gestor;
 import proyecto.Proyecto;
 import usuario.Tipo;
 import usuario.Usuario;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public final class Gestor extends Usuario {
+public final class Gestor extends Usuario implements Serializable {
     private ArrayList<Proyecto> proyectos;
 
     public Gestor(String nombre, String contrasena, String correo) {

@@ -1,10 +1,10 @@
 package inversor;
 import inversion.Inversion;
 import usuario.*;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public final class Inversor extends Usuario {
+public final class Inversor extends Usuario implements Serializable {
 
     private double saldo;
     private ArrayList<Inversion> inversiones;

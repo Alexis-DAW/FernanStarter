@@ -27,7 +27,8 @@ public class UsuarioControlador {
     }
 
     public void agregarUsuario(Usuario usuario){
-        if (modelo.agregarUsuario(usuario)) vista.operacionExitosa();
+        boolean agregadoCorrectamente = modelo.agregarUsuario(usuario);
+        if (agregadoCorrectamente) vista.operacionExitosa();
         else vista.operacionErronea();
     }
 
@@ -126,5 +127,18 @@ public class UsuarioControlador {
     public void cierreSesion(Usuario usuario){
         modelo.cierreSesion(usuario);
     }
+
+    public void guardarUsuarios(String ruta) {
+        boolean guardadoCorrectamente = modelo.guardarUsuarios(ruta);
+        if (guardadoCorrectamente) vista.guardadoCorrectamente();
+        else vista.guardadoIncorrectamente();
+    }
+
+    public void cargarUsuarios(String ruta) {
+        boolean cargadoCorrectamente = modelo.cargarUsuarios(ruta);
+        if (cargadoCorrectamente) vista.cargadoCorrectamente();
+        else vista.cargadoIncorrectamente();
+    }
+
 
 }

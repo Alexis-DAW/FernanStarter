@@ -1,6 +1,8 @@
 package proyecto;
 
-public final class Recompensa {
+import java.io.Serializable;
+
+public final class Recompensa implements Serializable {
     private int contadorId;
     private int id;
     private String descripcion;

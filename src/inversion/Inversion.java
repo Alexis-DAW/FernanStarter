@@ -4,9 +4,10 @@ import inversor.Inversor;
 import proyecto.Proyecto;
 import proyecto.Recompensa;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public final class Inversion implements Invertible {
+public final class Inversion implements Invertible, Serializable {
     private Inversor inversor;
     private Proyecto proyecto;
     private double cantidad;
