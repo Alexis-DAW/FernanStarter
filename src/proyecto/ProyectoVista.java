@@ -2,6 +2,7 @@ package proyecto;
 import java.util.ArrayList;
 
 public final class ProyectoVista {
+
     private String iconoExito;
     private String iconoError;
 

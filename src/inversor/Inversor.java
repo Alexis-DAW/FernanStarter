@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public final class Inversor extends Usuario implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private double saldo;
     private ArrayList<Inversion> inversiones;
 

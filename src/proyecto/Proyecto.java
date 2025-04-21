@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import static utilidades.FuncionesFechas.*;
 
 public final class Proyecto implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private static int contadorProyectos=0;
     private final int id;

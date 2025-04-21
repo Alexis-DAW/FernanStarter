@@ -3,6 +3,7 @@ package usuario;
 import java.io.Serializable;
 
 public abstract class Usuario implements Bloqueable, Serializable {
+    private static final long serialVersionUID = 1L;
 
     private String nombre;
     private String contrasena;

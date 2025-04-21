@@ -3,6 +3,7 @@ package proyecto;
 import java.io.Serializable;
 
 public final class Recompensa implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int contadorId;
     private int id;
     private String descripcion;

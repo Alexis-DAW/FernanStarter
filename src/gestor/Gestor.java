@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public final class Gestor extends Usuario implements Serializable {
+    private static final long serialVersionUID = 1L;
     private ArrayList<Proyecto> proyectos;
 
     public Gestor(String nombre, String contrasena, String correo) {

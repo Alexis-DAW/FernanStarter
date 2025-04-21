@@ -13,6 +13,7 @@ import java.util.Scanner;
 import static utilidades.FuncionesFechas.convertirAString;
 
 public final class GestionProyectos implements Serializable {
+    private static final long serialVersionUID = 1L;
     private ArrayList<Proyecto> proyectosDeLaPlataforma;
 
     public GestionProyectos() { this.proyectosDeLaPlataforma = new ArrayList<>(); }

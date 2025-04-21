@@ -12,6 +12,7 @@ import static usuario.Tipo.*;
 import static utilidades.FuncionesFechas.convertirAString;
 
 public final class GestionUsuarios implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private HashMap<String, Usuario> usuarios;
 
