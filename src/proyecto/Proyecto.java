@@ -74,6 +74,11 @@ public final class Proyecto {
         return numInversiones;
     }
 
+    // Este metodo sólo debe usarse desde el metodo cargarProyectos de GestionProyectos
+    public void setCantidadFinanciada(double cantidadFinanciada) {
+        this.cantidadFinanciada = cantidadFinanciada;
+    }
+
     @Override
     public String toString() {
         return "PROYECTO " + id + "\nNombre: " + nombre + ", descripción: " + descripcion + "\nCantidad necesaria: "

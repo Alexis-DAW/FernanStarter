@@ -3,6 +3,7 @@ import inversion.Inversion;
 import inversor.Inversor;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -125,5 +126,57 @@ public final class GestionProyectos {
             e.printStackTrace();
         }
     }
+
+    public void guardarProyectos(String ruta) {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(ruta));
+
+            for (Proyecto p : proyectosDeLaPlataforma) {
+                bw.write(p.getId() + ";" + p.getNombre() + ";" + p.getDescripcion() + ";" +
+                        p.getCantidadNecesaria() + ";" + p.getCantidadFinanciada() + ";" +
+                        p.getFechaInicio() + ";" + p.getFechaFin() + ";" + p.getCategoria());
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error al guardar proyectos.");
+            e.printStackTrace();
+        }
+    }
+
+    // todo modificar estos metodos para que también guarden la información de las recompensas y las inversiones de cada proyecto
+    // todo PREGUNTAR A ELADIO SI LA FORMA DE GUARDAR/CARGAR PROYECTOS Y USUARIOS DEBE SER ESTA O CON SERIALIZACION: ObjectInputStream
+    public void cargarProyectos(String ruta) {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(ruta));
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] partes = linea.split(";");
+                if (partes.length == 8) {
+                    int id = Integer.parseInt(partes[0]);
+                    String nombre = partes[1];
+                    String descripcion = partes[2];
+                    double cantidadNecesaria = Double.parseDouble(partes[3]);
+                    double cantidadFinanciada = Double.parseDouble(partes[4]);
+                    LocalDate fechaInicio = LocalDate.parse(partes[5]);
+                    LocalDate fechaFin = LocalDate.parse(partes[6]);
+                    Categoria categoria = Categoria.valueOf(partes[7]);
+
+                    Proyecto proyecto = new Proyecto(nombre, descripcion, cantidadNecesaria, fechaInicio, fechaFin, categoria);
+                    proyecto.setCantidadFinanciada(cantidadFinanciada);
+
+                    proyectosDeLaPlataforma.add(proyecto);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error al leer proyectos.");
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("Error en el formato del archivo de proyectos.");
+            e.printStackTrace();
+        }
+    }
+
+
+
 
 }
