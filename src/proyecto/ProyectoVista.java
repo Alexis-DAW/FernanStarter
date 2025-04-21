@@ -16,6 +16,20 @@ public final class ProyectoVista {
         }
     }
 
+    public void muestraProyectosCantidad (ArrayList<Proyecto> proyectos){
+        proyectos
+                .stream()
+                .sorted(((p1, p2) -> p2.getCantidadFinanciada() - p1.getCantidadFinanciada()))
+                .forEach(proyecto -> System.out.println(proyecto));
+    }
+
+    public void muestraProyectosFecha(ArrayList<Proyecto> proyectos){
+        proyectos
+                .stream()
+                .sorted(((p1, p2) -> p2.getDias() - p1.getDias()))
+                .forEach(proyecto -> System.out.println(proyecto));
+    }
+
     public void operacionExitosa(){
         System.out.println(iconoExito + " Se ha completado la operación con éxito");
     }

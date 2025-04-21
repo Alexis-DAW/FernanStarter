@@ -57,8 +57,6 @@ public final class GestionProyectos {
         }
         return false;
     }
-
-
     /**
      * Modifica un proyecto existente de la lista
      *
@@ -74,21 +72,6 @@ public final class GestionProyectos {
             return true;
         }
         return false;
-    }
-
-    public void proyectosOrdenadosCantidad() {
-        proyectosDeLaPlataforma
-                .stream()
-                .sorted(((p1, p2) -> p2.getCantidadFinanciada() - p1.getCantidadFinanciada()))
-                .forEach(proyecto -> System.out.println(proyecto));
-    }
-
-    public void proyectosOrdenadosFecha(){
-        proyectosDeLaPlataforma
-                .stream()
-                .sorted(((p1, p2) -> p2.getCantidadFinanciada() - p1.getCantidadFinanciada()))
-                .forEach(proyecto -> System.out.println(proyecto));
-
     }
 
     public boolean invertirEnProyecto(int posicionProyecto, Inversor inversor){
