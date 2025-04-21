@@ -1,3 +1,9 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.Properties;
 import java.util.Scanner;
 
 import administrador.Administrador;
@@ -9,11 +15,13 @@ import proyecto.ProyectoVista;
 import inversor.Inversor;
 import proyecto.GestionProyectos;
 import usuario.*;
+
+import static utilidades.FuncionesFechas.convertirAString;
 import static utilidades.FuncionesVarias.*;
 import static utilidades.FuncionesCorreos.autentificacionDeUsuario;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner s = new Scanner(System.in);
         GestionUsuarios listaUsuarios = new GestionUsuarios(); //Modelo
         UsuarioVista vistaUsuarios = new UsuarioVista("✅","❌"); //Vista
@@ -30,16 +38,25 @@ public class Main {
 //        controladorUsuario.agregarUsuario(gestorPrueba);
 //        controladorUsuario.agregarUsuario(inversorPrueba);
 
+        //Cargamos nuestro archivo properties.
+        Properties properties = new Properties();
+        properties.load(new FileReader("configuracion/setup.properties"));
+
+        //Guardamos la ruta en donde se guardarán los datos de los usuarios y proyectos, así como los logs de la plataforma.
+        properties.setProperty("rutaUsuarios","ficheros/usuarios.txt");
+        properties.setProperty("rutaProyectos","ficheros/proyectos.txt");
+        properties.setProperty("rutaLogs", "ficheros/log.txt");
+        properties.store(new FileWriter("./configuracion/setup.properties"), "Configuracion del programa");
+
         controladorUsuario.cargarUsuarios("ficheros/usuarios.txt");
-        controladorProyecto.cargarProyectos("ficheros/proyectos.txt");
+        proyectosDeLaPlataforma.cargarProyectos("ficheros/proyectos.txt");
 
         int opcion;
         do {
             System.out.println("Bienvenido ༼ つ ◕_◕ ༽つ");
             System.out.println("1. Registrarse");
             System.out.println("2. Iniciar sesión");
-            System.out.println("3. Mostrar listaUsuarios actuales (para pruebas internas)");
-            System.out.println("4. Salir del programa");
+            System.out.println("3. Salir del programa");
             opcion = Integer.parseInt(s.nextLine());
 
             if (opcion == 1) {
@@ -77,6 +94,11 @@ public class Main {
 
                     if (contrasenaIntroducida.equals(contrasenaUsuario)) {
                         System.out.println("Contraseña correcta. ¡Bienvenido!");
+                        //Mostramos el último inicio de sesión de un usuario
+                        System.out.println("Último inicio de sesión: " + properties.getProperty(usuario.getNombre()));
+                        //Guardamos el nuevo inicio de sesión en la plataforma en nuestro archivo properties.
+                        properties.setProperty(usuario.getNombre(), convertirAString(LocalDateTime.now()));
+                        properties.store(new FileWriter("./configuracion/setup.properties"), "Ultimos inicios de sesion");
                         controladorUsuario.inicioSesion(usuario);
                     }else{
                         System.out.println("Contraseña incorrecta");
@@ -96,8 +118,9 @@ public class Main {
                             System.out.println("MENÚ - ADMINISTRADOR");
                             System.out.println("1. Panel de control");
                             System.out.println("2. Proyectos");
-                            System.out.println("3. Configuración");
-                            System.out.println("4. Cerrar sesión");
+                            System.out.println("3. Configuración de usuario");
+                            System.out.println("4. Configuración de la plataforma");
+                            System.out.println("5. Cerrar sesión");
                             opcionAdmin = Integer.parseInt(s.nextLine());
 
                             if (opcionAdmin == 1) {
@@ -125,7 +148,7 @@ public class Main {
                                     switch (entrada) {
                                         case 1 -> {
                                             controladorProyecto.agregarProyecto(datosProyecto());
-                                            controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
+                                            //proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
                                         }
                                         case 2 -> controladorProyecto.mostrarProyectos();
                                         case 3 -> {
@@ -133,20 +156,42 @@ public class Main {
                                             System.out.println("Introduzca la ID del proyecto a modificar");
                                             int indice = Integer.parseInt(s.nextLine());
                                             controladorProyecto.modificarProyecto(indice, datosProyecto());
-                                            controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
+                                            //proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
                                         }
                                         case 4 -> {
                                             System.out.println("Introduzca la ID del proyecto a eliminar");
                                             int indice = Integer.parseInt(s.nextLine());
                                             controladorProyecto.eliminarProyecto(indice);
-                                            controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
+                                            //proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
                                         }
                                     }
                                 } while (entrada != 5);
                             } else if (opcionAdmin == 3) {
                                 configuracion(administrador);
+                            }else if (opcionAdmin == 4){
+                                System.out.println("CONFIGURACIÓN DEL PROGRAMA");
+                                System.out.println("Modo invitado » " + (properties.getProperty("invitado")));
+                                System.out.println("Ruta de usuarios » " + properties.getProperty("rutaUsuarios"));
+                                System.out.println("Ruta de proyectos » " + properties.getProperty("rutaProyectos"));
+                                System.out.println("Ruta de logs » " + properties.getProperty("rutaLogs"));
+
+                            }else if(opcionAdmin == 5){
+                                System.out.println("ÚLTIMAS CONEXIONES");
+//                               Este apartado lee nuestro archivo de logs y muestra aquellos que nos
+//                               indiquen el inicio de sesión de los usuarios dentro de la plataforma.
+                                String linea;
+                                try{
+                                    FileReader fr = new FileReader("ficheros/ejemplo.txt");
+                                    BufferedReader br = new BufferedReader(fr);
+                                    while ((linea = br.readLine()) != null){
+                                        if(linea.contains("Inicio de sesión")) System.out.println(linea);
+                                    }
+                                    br.close();
+                                }catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                             }
-                        } while (opcionAdmin != 4);
+                        } while (opcionAdmin != 6);
                         System.out.println("Cerrando la sesión...");
                         controladorUsuario.cierreSesion(administrador);
                     }
@@ -181,7 +226,7 @@ public class Main {
                                             Proyecto nuevoProyecto = datosProyecto();
                                             controladorProyecto.agregarProyecto(nuevoProyecto);
                                             controladorUsuario.agregarProyectoGestor(nuevoProyecto, gestor.getNombre());
-                                            controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
+                                            proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
                                         }
                                         case 2 -> controladorUsuario.mostrarProyectosGestor(gestor.getNombre());
                                         case 3 -> {
@@ -189,13 +234,13 @@ public class Main {
                                             System.out.println("Introduzca la ID del proyecto a modificar");
                                             int indice = Integer.parseInt(s.nextLine());
                                             controladorUsuario.modificarProyectoGestor(datosProyecto(), indice, gestor.getNombre());
-                                            controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
+                                            proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
                                         }
                                         case 4 -> {
                                             System.out.println("Introduzca la ID del proyecto a eliminar");
                                             int indice = Integer.parseInt(s.nextLine());
                                             controladorUsuario.eliminarProyectoGestor(indice, gestor.getNombre());
-                                            controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
+                                            proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
                                         }
                                     }
                                 } while (entrada != 5);
@@ -227,7 +272,7 @@ public class Main {
                                 System.out.print("Introduce el ID del proyecto donde sea invertir: ");
                                 int idProyecto = Integer.parseInt(s.nextLine());
                                 controladorProyecto.invertirEnProyecto(idProyecto, inversor);
-                                controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
+                                //proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
                             }
                             if (opcionInversor == 4){
                                 controladorUsuario.mostrarInversiones(inversor);
@@ -258,7 +303,9 @@ public class Main {
                 }
             }
             if (opcion == 3) controladorUsuario.muestraUsuarios();
-        } while (opcion != 4);
+        } while (opcion != 3);
+        controladorUsuario.guardarUsuarios("ficheros/usuarios.txt");
+        //proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
         System.out.println("SALIENDO...");
     }
 }

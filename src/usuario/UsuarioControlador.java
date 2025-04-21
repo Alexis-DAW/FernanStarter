@@ -119,10 +119,7 @@ public class UsuarioControlador {
         vista.mostrarInversiones(inversiones);
     }
 
-    public void inicioSesion(Usuario usuario){
-
-        modelo.inicioSesion(usuario);
-    }
+    public void inicioSesion(Usuario usuario){ modelo.inicioSesion(usuario); }
 
     public void cierreSesion(Usuario usuario){
         modelo.cierreSesion(usuario);
@@ -139,6 +136,4 @@ public class UsuarioControlador {
         if (cargadoCorrectamente) vista.cargadoCorrectamente();
         else vista.cargadoIncorrectamente();
     }
-
-
 }
