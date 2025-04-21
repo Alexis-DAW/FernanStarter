@@ -75,10 +75,19 @@ public final class GestionProyectos {
         return false;
     }
 
-    public void mostrarProyectos() {
-        for (Proyecto proyecto : proyectosDeLaPlataforma) {
-            System.out.println(proyecto);
-        }
+    public void proyectosOrdenadosCantidad() {
+        proyectosDeLaPlataforma
+                .stream()
+                .sorted(((p1, p2) -> p2.getCantidadFinanciada() - p1.getCantidadFinanciada()))
+                .forEach(proyecto -> System.out.println(proyecto));
+    }
+
+    public void proyectosOrdenadosFecha(){
+        proyectosDeLaPlataforma
+                .stream()
+                .sorted(((p1, p2) -> p2.getCantidadFinanciada() - p1.getCantidadFinanciada()))
+                .forEach(proyecto -> System.out.println(proyecto));
+
     }
 
     public boolean invertirEnProyecto(int posicionProyecto, Inversor inversor){
@@ -104,10 +113,15 @@ public final class GestionProyectos {
     //Esta función registra cada vez que se crea, elimina o se invierte un proyecto
     public void nuevoLog(String tipoLog, String nombre, LocalDateTime fecha) {
         try{
-            BufferedWriter bw = new BufferedWriter(new FileWriter("ficheros/log.txt"));
-            bw.write(tipoLog + " " + nombre + ", " + convertirAString(LocalDateTime.now()) + "\n");
+            BufferedWriter bw = new BufferedWriter(new FileWriter("ficheros/log.txt", true));
+            bw.write(tipoLog + " " + nombre + ", " + convertirAString(LocalDateTime.now()));
+            bw.newLine();
             bw.close();
-        }catch (IOException e) {
+        } catch (FileNotFoundException e) {
+            System.out.println("ERROR. Archivo no encontrado.");
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("Excepción de entrada/salida");
             e.printStackTrace();
         }
     }

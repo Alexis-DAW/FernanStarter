@@ -114,22 +114,27 @@ public final class GestionUsuarios{
         return inversor.getInversiones();
     }
 
-    public void nuevoLog(String tipoLog, String nombre, LocalDateTime fecha) {
+    public void nuevoLog(String tipoLog, String nombre) {
         try{
-            BufferedWriter bw = new BufferedWriter(new FileWriter("ficheros/log.txt"));
-            bw.write(tipoLog + " " + nombre + ", " + convertirAString(LocalDateTime.now()) + "\n");
+            BufferedWriter bw = new BufferedWriter(new FileWriter("ficheros/log.txt", true));
+            bw.write(tipoLog + " " + nombre + ", " + convertirAString(LocalDateTime.now()));
+            bw.newLine();
             bw.close();
-        }catch (IOException e) {
+        } catch (FileNotFoundException e) {
+            System.out.println("ERROR. Archivo no encontrado.");
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("Excepción de entrada/salida");
             e.printStackTrace();
         }
     }
 
     public void inicioSesion(Usuario usuario){
-        nuevoLog("Inicio de sesión de ", usuario.getNombre(), LocalDateTime.now());
+        nuevoLog("Inicio de sesión de ", usuario.getNombre());
     }
 
     public void cierreSesion(Usuario usuario){
-        nuevoLog("Cierre de sesión de ", usuario.getNombre(), LocalDateTime.now());
+        nuevoLog("Cierre de sesión de ", usuario.getNombre());
     }
 
     public void guardarUsuarios(String ruta) {

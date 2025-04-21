@@ -53,8 +53,9 @@ public final class Proyecto {
         return cantidadNecesaria;
     }
 
-    public double getCantidadFinanciada() {
-        return cantidadFinanciada;
+    public int getCantidadFinanciada() {
+
+        return (int)cantidadFinanciada;
     }
 
     public LocalDate getFechaInicio() {

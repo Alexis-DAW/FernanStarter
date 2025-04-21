@@ -119,6 +119,7 @@ public class UsuarioControlador {
     }
 
     public void inicioSesion(Usuario usuario){
+
         modelo.inicioSesion(usuario);
     }
 
