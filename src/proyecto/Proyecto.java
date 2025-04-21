@@ -3,6 +3,7 @@ import inversion.Inversion;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import static utilidades.FuncionesFechas.*;
 
@@ -59,8 +60,13 @@ public final class Proyecto implements Serializable {
     }
 
     public int getCantidadFinanciada() {
-
         return (int)cantidadFinanciada;
+    }
+
+    //Te devuelve cuantos días hay entre la fecha de inicio de un proyecto y la de fin
+    public int getDias(){
+        Period periodo = Period.between(fechaInicio, fechaFin);
+        return periodo.getDays();
     }
 
     public LocalDate getFechaInicio() {
