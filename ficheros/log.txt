@@ -33,3 +33,33 @@ Inicio de sesión de  gestor, 21/04/2025 19:02:27
 Inicio de sesión de  gestor, 21/04/2025 19:03:17
 Nuevo proyecto aaaaaa, 21/04/2025 19:03:47
 Cierre de sesión de  gestor, 21/04/2025 19:04:26
+Inicio de sesión de  gestor, 21/04/2025 19:27:41
+Nuevo proyecto prueba1, 21/04/2025 19:28:22
+Cierre de sesión de  gestor, 21/04/2025 19:28:32
+Inicio de sesión de  gestor, 21/04/2025 19:28:45
+Inicio de sesión de  inversor, 21/04/2025 19:29:38
+Cierre de sesión de  inversor, 21/04/2025 19:30:17
+Inicio de sesión de  gestor, 21/04/2025 19:30:22
+Nuevo proyecto prueba2, 21/04/2025 19:31:13
+Cierre de sesión de  gestor, 21/04/2025 19:31:28
+Inicio de sesión de  inversor, 21/04/2025 19:31:43
+Inicio de sesión de  gestor, 21/04/2025 19:38:50
+Nuevo proyecto prueba1, 21/04/2025 19:40:36
+Cierre de sesión de  gestor, 21/04/2025 19:40:45
+Inicio de sesión de  inversor, 21/04/2025 19:40:59
+Cierre de sesión de  inversor, 21/04/2025 19:41:10
+Inicio de sesión de  gestor, 21/04/2025 19:41:48
+Nuevo proyecto prueba2, 21/04/2025 19:42:26
+Cierre de sesión de  gestor, 21/04/2025 19:42:48
+Inicio de sesión de  AlexisPrueba, 21/04/2025 19:43:02
+Inicio de sesión de  gestor, 21/04/2025 20:04:40
+Nuevo proyecto aaaaaa, 21/04/2025 20:05:10
+Nuevo proyecto bbbbbbbb, 21/04/2025 20:05:48
+Cierre de sesión de  gestor, 21/04/2025 20:05:55
+Inicio de sesión de  inversor, 21/04/2025 20:06:06
+Inicio de sesión de  inversor, 21/04/2025 20:15:30
+Cierre de sesión de  inversor, 21/04/2025 20:15:36
+Inicio de sesión de  AlexisPrueba, 21/04/2025 20:20:11
+Nuevo proyecto ProyectoAlexis, 21/04/2025 20:21:02
+Cierre de sesión de  AlexisPrueba, 21/04/2025 20:21:15
+Inicio de sesión de  inversor, 21/04/2025 20:21:24

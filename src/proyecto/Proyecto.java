@@ -38,6 +38,10 @@ public final class Proyecto implements Serializable {
         this.numRecompensas = 0;
     }
 
+    static void setContadorProyectos(int contadorProyectos) {
+        Proyecto.contadorProyectos = contadorProyectos;
+    }
+
     public int getId() {
         return id;
     }

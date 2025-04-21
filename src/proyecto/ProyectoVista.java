@@ -17,11 +17,27 @@ public final class ProyectoVista {
     }
 
     public void operacionExitosa(){
-        System.out.println(iconoExito + " Se ha completado la operación con éxito");
+        System.out.println(iconoExito + " Se ha completado la operación con éxito.");
     }
 
     public void operacionErronea(){
-        System.out.println(iconoError + " No se ha completado la operación");
+        System.out.println(iconoError + " No se ha completado la operación.");
+    }
+
+    public void guardadoCorrectamente(){
+        System.out.println(iconoExito + " proyectos guardados correctamente.");
+    }
+
+    public void guardadoIncorrectamente(){
+        System.out.println(iconoError + " error al guardar los proyectos.");
+    }
+
+    public void cargadoCorrectamente(){
+        System.out.println(iconoExito + " proyectos cargados correctamente.");
+    }
+
+    public void cargadoIncorrectamente(){
+        System.out.println(iconoError + " error al cargar los proyectos.");
     }
 
 

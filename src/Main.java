@@ -23,8 +23,15 @@ public class Main {
         ProyectoVista vistaDeProyectos = new ProyectoVista("✅","❌"); //Vista
         ProyectoControlador controladorProyecto = new ProyectoControlador(proyectosDeLaPlataforma, vistaDeProyectos);
 
+//        Administrador adminPrueba = new Administrador("admin", "admin", "admin@gmail.com");
+//        Gestor gestorPrueba = new Gestor("gestor", "gestor", "gestor@gmail.com");
+//        Inversor inversorPrueba = new Inversor ("inversor", "inversor", "inversor@gmail.com");
+//        controladorUsuario.agregarUsuario(adminPrueba);
+//        controladorUsuario.agregarUsuario(gestorPrueba);
+//        controladorUsuario.agregarUsuario(inversorPrueba);
+
         controladorUsuario.cargarUsuarios("ficheros/usuarios.txt");
-        //proyectosDeLaPlataforma.cargarProyectos("ficheros/proyectos.txt");
+        controladorProyecto.cargarProyectos("ficheros/proyectos.txt");
 
         int opcion;
         do {
@@ -118,7 +125,7 @@ public class Main {
                                     switch (entrada) {
                                         case 1 -> {
                                             controladorProyecto.agregarProyecto(datosProyecto());
-                                            //proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
+                                            controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
                                         }
                                         case 2 -> controladorProyecto.mostrarProyectos();
                                         case 3 -> {
@@ -126,13 +133,13 @@ public class Main {
                                             System.out.println("Introduzca la ID del proyecto a modificar");
                                             int indice = Integer.parseInt(s.nextLine());
                                             controladorProyecto.modificarProyecto(indice, datosProyecto());
-                                            //proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
+                                            controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
                                         }
                                         case 4 -> {
                                             System.out.println("Introduzca la ID del proyecto a eliminar");
                                             int indice = Integer.parseInt(s.nextLine());
                                             controladorProyecto.eliminarProyecto(indice);
-                                            //proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
+                                            controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
                                         }
                                     }
                                 } while (entrada != 5);
@@ -174,7 +181,7 @@ public class Main {
                                             Proyecto nuevoProyecto = datosProyecto();
                                             controladorProyecto.agregarProyecto(nuevoProyecto);
                                             controladorUsuario.agregarProyectoGestor(nuevoProyecto, gestor.getNombre());
-                                            proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
+                                            controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
                                         }
                                         case 2 -> controladorUsuario.mostrarProyectosGestor(gestor.getNombre());
                                         case 3 -> {
@@ -182,13 +189,13 @@ public class Main {
                                             System.out.println("Introduzca la ID del proyecto a modificar");
                                             int indice = Integer.parseInt(s.nextLine());
                                             controladorUsuario.modificarProyectoGestor(datosProyecto(), indice, gestor.getNombre());
-                                            proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
+                                            controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
                                         }
                                         case 4 -> {
                                             System.out.println("Introduzca la ID del proyecto a eliminar");
                                             int indice = Integer.parseInt(s.nextLine());
                                             controladorUsuario.eliminarProyectoGestor(indice, gestor.getNombre());
-                                            proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
+                                            controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
                                         }
                                     }
                                 } while (entrada != 5);
@@ -220,7 +227,7 @@ public class Main {
                                 System.out.print("Introduce el ID del proyecto donde sea invertir: ");
                                 int idProyecto = Integer.parseInt(s.nextLine());
                                 controladorProyecto.invertirEnProyecto(idProyecto, inversor);
-                                //proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
+                                controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
                             }
                             if (opcionInversor == 4){
                                 controladorUsuario.mostrarInversiones(inversor);
@@ -252,8 +259,6 @@ public class Main {
             }
             if (opcion == 3) controladorUsuario.muestraUsuarios();
         } while (opcion != 4);
-        controladorUsuario.guardarUsuarios("ficheros/usuarios.txt");
-        //proyectosDeLaPlataforma.guardarProyectos("ficheros/proyectos.txt");
         System.out.println("SALIENDO...");
     }
 }

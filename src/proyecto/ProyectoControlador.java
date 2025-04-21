@@ -49,6 +49,16 @@ public final class ProyectoControlador {
         }
     }
 
+    public void guardarProyectos(String ruta) {
+        boolean guardadoCorrectamente = modelo.guardarProyectos(ruta);
+        if (guardadoCorrectamente) vista.guardadoCorrectamente();
+        else vista.guardadoIncorrectamente();
+    }
 
+    public void cargarProyectos(String ruta) {
+        boolean cargadoCorrectamente = modelo.cargarProyectos(ruta);
+        if (cargadoCorrectamente) vista.cargadoCorrectamente();
+        else vista.cargadoIncorrectamente();
+    }
 
 }
