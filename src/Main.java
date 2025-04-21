@@ -56,7 +56,8 @@ public class Main {
             System.out.println("Bienvenido ༼ つ ◕_◕ ༽つ");
             System.out.println("1. Registrarse");
             System.out.println("2. Iniciar sesión");
-            System.out.println("3. Salir del programa");
+            System.out.println("3. Acceder como invitado");
+            System.out.println("4. Salir del programa");
             opcion = Integer.parseInt(s.nextLine());
 
             if (opcion == 1) {
@@ -289,7 +290,13 @@ public class Main {
                     }
                 }
             }
-        } while (opcion != 3);
+            if (opcion == 3 && properties.getProperty("invitado").equals("activado")){
+                System.out.println("CONSULTA DE PROYECTOS");
+                controladorProyecto.mostrarProyectos();
+            }else{
+                System.out.println("Actualmente no se puede acceder como invitado a la plataforma");
+            }
+        } while (opcion != 4);
 //        controladorUsuario.guardarUsuarios("ficheros/usuarios.txt");
 //        controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
         System.out.println("SALIENDO...");

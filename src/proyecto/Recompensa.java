@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public final class Recompensa implements Serializable {
     private static final long serialVersionUID = 1L;
-    private int contadorId;
+    private static int contadorId;
     private int id;
     private String descripcion;
     private double cantidadMinima; // (para obtener la recompensa)
@@ -25,6 +25,10 @@ public final class Recompensa implements Serializable {
 
     public double getCantidadMinima() {
         return cantidadMinima;
+    }
+
+    public static void setContadorId(int nuevoContador) {
+        contadorId = nuevoContador;
     }
 
     public String toString(){

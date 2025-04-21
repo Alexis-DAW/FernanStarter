@@ -64,6 +64,10 @@ public final class Proyecto implements Serializable {
         return (int)cantidadFinanciada;
     }
 
+    public Recompensa[] getRecompensas() {
+        return recompensas;
+    }
+
     //Te devuelve cuantos días hay entre la fecha de inicio de un proyecto y la de fin
     public int getDias(){
         Period periodo = Period.between(fechaInicio, fechaFin);

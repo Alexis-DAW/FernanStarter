@@ -133,6 +133,16 @@ public final class GestionProyectos implements Serializable {
                 if (p.getId() > maxId) maxId = p.getId();
             }
             Proyecto.setContadorProyectos(maxId + 1);
+
+            // Restaurar los ID de recompensas
+            maxId = 0;
+            for (Proyecto p : proyectosDeLaPlataforma) {
+                for (Recompensa r : p.getRecompensas()) {
+                    if (r != null && r.getId() > maxId) maxId = r.getId();
+                }
+            }
+            Recompensa.setContadorId(maxId);
+
             return true;
 
         } catch (IOException | ClassNotFoundException e) {
