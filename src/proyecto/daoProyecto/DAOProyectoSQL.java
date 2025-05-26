@@ -1,7 +1,9 @@
-package proyecto;
+package proyecto.daoProyecto;
 
 import gestor.DAOGestorSQL;
 import gestor.Gestor;
+import proyecto.Categoria;
+import proyecto.Proyecto;
 import utilidades.DAOManager;
 
 import java.sql.*;

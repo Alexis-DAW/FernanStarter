@@ -1,5 +1,6 @@
-package proyecto;
+package proyecto.daoProyecto;
 
+import proyecto.Proyecto;
 import utilidades.DAOManager;
 
 import java.util.ArrayList;

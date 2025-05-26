@@ -1,5 +1,6 @@
-package proyecto;
+package proyecto.daoProyecto;
 
+import proyecto.Recompensa;
 import utilidades.DAOManager;
 
 import java.sql.ResultSet;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 public class DAORecompensaSQL implements DAORecompensa {
 
     public boolean insert(Recompensa recompensa, DAOManager daoManager) {
-        String sql = "INSERT INTO entradas (nombre) VALUES ('"
+        String sql = "INSERT INTO recompensa VALUES ('"
                 + recompensa.getId() + "','"
                 + recompensa.getDescripcion() + "','"
                 + recompensa.getCantidadMinima() + "');";
@@ -18,19 +19,19 @@ public class DAORecompensaSQL implements DAORecompensa {
     }
 
     public boolean update(Recompensa recompensa, DAOManager daoManager) {
-        String sql = "UPDATE entradas SET descripcion= '"
+        String sql = "UPDATE recompensa SET descripcion= '"
                 + recompensa.getDescripcion() + ", cantidadMinima= "
                 + recompensa.getCantidadMinima() + " WHERE id= " + recompensa.getId();
         return daoManager.ejecutaSentencia(sql);
     }
 
     public boolean delete(int idRecompensa, DAOManager daoManager) {
-        String sql = "DELETE FROM entradas WHERE id = "+ idRecompensa + ";";
+        String sql = "DELETE FROM recompensa WHERE id = "+ idRecompensa + ";";
         return daoManager.ejecutaSentencia(sql);
     }
 
     public Recompensa read(int idRecompensa, DAOManager daoManager) {
-        String sql = "SELECT * FROM entradas WHERE id = "+ idRecompensa + ";";
+        String sql = "SELECT * FROM recompensa WHERE id = "+ idRecompensa + ";";
         try{
             Statement stmt = daoManager.getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -49,7 +50,7 @@ public class DAORecompensaSQL implements DAORecompensa {
     }
 
     public ArrayList<Recompensa> readAll(DAOManager daoManager) {
-        String sql = "SELECT * FROM entradas;";
+        String sql = "SELECT * FROM recompensa;";
         ArrayList<Recompensa> recompensas = new ArrayList<>();
         try {
             Statement stmt = daoManager.getConnection().createStatement();

@@ -1,5 +1,10 @@
 package utilidades;
 
+import inversion.DAOInversionSQL;
+import proyecto.daoProyecto.DAOProyectoSQL;
+import proyecto.daoProyecto.DAORecompensaSQL;
+import inversor.DAOInversorSQL;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -28,7 +33,7 @@ public class DAOManager {
 
     public void open() {
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver"); //Cargo el driver de conexión JDBC
+            Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(URL, USER, PASS);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
@@ -60,4 +65,20 @@ public class DAOManager {
             return false;
         }
     }
+
+    public DAOInversorSQL getDAOInversor() { return new DAOInversorSQL();}
+
+    public DAOProyectoSQL getDAOProyecto() {
+        return new DAOProyectoSQL();
+    }
+
+    public DAORecompensaSQL getDAORecompensa() {
+        return new DAORecompensaSQL();
+    }
+
+    public DAOInversionSQL getDAOInversion() {
+        return new DAOInversionSQL();
+    }
+
+
 }
