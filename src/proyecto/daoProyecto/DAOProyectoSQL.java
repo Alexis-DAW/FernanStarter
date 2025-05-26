@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class DAOProyectoSQL implements DAOProyecto {
-
     @Override
     public boolean insert(Proyecto proyecto, DAOManager daoManager) {
         String sql = "INSERT INTO proyecto (nombre, descripcion, cantidad_necesaria, cantidad_financiada, fecha_inicio, fecha_fin, categoria, correo_gestor) " +
@@ -40,7 +39,6 @@ public class DAOProyectoSQL implements DAOProyecto {
         }
         return false;
     }
-
     @Override
     public boolean update(Proyecto proyecto, DAOManager daoManager) {
         String sql = "UPDATE proyecto SET nombre=?, descripcion=?, cantidad_necesaria=?, cantidad_financiada=?, fecha_inicio=?, fecha_fin=?, categoria=? " +
@@ -61,7 +59,6 @@ public class DAOProyectoSQL implements DAOProyecto {
         }
         return false;
     }
-
     @Override
     public boolean delete(int idProyecto, DAOManager daoManager) {
         String sql = "DELETE FROM proyecto WHERE id=?";
@@ -73,7 +70,6 @@ public class DAOProyectoSQL implements DAOProyecto {
         }
         return false;
     }
-
     @Override
     public Proyecto read(int idProyecto, DAOManager daoManager) {
         String sql = "SELECT * FROM proyecto WHERE id=?";
@@ -89,7 +85,6 @@ public class DAOProyectoSQL implements DAOProyecto {
         }
         return null;
     }
-
     @Override
     public ArrayList<Proyecto> readAll(DAOManager daoManager) {
         ArrayList<Proyecto> proyectos = new ArrayList<>();

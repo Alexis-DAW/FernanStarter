@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class DAORecompensaSQL implements DAORecompensa {
-
+    @Override
     public boolean insert(Recompensa recompensa, DAOManager daoManager) {
         String sql = "INSERT INTO recompensa VALUES ('"
                 + recompensa.getId() + "','"
@@ -17,51 +17,47 @@ public class DAORecompensaSQL implements DAORecompensa {
                 + recompensa.getCantidadMinima() + "');";
         return daoManager.ejecutaSentencia(sql);
     }
-
+    @Override
     public boolean update(Recompensa recompensa, DAOManager daoManager) {
-        String sql = "UPDATE recompensa SET descripcion= '"
-                + recompensa.getDescripcion() + ", cantidadMinima= "
-                + recompensa.getCantidadMinima() + " WHERE id= " + recompensa.getId();
+        String sql = "UPDATE recompensa SET descripcion = '"
+                + recompensa.getDescripcion() + "', cantidadMinima = "
+                + recompensa.getCantidadMinima() + " WHERE id = "
+                + recompensa.getId();
         return daoManager.ejecutaSentencia(sql);
     }
-
+    @Override
     public boolean delete(int idRecompensa, DAOManager daoManager) {
         String sql = "DELETE FROM recompensa WHERE id = "+ idRecompensa + ";";
         return daoManager.ejecutaSentencia(sql);
     }
-
+    @Override
     public Recompensa read(int idRecompensa, DAOManager daoManager) {
         String sql = "SELECT * FROM recompensa WHERE id = "+ idRecompensa + ";";
-        try{
-            Statement stmt = daoManager.getConnection().createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
+        try(Statement stmt = daoManager.getConnection().createStatement();
+            ResultSet rs = stmt.executeQuery(sql)){
             if(rs.next()) {
-                // Si existe una entrada con ese id creo el objeto Entrada a partir de los datos de la tabla entradas
                 Recompensa recompensa = new Recompensa(
                         rs.getString("descripcion"),
                         rs.getDouble("cantidadMinima"));
                 return recompensa;
             }
-            stmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
-
+    @Override
     public ArrayList<Recompensa> readAll(DAOManager daoManager) {
         String sql = "SELECT * FROM recompensa;";
         ArrayList<Recompensa> recompensas = new ArrayList<>();
-        try {
-            Statement stmt = daoManager.getConnection().createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
+        try (Statement stmt = daoManager.getConnection().createStatement();
+             ResultSet rs = stmt.executeQuery(sql)){
             while(rs.next()) {
                 Recompensa recompensa = new Recompensa(
                         rs.getString("descripcion"),
                         rs.getDouble("cantidadMinima"));
                 recompensas.add(recompensa);
             }
-            stmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

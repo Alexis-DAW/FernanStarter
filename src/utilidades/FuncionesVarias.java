@@ -128,6 +128,7 @@ public final class FuncionesVarias {
         System.out.print("Introduzca la fecha de cierre (dd/MM/yyy): ");
         LocalDate fechaCierre= convertirAFecha(s.nextLine());
 
+        //todo -> ahora se ha añadido Gestor al constructor de Proyecto
         Proyecto nuevoProyecto= new Proyecto(titulo, descripcion, cantidad, fechaInicio, fechaCierre, categoriaElegida);
 
         for (int i = 1; i <= 3; i++) {

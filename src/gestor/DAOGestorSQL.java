@@ -5,11 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import administrador.DAOUsuario;
 import usuario.Usuario;
 import administrador.DAOManager;
 
-public class DAOGestorSQL{
-
+public class DAOGestorSQL implements DAOUsuario {
+    @Override
     public boolean insert(Usuario usuario, DAOManager daoManager) {
         String sql = "INSERT INTO usuario VALUES ('"
                 + usuario.getNombre() + "','"
@@ -17,19 +18,19 @@ public class DAOGestorSQL{
                 + usuario.getCorreo() + "', 'GESTOR');";
         return daoManager.ejecutaSentencia(sql);
     }
-
+    @Override
     public boolean update(Usuario usuario, DAOManager daoManager) {
         String sql = "UPDATE usuario SET nombre = '" + usuario.getNombre()
                 + "', contrasena = '" + usuario.getContrasena()
-                + "' WHERE correo = " + usuario.getCorreo() + " AND tipo = 'GESTOR';";
+                + "' WHERE correo = '" + usuario.getCorreo() + "' AND tipo = 'GESTOR';";
         return daoManager.ejecutaSentencia(sql);
     }
-
+    @Override
     public boolean delete(String correo, DAOManager daoManager) {
-        String sql = "DELETE FROM usuario WHERE correo = " + correo + " AND tipo = 'GESTOR';";
+        String sql = "DELETE FROM usuario WHERE correo = '" + correo + "' AND tipo = 'GESTOR';";
         return daoManager.ejecutaSentencia(sql);
     }
-
+    @Override
     public Gestor read(String correo, DAOManager daoManager) {
         String sql = "SELECT nombre, contrasena FROM usuario WHERE correo = ? AND tipo = 'GESTOR'";
 
@@ -49,7 +50,8 @@ public class DAOGestorSQL{
         } catch (SQLException e) {
             System.err.println("Error al leer el gestor con correo '" + correo + "': " + e.getMessage());
         }
-
         return null;
     }
+
+    // todo -> implementar el método readAll para Gestor
 }

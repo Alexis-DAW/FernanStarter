@@ -7,7 +7,7 @@ public final class Recompensa implements Serializable {
     private static int contadorId;
     private int id;
     private String descripcion;
-    private double cantidadMinima; // (para obtener la recompensa)
+    private double cantidadMinima;
 
     public Recompensa(String descripcion, double cantidadMinima) {
         this.id = ++contadorId;
@@ -38,6 +38,4 @@ public final class Recompensa implements Serializable {
     public boolean esSuficienteParaObtener(double cantidadInvertida) {
         return cantidadInvertida >= cantidadMinima;
     }
-
-
 }

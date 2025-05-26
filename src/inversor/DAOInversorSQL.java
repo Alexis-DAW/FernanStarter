@@ -21,20 +21,19 @@ public class DAOInversorSQL implements DAOUsuario {
     public boolean update(Usuario usuario, DAOManager daoManager) {
         String sql = "UPDATE usuario SET nombre = '" + usuario.getNombre()
                 + "', contrasena = '" + usuario.getContrasena()
-                + "' WHERE correo = " + usuario.getCorreo() + ";";
+                + "' WHERE correo = '" + usuario.getCorreo() + "';";
         return daoManager.ejecutaSentencia(sql);
     }
 
     public boolean delete(String correo, DAOManager daoManager) {
-        String sql = "DELETE FROM usuario WHERE correo = " + correo + ";";
+        String sql = "DELETE FROM usuario WHERE correo = '" + correo + "';";
         return daoManager.ejecutaSentencia(sql);
     }
 
     public Inversor read(String correo, DAOManager daoManager) {
-        String sql = "SELECT * FROM usuario WHERE correo = " + correo + " AND tipo = 'INVERSOR';";
+        String sql = "SELECT * FROM usuario WHERE correo = '" + correo + "' AND tipo = 'INVERSOR';";
         try (Statement stmt = daoManager.getConnection().createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
-
             if (rs.next()) {
                 Inversor inversor = new Inversor(
                         rs.getString("nombre"),
@@ -54,7 +53,6 @@ public class DAOInversorSQL implements DAOUsuario {
         String sql = "SELECT * FROM usuario;";
         try (Statement stmt = daoManager.getConnection().createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
-
             while (rs.next()) {
                 Inversor inversor = new Inversor(
                         rs.getString("nombre"),
@@ -62,7 +60,6 @@ public class DAOInversorSQL implements DAOUsuario {
                         rs.getString("correo"));
                 lista.add(inversor);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
