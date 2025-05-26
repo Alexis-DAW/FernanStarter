@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class DAOAdminSQL implements DAOUsuario {
+public class DAOAdministradorSQL implements DAOUsuario {
     @Override
     public boolean insert(Usuario usuario, DAOManager daoManager) {
         String sql = "INSERT INTO usuario VALUES ('"

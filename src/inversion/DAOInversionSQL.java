@@ -71,6 +71,8 @@ public class DAOInversionSQL implements DAOInversion {
         double cantidad= rs.getDouble("cantidad");
         int id_recompensa= rs.getInt("id_recompensa");
 
+        // Creamos las clases necesarias para el constructor de Inversion.
+        // Para ello, hacemos llamada a los métodos que hemos implementado en el DAOManager.
         Inversor inversor= daoManager.getDAOInversor().read(correo_inversor, daoManager);
         Proyecto proyecto= daoManager.getDAOProyecto().read(id_proyecto,daoManager);
         Recompensa recompensa= daoManager.getDAORecompensa().read(id_recompensa, daoManager);
