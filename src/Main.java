@@ -48,8 +48,8 @@ public class Main {
         properties.setProperty("rutaLogs", "ficheros/log.txt");
         properties.store(new FileWriter("./configuracion/setup.properties"), "Configuracion del programa");
 
-        controladorUsuario.cargarUsuarios("ficheros/usuarios.txt");
-        controladorProyecto.cargarProyectos("ficheros/proyectos.txt");
+        controladorUsuario.cargarUsuarios(properties.getProperty("rutaUsuarios"));
+        controladorProyecto.cargarProyectos(properties.getProperty("rutaProyectos"));
 
         int opcion;
         do {
@@ -74,7 +74,7 @@ public class Main {
 
                 Usuario nuevoUsuario = datosUsuario(entrada);
                 controladorUsuario.agregarUsuario(nuevoUsuario);
-                controladorUsuario.guardarUsuarios("ficheros/usuarios.txt");
+                controladorUsuario.guardarUsuarios(properties.getProperty("rutaUsuarios"));
             }
 
             if (opcion == 2) {

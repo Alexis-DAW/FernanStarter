@@ -59,6 +59,13 @@ public class UsuarioVista {
         }
     }
 
+    public void muestraInversionesCantidad (ArrayList<Inversion> inversiones){
+        inversiones
+                .stream()
+                .sorted(((i1, i2) -> i2.getCantidad() - i1.getCantidad()))
+                .forEach(inversion -> System.out.println(inversion));
+    }
+
     public void guardadoCorrectamente (){
         System.out.println(iconoExito + " usuarios guardados correctamente.");
     }

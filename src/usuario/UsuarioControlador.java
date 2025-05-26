@@ -126,14 +126,12 @@ public class UsuarioControlador {
     }
 
     public void guardarUsuarios(String ruta) {
-        boolean guardadoCorrectamente = modelo.guardarUsuarios(ruta);
-        if (guardadoCorrectamente) vista.guardadoCorrectamente();
+        if (modelo.guardarUsuarios(ruta)) vista.guardadoCorrectamente();
         else vista.guardadoIncorrectamente();
     }
 
     public void cargarUsuarios(String ruta) {
-        boolean cargadoCorrectamente = modelo.cargarUsuarios(ruta);
-        if (cargadoCorrectamente) vista.cargadoCorrectamente();
+        if (modelo.cargarUsuarios(ruta)) vista.cargadoCorrectamente();
         else vista.cargadoIncorrectamente();
     }
 }

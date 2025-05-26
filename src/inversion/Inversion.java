@@ -23,8 +23,18 @@ public final class Inversion implements Invertible, Serializable {
         this.recompensa = recompensa;
     }
 
-    public double getCantidad() {
-        return cantidad;
+    public int getCantidad() {
+        return (int) cantidad;
+    }
+
+    public Inversor getInversor() { return inversor; }
+
+    public Proyecto getProyecto() { return proyecto; }
+
+    public LocalDate getFecha() { return fecha; }
+
+    public Recompensa getRecompensa() {
+        return recompensa;
     }
 
     public String toString(){

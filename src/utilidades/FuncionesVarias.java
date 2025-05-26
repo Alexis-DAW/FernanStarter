@@ -142,15 +142,15 @@ public final class FuncionesVarias {
         return nuevoProyecto;
     }
 
-    public static void muestraGrafico(int[] cantidad, int[] cantidadAportada, int proyecto) {
-        float grafico = (float) (cantidadAportada[proyecto] * 100) / cantidad[proyecto];
-        System.out.println("Gráfica de financiación");
-        System.out.print(grafico + "% \u2192 ");
-        for (int i = 0; i <= grafico; i++) {
-            System.out.print("\u001B[36m\u275A");
-            if (i == 100) break;
-        }
-    }
+//    public static void muestraGrafico(int[] cantidad, int[] cantidadAportada, int proyecto) {
+//        float grafico = (float) (cantidadAportada[proyecto] * 100) / cantidad[proyecto];
+//        System.out.println("Gráfica de financiación");
+//        System.out.print(grafico + "% \u2192 ");
+//        for (int i = 0; i <= grafico; i++) {
+//            System.out.print("\u001B[36m\u275A");
+//            if (i == 100) break;
+//        }
+//    }
 
     public static void ultimasConexiones(){
         System.out.println("ÚLTIMAS CONEXIONES");

@@ -14,5 +14,4 @@ public final class Administrador extends Usuario implements Serializable {
     public String toString(){
         return "Administrador " + super.getNombre();
     }
-
 }

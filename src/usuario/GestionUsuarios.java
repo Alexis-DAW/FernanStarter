@@ -1,5 +1,4 @@
 package usuario;
-import administrador.Administrador;
 import gestor.Gestor;
 import inversion.Inversion;
 import inversor.Inversor;
@@ -36,13 +35,7 @@ public final class GestionUsuarios implements Serializable {
         return usuarios.get(nombreUsuario);
     }
 
-    public boolean eliminarUsuario(String nombreUsuario) {
-        return usuarios.remove(nombreUsuario) != null;
-    }
-
-    public Tipo getTipoDeUsuario(String nombreUsuario){
-        return usuarios.get(nombreUsuario).getTipoUsuario();
-    }
+    public boolean eliminarUsuario(String nombreUsuario) {return usuarios.remove(nombreUsuario) != null;}
 
     public Tipo getTipoDeUsuario(Usuario usuario){
         return usuarios.get(usuario.getNombre()).getTipoUsuario();
@@ -114,14 +107,14 @@ public final class GestionUsuarios implements Serializable {
         return inversor.getInversiones();
     }
 
-    public void nuevoLog(String tipoLog, String nombre) {
+    public void nuevoLog(String tipo, String nombre) {
         try{
             BufferedWriter bw = new BufferedWriter(new FileWriter("ficheros/log.txt", true));
-            bw.write(tipoLog + " " + nombre + ", " + convertirAString(LocalDateTime.now()));
+            bw.write(tipo + " " + nombre + " " + convertirAString(LocalDateTime.now()));
             bw.newLine();
             bw.close();
         } catch (FileNotFoundException e) {
-            System.out.println("ERROR. Archivo no encontrado.");
+            System.out.println("Archivo no encontrado");
             e.printStackTrace();
         } catch (IOException e) {
             System.out.println("Excepción de entrada/salida");
@@ -130,15 +123,18 @@ public final class GestionUsuarios implements Serializable {
     }
 
     public void inicioSesion(Usuario usuario){
-        nuevoLog("Inicio de sesión de ", usuario.getNombre());
+
+        nuevoLog("Inicio de sesión", usuario.getNombre());
     }
 
     public void cierreSesion(Usuario usuario){
-        nuevoLog("Cierre de sesión de ", usuario.getNombre());
+
+        nuevoLog("Cierre de sesión", usuario.getNombre());
     }
 
     public boolean guardarUsuarios(String ruta) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ruta))) {
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ruta));
             oos.writeObject(usuarios);
             return true;
         } catch (IOException e) {
@@ -148,7 +144,8 @@ public final class GestionUsuarios implements Serializable {
     }
 
     public boolean cargarUsuarios(String ruta) {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ruta))) {
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ruta));
             usuarios = (HashMap<String, Usuario>) ois.readObject();
             return true;
         } catch (IOException | ClassNotFoundException e) {
