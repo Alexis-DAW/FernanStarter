@@ -5,7 +5,6 @@ import utilidades.DAOManager;
 import java.util.ArrayList;
 
 public interface DAOProyecto {
-
     boolean insert(Proyecto proyecto, DAOManager daoManager);
     boolean update(Proyecto proyecto, DAOManager daoManager);
     boolean delete(int idProyecto, DAOManager daoManager);

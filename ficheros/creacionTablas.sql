@@ -18,16 +18,20 @@ INSERT INTO usuario (correo, nombre, contrasena, tipo, bloqueado) VALUES
 
 CREATE TABLE proyecto (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    titulo VARCHAR(255) NOT NULL,
+    nombre VARCHAR(255) NOT NULL,
     descripcion TEXT,
+    cantidad_necesaria DECIMAL(10, 2),
+    cantidad_financiada DECIMAL(10, 2) DEFAULT 0.00,
+    fecha_inicio DATE DEFAULT (CURRENT_DATE),
+    fecha_fin DATE,
     categoria ENUM('TECNOLOGIA', 'ARTE', 'CINE', 'JUEGOS', 'COMIDA', 'MODA'),
     correo_gestor VARCHAR(100),
     FOREIGN KEY (correo_gestor) REFERENCES usuario(correo)
 );
 
-INSERT INTO proyecto (titulo, descripcion, categoria, correo_gestor) VALUES
-    ('Proyecto Alpha', 'Un proyecto sobre tecnología avanzada.', 'TECNOLOGIA', 'gestor1@correo.com'),
-    ('Proyecto Arte V', 'Proyecto visual contemporáneo.', 'ARTE', 'gestor1@correo.com');
+INSERT INTO proyecto (nombre, descripcion, cantidad_necesaria, cantidad_financiada, fecha_inicio, fecha_fin, categoria, correo_gestor)
+VALUES ('Impresora 3D doméstica', 'Prototipo de impresora accesible', 1000.00, 250.00, '2025-05-01', '2025-08-01', 'TECNOLOGIA', 'gestor1@correo.com'),
+       ('Documental sobre energías limpias', 'Rodaje independiente en España', 5000.00, 1200.00, '2025-04-20', '2025-09-30', 'CINE', 'gestor1@correo.com');
 
 CREATE TABLE recompensa (
     id INT PRIMARY KEY AUTO_INCREMENT,
