@@ -1,4 +1,5 @@
 package proyecto;
+import gestor.Gestor;
 import inversion.Inversion;
 
 import java.io.Serializable;
@@ -23,9 +24,10 @@ public final class Proyecto implements Serializable {
     private ArrayList<Inversion> inversiones;
     private int numInversiones;
     private int numRecompensas;
+    private Gestor gestor;
 
     public Proyecto(String nombre, String descripcion, double cantidadNecesaria, LocalDate fechaInicio,
-                    LocalDate fechaFin, Categoria categoria){
+                    LocalDate fechaFin, Categoria categoria, Gestor gestor){
         this.id = contadorProyectos++;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -38,6 +40,20 @@ public final class Proyecto implements Serializable {
         this.recompensas = new Recompensa[3];
         this.numInversiones = 0;
         this.numRecompensas = 0;
+        this.gestor = gestor;
+    }
+
+    public Proyecto(int id, String nombre, String descripcion, double cantidadNecesaria,
+                    LocalDate fechaInicio, LocalDate fechaFin, Categoria categoria, Gestor gestor) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.cantidadNecesaria = cantidadNecesaria;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.categoria = categoria;
+        this.gestor = gestor;
+        this.cantidadFinanciada = 0.0;
     }
 
     static void setContadorProyectos(int contadorProyectos) {
@@ -66,6 +82,10 @@ public final class Proyecto implements Serializable {
 
     public Recompensa[] getRecompensas() {
         return recompensas;
+    }
+
+    public Gestor getGestor() {
+        return gestor;
     }
 
     //Te devuelve cuantos días hay entre la fecha de inicio de un proyecto y la de fin
