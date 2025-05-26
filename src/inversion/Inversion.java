@@ -9,6 +9,8 @@ import java.time.LocalDate;
 
 public final class Inversion implements Invertible, Serializable {
     private static final long serialVersionUID = 1L;
+    private static int contadorId;
+    private int id;
     private Inversor inversor;
     private Proyecto proyecto;
     private double cantidad;
@@ -16,6 +18,7 @@ public final class Inversion implements Invertible, Serializable {
     private Recompensa recompensa;
 
     public Inversion(Inversor inversor, Proyecto proyecto, double cantidad, Recompensa recompensa) {
+        this.id = ++contadorId;
         this.inversor = inversor;
         this.proyecto = proyecto;
         this.cantidad = cantidad;

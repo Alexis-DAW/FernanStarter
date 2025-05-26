@@ -5,9 +5,9 @@ import java.io.Serializable;
 public abstract class Usuario implements Bloqueable, Serializable {
     private static final long serialVersionUID = 1L;
 
+    private String correo;
     private String nombre;
     private String contrasena;
-    private String correo;
     private final Tipo tipo;
     private boolean bloqueado;
 
