@@ -1,7 +1,7 @@
 package proyecto.daoProyecto;
 
 import proyecto.Proyecto;
-import utilidades.DAOManager;
+import administrador.DAOManager;
 
 import java.util.ArrayList;
 

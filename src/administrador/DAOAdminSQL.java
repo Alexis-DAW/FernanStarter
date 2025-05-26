@@ -1,46 +1,44 @@
-package inversor;
+package administrador;
 
-import administrador.DAOUsuario;
 import usuario.Usuario;
-import administrador.DAOManager;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class DAOInversorSQL implements DAOUsuario {
+public class DAOAdminSQL implements DAOUsuario {
     public boolean insert(Usuario usuario, DAOManager daoManager) {
         String sql = "INSERT INTO usuario VALUES ('"
                 + usuario.getNombre() + "','"
                 + usuario.getContrasena() + "','"
-                + usuario.getCorreo() + "', 'INVERSOR');";
+                + usuario.getCorreo() + "', 'ADMINISTRADOR');";
         return daoManager.ejecutaSentencia(sql);
     }
 
     public boolean update(Usuario usuario, DAOManager daoManager) {
         String sql = "UPDATE usuario SET nombre = '" + usuario.getNombre()
                 + "', contrasena = '" + usuario.getContrasena()
-                + "' WHERE correo = " + usuario.getCorreo() + ";";
+                + "' WHERE correo = " + usuario.getCorreo() + " AND tipo ='ADMINISTRADOR';";
         return daoManager.ejecutaSentencia(sql);
     }
 
     public boolean delete(String correo, DAOManager daoManager) {
-        String sql = "DELETE FROM usuario WHERE correo = " + correo + ";";
+        String sql = "DELETE FROM usuario WHERE correo = " + correo + " AND tipo ='ADMINISTRADOR';";
         return daoManager.ejecutaSentencia(sql);
     }
 
-    public Inversor read(String correo, DAOManager daoManager) {
-        String sql = "SELECT * FROM usuario WHERE correo = " + correo + " AND tipo = 'INVERSOR';";
+    public Administrador read(String correo, DAOManager daoManager) {
+        String sql = "SELECT * FROM usuario WHERE correo = " + correo + " AND tipo ='ADMINISTRADOR';";
         try (Statement stmt = daoManager.getConnection().createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
             if (rs.next()) {
-                Inversor inversor = new Inversor(
+                Administrador administrador = new Administrador(
                         rs.getString("nombre"),
-                        rs.getString("contrasena"),
-                        rs.getString("correo"));
-                return inversor;
+                        rs.getString("contrasena"), correo);
+
+                return administrador;
             }
 
         } catch (SQLException e) {
@@ -51,16 +49,17 @@ public class DAOInversorSQL implements DAOUsuario {
 
     public ArrayList<Usuario> readAll(DAOManager daoManager) {
         ArrayList<Usuario> lista = new ArrayList<>();
-        String sql = "SELECT * FROM usuario;";
+        String sql = "SELECT * FROM usuario WHERE tipo = 'ADMINISTRADOR';";
         try (Statement stmt = daoManager.getConnection().createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                Inversor inversor = new Inversor(
+                Administrador administrador = new Administrador(
                         rs.getString("nombre"),
                         rs.getString("contrasena"),
                         rs.getString("correo"));
-                lista.add(inversor);
+
+                lista.add(administrador);
             }
 
         } catch (SQLException e) {

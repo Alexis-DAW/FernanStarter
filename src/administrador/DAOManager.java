@@ -1,4 +1,4 @@
-package utilidades;
+package administrador;
 
 import inversion.DAOInversionSQL;
 import proyecto.daoProyecto.DAOProyectoSQL;

@@ -5,9 +5,30 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import utilidades.DAOManager;
+import usuario.Usuario;
+import administrador.DAOManager;
 
-public class DAOGestorSQL {
+public class DAOGestorSQL{
+
+    public boolean insert(Usuario usuario, DAOManager daoManager) {
+        String sql = "INSERT INTO usuario VALUES ('"
+                + usuario.getNombre() + "','"
+                + usuario.getContrasena() + "','"
+                + usuario.getCorreo() + "', 'GESTOR');";
+        return daoManager.ejecutaSentencia(sql);
+    }
+
+    public boolean update(Usuario usuario, DAOManager daoManager) {
+        String sql = "UPDATE usuario SET nombre = '" + usuario.getNombre()
+                + "', contrasena = '" + usuario.getContrasena()
+                + "' WHERE correo = " + usuario.getCorreo() + " AND tipo = 'GESTOR';";
+        return daoManager.ejecutaSentencia(sql);
+    }
+
+    public boolean delete(String correo, DAOManager daoManager) {
+        String sql = "DELETE FROM usuario WHERE correo = " + correo + " AND tipo = 'GESTOR';";
+        return daoManager.ejecutaSentencia(sql);
+    }
 
     public Gestor read(String correo, DAOManager daoManager) {
         String sql = "SELECT nombre, contrasena FROM usuario WHERE correo = ? AND tipo = 'GESTOR'";
@@ -31,6 +52,4 @@ public class DAOGestorSQL {
 
         return null;
     }
-
-
 }

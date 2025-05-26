@@ -3,7 +3,7 @@ package inversion;
 import inversor.Inversor;
 import proyecto.Proyecto;
 import proyecto.Recompensa;
-import utilidades.DAOManager;
+import administrador.DAOManager;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
