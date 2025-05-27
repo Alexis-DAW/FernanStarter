@@ -75,6 +75,7 @@ public class Main {
             controladorUsuarioDAO.cargarUsuarios();
             controladorProyectoDAO.cargarProyectos();
 
+
             int opcion;
             do {
                 System.out.println("Bienvenido ༼ つ ◕_◕ ༽つ");
@@ -98,6 +99,7 @@ public class Main {
 
                     Usuario nuevoUsuario = datosUsuario(entrada);
                     controladorUsuario.agregarUsuario(nuevoUsuario);
+                    controladorUsuarioDAO.insert(nuevoUsuario);
                     controladorUsuario.guardarUsuarios(properties.getProperty("rutaUsuarios"));
                 }
 
@@ -173,7 +175,9 @@ public class Main {
 
                                         switch (entrada) {
                                             case 1 -> {
-                                                controladorProyecto.agregarProyecto(datosProyecto(usuario));
+                                                Proyecto proyecto= datosProyecto(usuario);
+                                                controladorProyecto.agregarProyecto(proyecto);
+                                                controladorProyectoDAO.insert(proyecto);
                                                 controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
                                             }
                                             case 2 -> controladorProyecto.mostrarProyectos();
@@ -181,13 +185,16 @@ public class Main {
                                                 controladorProyecto.mostrarProyectos();
                                                 System.out.println("Introduzca la ID del proyecto a modificar");
                                                 int indice = Integer.parseInt(s.nextLine());
-                                                controladorProyecto.modificarProyecto(indice, datosProyecto(usuario));
+                                                Proyecto proyecto= datosProyecto(usuario);
+                                                controladorProyecto.modificarProyecto(indice,proyecto );
+                                                controladorProyectoDAO.update(proyecto);
                                                 controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
                                             }
                                             case 4 -> {
                                                 System.out.println("Introduzca la ID del proyecto a eliminar");
                                                 int indice = Integer.parseInt(s.nextLine());
                                                 controladorProyecto.eliminarProyecto(indice);
+                                                controladorProyectoDAO.delete(indice);
                                                 controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
                                             }
                                         }
@@ -236,6 +243,7 @@ public class Main {
                                         switch (entrada) {
                                             case 1 -> {
                                                 Proyecto nuevoProyecto = datosProyecto(gestor);
+                                                controladorProyectoDAO.insert(nuevoProyecto);
                                                 controladorProyecto.agregarProyecto(nuevoProyecto);
                                                 controladorUsuario.agregarProyectoGestor(nuevoProyecto, gestor.getNombre());
                                                 controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
@@ -245,12 +253,15 @@ public class Main {
                                                 controladorUsuario.mostrarProyectosGestor(gestor.getNombre());
                                                 System.out.println("Introduzca la ID del proyecto a modificar");
                                                 int indice = Integer.parseInt(s.nextLine());
-                                                controladorUsuario.modificarProyectoGestor(datosProyecto(gestor), indice, gestor.getNombre());
+                                                Proyecto proyecto= datosProyecto(gestor);
+                                                controladorProyectoDAO.update(proyecto);
+                                                controladorUsuario.modificarProyectoGestor(proyecto, indice, gestor.getNombre());
                                                 controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
                                             }
                                             case 4 -> {
                                                 System.out.println("Introduzca la ID del proyecto a eliminar");
                                                 int indice = Integer.parseInt(s.nextLine());
+                                                controladorProyectoDAO.delete(indice);
                                                 controladorUsuario.eliminarProyectoGestor(indice, gestor.getNombre());
                                                 controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
                                             }
