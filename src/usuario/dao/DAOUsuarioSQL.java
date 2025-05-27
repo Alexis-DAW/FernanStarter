@@ -11,7 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class DAOUsuarioSQL implements DAOUsuario {
-    
+
     private ArrayList<Usuario> listadoUsuarios;
 
     @Override
@@ -89,26 +89,16 @@ public class DAOUsuarioSQL implements DAOUsuario {
         return usuario;
     }
 
-    public boolean cargarUsuarios(String ruta){
-        try{
-            ObjectInputStream ois= new ObjectInputStream(new FileInputStream(ruta));
-            listadoUsuarios= (ArrayList<Usuario>) ois.readObject();
-            return true;
-        }catch (Exception e){
-            e.printStackTrace();
-            return false;
-        }
+    public boolean cargarUsuarios(DAOManager daoManager){
+        listadoUsuarios= readAll(daoManager);
+        if (listadoUsuarios!= null) return true;
+        else return false;
     }
 
-    public boolean guardarUsuarios(String ruta, DAOManager daoManager) {
-        try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ruta));
-            ArrayList<Usuario> listadoUsuarios = readAll(daoManager);
-            oos.writeObject(listadoUsuarios);
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
+    public boolean guardarUsuarios(ArrayList<Usuario> listaUsuarios, DAOManager daoManager){
+        for(Usuario usuario: listaUsuarios){
+            insert(usuario, daoManager);
         }
+        return true;
     }
 }

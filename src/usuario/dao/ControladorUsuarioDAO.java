@@ -4,6 +4,8 @@ import usuario.Usuario;
 import usuario.UsuarioVista;
 import utilidades.DAOManager;
 
+import java.util.ArrayList;
+
 import static utilidades.FuncionesVarias.logBBDD;
 
 public class ControladorUsuarioDAO {
@@ -58,13 +60,13 @@ public class ControladorUsuarioDAO {
         else vista.operacionErronea();
     }
 
-    public void cargarUsuarios(String ruta){
-        if (modelo.cargarUsuarios(ruta)) vista.operacionExitosa();
+    public void cargarUsuarios(){
+        if (modelo.cargarUsuarios(daoManager)) vista.operacionExitosa();
         else vista.operacionErronea();
     }
 
-    public void guardarUsuarios(String ruta){
-        if (modelo.guardarUsuarios(ruta, daoManager)) vista.operacionExitosa();
+    public void guardarUsuarios(ArrayList<Usuario> listaUsuarios){
+        if (modelo.guardarUsuarios(listaUsuarios, daoManager)) vista.operacionExitosa();
         else vista.operacionErronea();
     }
 

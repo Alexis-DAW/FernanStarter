@@ -71,8 +71,8 @@ public class Main {
             properties.store(new FileWriter("./configuracion/setup.properties"), "Configuracion del programa");
 
             //Por último, cargamos los usuarios y proyectos de la BBDD
-            controladorUsuarioDAO.cargarUsuarios(properties.getProperty("rutaUsuarios"));
-            controladorProyectoDAO.cargarProyectos(properties.getProperty("rutaProyectos"));
+            controladorUsuarioDAO.cargarUsuarios();
+            controladorProyectoDAO.cargarProyectos();
 
             int opcion;
             do {

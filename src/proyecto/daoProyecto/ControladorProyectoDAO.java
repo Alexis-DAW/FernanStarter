@@ -3,6 +3,9 @@ package proyecto.daoProyecto;
 import proyecto.Proyecto;
 import proyecto.ProyectoVista;
 import utilidades.DAOManager;
+
+import java.util.ArrayList;
+
 import static utilidades.FuncionesVarias.*;
 
 public class ControladorProyectoDAO {
@@ -56,13 +59,13 @@ public class ControladorProyectoDAO {
         else vista.operacionErronea();
     }
 
-    public void cargarProyectos(String ruta){
-        if (modelo.cargarUsuarios(ruta)) vista.operacionExitosa();
+    public void cargarProyectos(){
+        if (modelo.cargarUsuarios(daoManager)) vista.operacionExitosa();
         else vista.operacionErronea();
     }
 
-    public void guardarProyectos(String ruta){
-        if (modelo.guardarUsuarios(ruta, daoManager)) vista.operacionExitosa();
+    public void guardarProyectos(ArrayList<Proyecto> listaProyectos){
+        if (modelo.guardarUsuarios(listaProyectos, daoManager)) vista.operacionExitosa();
         else vista.operacionErronea();
     }
 }

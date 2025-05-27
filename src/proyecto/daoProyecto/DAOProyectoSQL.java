@@ -3,6 +3,7 @@ package proyecto.daoProyecto;
 import gestor.Gestor;
 import proyecto.Categoria;
 import proyecto.Proyecto;
+import usuario.Usuario;
 import usuario.dao.DAOUsuarioSQL;
 import utilidades.DAOManager;
 
@@ -126,26 +127,16 @@ public class DAOProyectoSQL implements DAOProyecto {
         return p;
     }
 
-    public boolean cargarUsuarios(String ruta){
-        try{
-            ObjectInputStream ois= new ObjectInputStream(new FileInputStream(ruta));
-            listadoProyectos= (ArrayList<Proyecto>) ois.readObject();
-            return true;
-        }catch (Exception e){
-            e.printStackTrace();
-            return false;
-        }
+    public boolean cargarUsuarios(DAOManager daoManager){
+        listadoProyectos= readAll(daoManager);
+        if(listadoProyectos!=null) return true;
+        else return false;
     }
 
-    public boolean guardarUsuarios(String ruta, DAOManager daoManager) {
-        try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ruta));
-            ArrayList<Proyecto> listadoProyectos = readAll(daoManager);
-            oos.writeObject(listadoProyectos);
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
+    public boolean guardarUsuarios(ArrayList<Proyecto> listaProyectos, DAOManager daoManager) {
+        for(Proyecto proyecto: listaProyectos){
+            insert(proyecto, daoManager);
         }
+        return true;
     }
 }
