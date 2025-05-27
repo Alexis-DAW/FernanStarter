@@ -1,7 +1,7 @@
 package proyecto.daoProyecto;
 
 import proyecto.Recompensa;
-import administrador.DAOManager;
+import utilidades.DAOManager;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -1,13 +1,11 @@
 package gestor;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 
 import administrador.DAOUsuario;
 import usuario.Usuario;
-import administrador.DAOManager;
+import utilidades.DAOManager;
 
 public class DAOGestorSQL implements DAOUsuario {
     @Override
@@ -53,5 +51,25 @@ public class DAOGestorSQL implements DAOUsuario {
         return null;
     }
 
-    // todo -> implementar el método readAll para Gestor
+    @Override
+    public ArrayList<Usuario> readAll(DAOManager daoManager) {
+        ArrayList<Usuario> lista = new ArrayList<>();
+        String sql = "SELECT * FROM usuario WHERE tipo = 'GESTOR';";
+        try (Statement stmt = daoManager.getConnection().createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                Gestor gestor = new Gestor(
+                        rs.getString("nombre"),
+                        rs.getString("contrasena"),
+                        rs.getString("correo"));
+
+                lista.add(gestor);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
 }

@@ -1,6 +1,6 @@
 package inversion;
 
-import administrador.DAOManager;
+import utilidades.DAOManager;
 
 import java.util.ArrayList;
 

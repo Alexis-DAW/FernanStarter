@@ -1,4 +1,3 @@
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,6 +6,7 @@ import java.util.Properties;
 import java.util.Scanner;
 
 import administrador.Administrador;
+import utilidades.DAOManager;
 import gestor.Gestor;
 
 import proyecto.Proyecto;
@@ -23,6 +23,10 @@ import static utilidades.FuncionesCorreos.autentificacionDeUsuario;
 public class Main {
     public static void main(String[] args) throws IOException {
         Scanner s = new Scanner(System.in);
+
+        DAOManager daoManager = utilidades.DAOManager.getSinglentonInstance();
+        daoManager.open();
+
         GestionUsuarios listaUsuarios = new GestionUsuarios(); //Modelo
         UsuarioVista vistaUsuarios = new UsuarioVista("✅","❌"); //Vista
         UsuarioControlador controladorUsuario = new UsuarioControlador(listaUsuarios, vistaUsuarios);

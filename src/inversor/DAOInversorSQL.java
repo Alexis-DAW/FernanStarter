@@ -2,7 +2,7 @@ package inversor;
 
 import administrador.DAOUsuario;
 import usuario.Usuario;
-import administrador.DAOManager;
+import utilidades.DAOManager;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -48,9 +48,10 @@ public class DAOInversorSQL implements DAOUsuario {
         return null;
     }
 
+    @Override
     public ArrayList<Usuario> readAll(DAOManager daoManager) {
         ArrayList<Usuario> lista = new ArrayList<>();
-        String sql = "SELECT * FROM usuario;";
+        String sql = "SELECT * FROM usuario WHERE tipo = 'INVERSOR';";
         try (Statement stmt = daoManager.getConnection().createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
@@ -58,8 +59,10 @@ public class DAOInversorSQL implements DAOUsuario {
                         rs.getString("nombre"),
                         rs.getString("contrasena"),
                         rs.getString("correo"));
+
                 lista.add(inversor);
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

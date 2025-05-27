@@ -4,7 +4,7 @@ import gestor.DAOGestorSQL;
 import gestor.Gestor;
 import proyecto.Categoria;
 import proyecto.Proyecto;
-import administrador.DAOManager;
+import utilidades.DAOManager;
 
 import java.sql.*;
 import java.time.LocalDate;

@@ -1,6 +1,7 @@
 package administrador;
 
 import usuario.Usuario;
+import utilidades.DAOManager;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

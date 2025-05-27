@@ -1,6 +1,5 @@
-package administrador;
+package utilidades;
 
-import inversion.DAOInversionSQL;
 import proyecto.daoProyecto.DAOProyectoSQL;
 import proyecto.daoProyecto.DAORecompensaSQL;
 import inversor.DAOInversorSQL;
@@ -24,7 +23,6 @@ public class DAOManager {
         this.PASS= " ";
     }
 
-    // pero q e eta vaina dio mio
     public static DAOManager getSinglentonInstance(){
         if (singlenton == null) {
             singlenton = new DAOManager();
