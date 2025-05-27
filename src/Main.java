@@ -1,11 +1,19 @@
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
 import java.time.LocalDateTime;
 import java.util.Properties;
 import java.util.Scanner;
 
 import administrador.Administrador;
+import administrador.DAOAdministradorSQL;
+import administrador.DAOUsuario;
+import gestor.DAOGestorSQL;
+import inversion.DAOInversionSQL;
+import inversor.DAOInversorSQL;
+import proyecto.daoProyecto.DAOProyectoSQL;
+import proyecto.daoProyecto.DAORecompensaSQL;
 import utilidades.DAOManager;
 import gestor.Gestor;
 
@@ -27,12 +35,23 @@ public class Main {
         DAOManager daoManager = utilidades.DAOManager.getSinglentonInstance();
         try {
             daoManager.open();
-            GestionUsuarios listaUsuarios = new GestionUsuarios();
+            // Obtenemos la conexión para pasársela a los DAOs
+            Connection connection = daoManager.getConnection();
+
+            DAOGestorSQL daoGestor = new DAOGestorSQL();
+            DAOInversorSQL daoInversor = new DAOInversorSQL();
+            DAOAdministradorSQL daoAdministrador = new DAOAdministradorSQL();
+            DAOProyectoSQL daoProyecto = new DAOProyectoSQL();
+            DAORecompensaSQL daoRecompensa = new DAORecompensaSQL();
+            DAOInversionSQL daoInversion = new DAOInversionSQL();
+
             UsuarioVista vistaUsuarios = new UsuarioVista("🟢","🔴");
+            ProyectoVista vistaDeProyectos = new ProyectoVista("🟢","🔴");
+
+            GestionUsuarios listaUsuarios = new GestionUsuarios();
             UsuarioControlador controladorUsuario = new UsuarioControlador(listaUsuarios, vistaUsuarios);
 
             GestionProyectos proyectosDeLaPlataforma = new GestionProyectos();
-            ProyectoVista vistaDeProyectos = new ProyectoVista("🟢","🔴");
             ProyectoControlador controladorProyecto = new ProyectoControlador(proyectosDeLaPlataforma, vistaDeProyectos);
 
             //Cargamos nuestro archivo properties.
@@ -208,7 +227,7 @@ public class Main {
 
                                         switch (entrada) {
                                             case 1 -> {
-                                                Proyecto nuevoProyecto = datosProyecto(usuario);
+                                                Proyecto nuevoProyecto = datosProyecto(gestor);
                                                 controladorProyecto.agregarProyecto(nuevoProyecto);
                                                 controladorUsuario.agregarProyectoGestor(nuevoProyecto, gestor.getNombre());
                                                 controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
@@ -218,7 +237,7 @@ public class Main {
                                                 controladorUsuario.mostrarProyectosGestor(gestor.getNombre());
                                                 System.out.println("Introduzca la ID del proyecto a modificar");
                                                 int indice = Integer.parseInt(s.nextLine());
-                                                controladorUsuario.modificarProyectoGestor(datosProyecto(usuario), indice, gestor.getNombre());
+                                                controladorUsuario.modificarProyectoGestor(datosProyecto(gestor), indice, gestor.getNombre());
                                                 controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
                                             }
                                             case 4 -> {

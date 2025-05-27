@@ -66,12 +66,4 @@ public class DAOManager {
     }
 
 
-    // Con los siguientes métodos obtenemos las clases de Inversor, Proyecto y Recompensa.
-    // Se obtiene mediante la clave primaria de clase que queremos instanciar.
-    public DAOInversorSQL getDAOInversor() { return new DAOInversorSQL();}
-    public DAOProyectoSQL getDAOProyecto() { return new DAOProyectoSQL();}
-    public DAORecompensaSQL getDAORecompensa() { return new DAORecompensaSQL(); }
-
-
-
 }
