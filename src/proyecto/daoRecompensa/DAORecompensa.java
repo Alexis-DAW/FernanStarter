@@ -1,4 +1,4 @@
-package proyecto.daoProyecto;
+package proyecto.daoRecompensa;
 
 import proyecto.Recompensa;
 import utilidades.DAOManager;

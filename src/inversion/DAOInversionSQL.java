@@ -1,8 +1,11 @@
 package inversion;
 
+import inversor.DAOInversorSQL;
 import inversor.Inversor;
 import proyecto.Proyecto;
 import proyecto.Recompensa;
+import proyecto.daoProyecto.DAOProyectoSQL;
+import proyecto.daoRecompensa.DAORecompensaSQL;
 import utilidades.DAOManager;
 
 import java.sql.ResultSet;
@@ -71,12 +74,12 @@ public class DAOInversionSQL implements DAOInversion {
         double cantidad= rs.getDouble("cantidad");
         int id_recompensa= rs.getInt("id_recompensa");
 
-        // Creamos las clases necesarias para el constructor de Inversion.
-        // Para ello, hacemos llamada a los métodos que hemos implementado en el DAOManager.
-        // Se obtendrá un objeto de la clase mediante su clave primaria.
-        Inversor inversor= daoManager.getDAOInversor().read(correo_inversor, daoManager);
-        Proyecto proyecto= daoManager.getDAOProyecto().read(id_proyecto,daoManager);
-        Recompensa recompensa= daoManager.getDAORecompensa().read(id_recompensa, daoManager);
+        DAOInversorSQL daoInversorSQL= new DAOInversorSQL();
+        DAOProyectoSQL daoProyectoSQL= new DAOProyectoSQL();
+        DAORecompensaSQL daoRecompensaSQL= new DAORecompensaSQL();
+        Inversor inversor= daoInversorSQL.read(correo_inversor, daoManager);
+        Proyecto proyecto= daoProyectoSQL.read(id_proyecto,daoManager);
+        Recompensa recompensa= daoRecompensaSQL.read(id_recompensa, daoManager);
 
         return new Inversion(inversor, proyecto, cantidad, recompensa);
     }

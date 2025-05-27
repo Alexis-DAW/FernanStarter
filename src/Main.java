@@ -1,6 +1,5 @@
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.Connection;
 import java.time.LocalDateTime;
 import java.util.Properties;
@@ -8,13 +7,12 @@ import java.util.Scanner;
 
 import administrador.Administrador;
 import administrador.DAOAdministradorSQL;
-import administrador.DAOUsuario;
 import gestor.DAOGestorSQL;
 import inversion.DAOInversionSQL;
 import inversor.DAOInversorSQL;
 import proyecto.daoProyecto.ControladorProyectoDAO;
 import proyecto.daoProyecto.DAOProyectoSQL;
-import proyecto.daoProyecto.DAORecompensaSQL;
+import proyecto.daoRecompensa.DAORecompensaSQL;
 import utilidades.DAOManager;
 import gestor.Gestor;
 
