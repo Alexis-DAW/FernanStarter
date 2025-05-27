@@ -12,6 +12,7 @@ import administrador.DAOUsuario;
 import gestor.DAOGestorSQL;
 import inversion.DAOInversionSQL;
 import inversor.DAOInversorSQL;
+import proyecto.daoProyecto.ControladorProyectoDAO;
 import proyecto.daoProyecto.DAOProyectoSQL;
 import proyecto.daoProyecto.DAORecompensaSQL;
 import utilidades.DAOManager;
@@ -53,6 +54,8 @@ public class Main {
 
             GestionProyectos proyectosDeLaPlataforma = new GestionProyectos();
             ProyectoControlador controladorProyecto = new ProyectoControlador(proyectosDeLaPlataforma, vistaDeProyectos);
+
+            ControladorProyectoDAO controladorProyectoDAO = new ControladorProyectoDAO(daoProyecto, vistaDeProyectos, daoManager);
 
             //Cargamos nuestro archivo properties.
             Properties properties = new Properties();
