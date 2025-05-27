@@ -48,6 +48,7 @@ public class Main {
             //Creación de los controladores
             ControladorProyectoDAO controladorProyectoDAO = new ControladorProyectoDAO(daoProyecto, vistaDeProyectos, daoManager);
             ControladorUsuarioDAO controladorUsuarioDAO= new ControladorUsuarioDAO(daoUsuario, vistaUsuarios, daoManager);
+            controladorUsuarioDAO.cargarUsuarios();
 
             //Modelos y controladores para persistencia en ficheros
             GestionUsuarios listaUsuarios = new GestionUsuarios();
@@ -105,10 +106,10 @@ public class Main {
                     Usuario usuario;
                     do {
                         System.out.println("» Introduzca su nombre de usuario: ");
-                        usuario = controladorUsuario.devuelveUsuario(s.nextLine());
+                        usuario = controladorUsuarioDAO.getUsuarioPorNombre(s.nextLine());
                     } while (usuario == null);
 
-                    String contrasenaUsuario = controladorUsuario.getContrasena(usuario);
+                    String contrasenaUsuario = controladorUsuarioDAO.getContrasena(usuario);
                     String contrasenaIntroducida;
                     int intentos = 3;
                     do {
@@ -134,7 +135,7 @@ public class Main {
                     if (intentos == 0) controladorUsuario.bloquearUsuario(usuario);
                     controladorUsuario.guardarUsuarios("ficheros/usuarios.txt"); // cuando un usuario quede bloqueado, se guarda
 
-                    switch (controladorUsuario.getTipoDeUsuario(usuario)) {
+                    switch (usuario.getTipoUsuario()) {
                         case ADMINISTRADOR -> {
                             Administrador administrador = (Administrador) usuario;
                             int opcionAdmin;

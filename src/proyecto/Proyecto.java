@@ -1,6 +1,7 @@
 package proyecto;
 import gestor.Gestor;
 import inversion.Inversion;
+import usuario.Usuario;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -24,10 +25,10 @@ public final class Proyecto implements Serializable {
     private ArrayList<Inversion> inversiones;
     private int numInversiones;
     private int numRecompensas;
-    private Gestor gestor;
+    private Usuario usuario;
 
     public Proyecto(String nombre, String descripcion, double cantidadNecesaria, LocalDate fechaInicio,
-                    LocalDate fechaFin, Categoria categoria, Gestor gestor){
+                    LocalDate fechaFin, Categoria categoria, Usuario usuario){
         this.id = contadorProyectos++;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -40,11 +41,11 @@ public final class Proyecto implements Serializable {
         this.recompensas = new Recompensa[3];
         this.numInversiones = 0;
         this.numRecompensas = 0;
-        this.gestor = gestor;
+        this.usuario = usuario;
     }
 
     public Proyecto(int id, String nombre, String descripcion, double cantidadNecesaria,
-                    LocalDate fechaInicio, LocalDate fechaFin, Categoria categoria, Gestor gestor) {
+                    LocalDate fechaInicio, LocalDate fechaFin, Categoria categoria, Usuario usuario) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -52,7 +53,7 @@ public final class Proyecto implements Serializable {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.categoria = categoria;
-        this.gestor = gestor;
+        this.usuario = usuario;
         this.cantidadFinanciada = 0.0;
     }
 
@@ -84,8 +85,8 @@ public final class Proyecto implements Serializable {
         return recompensas;
     }
 
-    public Gestor getGestor() {
-        return gestor;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
     //Te devuelve cuantos días hay entre la fecha de inicio de un proyecto y la de fin

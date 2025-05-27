@@ -7,6 +7,7 @@ import java.util.Scanner;
 import static utilidades.FuncionesCadenas.*;
 import static utilidades.FuncionesFechas.*;
 
+import administrador.Administrador;
 import proyecto.Categoria;
 import proyecto.Proyecto;
 import proyecto.Recompensa;
@@ -144,7 +145,9 @@ public final class FuncionesVarias {
         System.out.print("Introduzca la fecha de cierre (dd/MM/yyy): ");
         LocalDate fechaCierre= convertirAFecha(s.nextLine());
 
-        Proyecto nuevoProyecto= new Proyecto(titulo, descripcion, cantidad, fechaInicio, fechaCierre, categoria, (Gestor)usuario);
+        Usuario usuarioCasteado = (usuario.getTipoUsuario().equals(Tipo.GESTOR)) ? (Gestor) usuario : (Administrador) usuario;
+
+        Proyecto nuevoProyecto= new Proyecto(titulo, descripcion, cantidad, fechaInicio, fechaCierre, categoria, usuarioCasteado);
 
         for (int i = 1; i <= 3; i++) {
             System.out.print("Descripción de recompensa nº" + i + ": ");

@@ -13,3 +13,11 @@ Cierre de sesión de  inversor, 21/04/2025 18:33:52
 Inicio de sesión de  gestor, 21/04/2025 18:34:05
 Cierre de sesión de  gestor, 21/04/2025 18:34:08
 
+Inicio de sesión admin 27/05/2025 13:36:09
+Inicio de sesión admin 27/05/2025 13:48:59
+Nuevo proyecto 111111, 27/05/2025 13:49:47
+Inicio de sesión Admin Uno, 27/05/2025 21:08:52
+Inicio de sesión Admin Uno, 27/05/2025 21:13:57
+Cierre de sesión Admin Uno, 27/05/2025 21:16:14
+Inicio de sesión Gestor Uno, 27/05/2025 21:16:23
+Nuevo proyecto 111111, 27/05/2025 21:17:08

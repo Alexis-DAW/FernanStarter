@@ -1,5 +1,6 @@
 package usuario.dao;
 
+import usuario.Tipo;
 import usuario.Usuario;
 import usuario.UsuarioVista;
 import utilidades.DAOManager;
@@ -13,61 +14,105 @@ public class ControladorUsuarioDAO {
     private DAOUsuarioSQL modelo;
     private UsuarioVista vista;
     private DAOManager daoManager;
+    private ArrayList<Usuario> listaUsuarios;
 
     public ControladorUsuarioDAO(DAOUsuarioSQL modelo, UsuarioVista vista, DAOManager daoManager){
-        this.modelo= modelo;
-        this.vista= vista;
-        this.daoManager= daoManager;
+        this.modelo = modelo;
+        this.vista = vista;
+        this.daoManager = daoManager;
+        this.listaUsuarios = new ArrayList<>();
     }
 
     public void insert(Usuario usuario){
         if(modelo.insert(usuario, daoManager)){
             vista.operacionExitosa();
             logBBDD("Inserción", "usuario");
+            listaUsuarios.add(usuario); // también lo añado a la lista local
+        } else {
+            vista.operacionErronea();
         }
-        else vista.operacionErronea();
     }
 
     public void delete(String correo){
         if(modelo.delete(correo, daoManager)){
             vista.operacionExitosa();
             logBBDD("Eliminación", "usuario");
+            listaUsuarios.removeIf(u -> u.getCorreo().equalsIgnoreCase(correo));
+        } else {
+            vista.operacionErronea();
         }
-        else vista.operacionErronea();
     }
 
     public void update(Usuario usuario){
         if(modelo.update(usuario, daoManager)){
             vista.operacionExitosa();
-            logBBDD("Actualización","usuario" );
+            logBBDD("Actualización","usuario");
+            for (int i = 0; i < listaUsuarios.size(); i++) {
+                if (listaUsuarios.get(i).getCorreo().equalsIgnoreCase(usuario.getCorreo())) {
+                    listaUsuarios.set(i, usuario);
+                    break;
+                }
+            }
+        } else {
+            vista.operacionErronea();
         }
-        else vista.operacionErronea();
     }
 
     public void read(String correo){
         if(modelo.read(correo, daoManager)!= null){
             vista.operacionExitosa();
             logBBDD("Acceso", "usuario");
+        } else {
+            vista.operacionErronea();
         }
-        else vista.operacionErronea();
     }
 
     public void readAll(){
         if(modelo.readAll(daoManager)!= null){
             vista.operacionExitosa();
             logBBDD("Acceso", "usuario");
+        } else {
+            vista.operacionErronea();
         }
-        else vista.operacionErronea();
     }
 
     public void cargarUsuarios(){
-        if (modelo.cargarUsuarios(daoManager)) vista.operacionExitosa();
-        else vista.operacionErronea();
+        ArrayList<Usuario> cargados = modelo.readAll(daoManager);
+        if (cargados != null) {
+            this.listaUsuarios = cargados;
+            vista.operacionExitosa();
+        } else {
+            vista.operacionErronea();
+        }
     }
 
     public void guardarUsuarios(ArrayList<Usuario> listaUsuarios){
-        if (modelo.guardarUsuarios(listaUsuarios, daoManager)) vista.operacionExitosa();
-        else vista.operacionErronea();
+        if (modelo.guardarUsuarios(listaUsuarios, daoManager)) {
+            vista.operacionExitosa();
+            this.listaUsuarios = listaUsuarios;
+        } else {
+            vista.operacionErronea();
+        }
     }
+
+    // MÉTODOS NUEVOS -----------------------------
+
+    public ArrayList<Usuario> getListaUsuarios() {
+        return listaUsuarios;
+    }
+
+    public Usuario getUsuarioPorNombre(String nombre) {
+        for (Usuario u : listaUsuarios) {
+            if (u.getNombre().equalsIgnoreCase(nombre)) return u;
+        }
+        return null;
+    }
+
+    public String getContrasena(Usuario usuario){
+        return usuario.getContrasena();
+    }
+
+
+
 
 }

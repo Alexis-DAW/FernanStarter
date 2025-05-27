@@ -12,15 +12,13 @@ import java.util.ArrayList;
 
 public class DAOUsuarioSQL implements DAOUsuario {
 
-    private ArrayList<Usuario> listadoUsuarios;
-
     @Override
     public boolean insert(Usuario usuario, DAOManager daoManager) {
         String sql = "INSERT INTO usuario (nombre, contrasena, correo, tipo) VALUES ('"
                 + usuario.getNombre() + "','"
                 + usuario.getContrasena() + "','"
                 + usuario.getCorreo() + "','"
-                + usuario.getTipoUsuario().toString() + "';";
+                + usuario.getTipoUsuario().toString() + "');";
         return daoManager.ejecutaSentencia(sql);
     }
 
@@ -89,12 +87,17 @@ public class DAOUsuarioSQL implements DAOUsuario {
         return usuario;
     }
 
-    public boolean cargarUsuarios(DAOManager daoManager){
-        listadoUsuarios= readAll(daoManager);
-        if (listadoUsuarios!= null) return true;
-        else return false;
-    }
-
+//    public boolean cargarUsuarios(DAOManager daoManager){
+//        listadoUsuarios = readAll(daoManager);
+//        if (listadoUsuarios != null && !listadoUsuarios.isEmpty()) {
+//            for (Usuario u : listadoUsuarios) {
+//                System.out.println("Cargado usuario: " + u.getCorreo());
+//            }
+//            return true;
+//        }
+//        return false;
+//    }
+//
     public boolean guardarUsuarios(ArrayList<Usuario> listaUsuarios, DAOManager daoManager){
         for(Usuario usuario: listaUsuarios){
             insert(usuario, daoManager);

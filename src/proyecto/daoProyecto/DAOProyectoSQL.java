@@ -27,7 +27,7 @@ public class DAOProyectoSQL implements DAOProyecto {
             stmt.setDate(5, Date.valueOf(proyecto.getFechaInicio()));
             stmt.setDate(6, Date.valueOf(proyecto.getFechaFin()));
             stmt.setString(7, proyecto.getCategoria().name());
-            stmt.setString(8, proyecto.getGestor().getCorreo());
+            stmt.setString(8, proyecto.getUsuario().getCorreo());
 
             int filas = stmt.executeUpdate();
             if (filas > 0) {
