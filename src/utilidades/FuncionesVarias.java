@@ -17,7 +17,6 @@ import inversor.*;
 
 public final class FuncionesVarias {
 
-    //Apartado de configuración de usuarios (es igual para todos)
     public static void configuracion(Usuario usuario) {
         Scanner s = new Scanner(System.in);
         System.out.println("CONFIGURACION DE USUARIO");
@@ -57,7 +56,6 @@ public final class FuncionesVarias {
         }while (opcion!=4);
     }
 
-    //Crea una nueva contraseña, comprobando que esta cumpla con los requisitos de seguridad
     public static String crearcontrasena(){
         Scanner s = new Scanner(System.in);
         String contrasena;
@@ -74,7 +72,7 @@ public final class FuncionesVarias {
         do{
             System.out.println("Vuelva ha introducir su contraseña");
             contrasena2= s.nextLine();
-        }while(!compararContrasenas(contrasena, contrasena));
+        }while(!compararContrasenas(contrasena, contrasena2));
 
         return contrasena;
     }
@@ -97,7 +95,7 @@ public final class FuncionesVarias {
     }
 
    //Esta función devuelve un proyecto, se usa para agregar un proyecto nuevo o para modificar uno existente
-    public static Proyecto datosProyecto(){
+    public static Proyecto datosProyecto(Usuario usuario){
         Scanner s = new Scanner(System.in);
         String titulo, descripcion;
         do{
@@ -110,15 +108,7 @@ public final class FuncionesVarias {
             descripcion = s.nextLine();
         }while(!comprobarLongitud(descripcion));
 
-        System.out.print("Escoja una de las siguientes categorías: ");
-        System.out.println("-> Arte");
-        System.out.println("-> Tecnología");
-        System.out.println("-> Cine");
-        System.out.println("-> Música");
-        System.out.println("-> Juegos");
-        System.out.println("-> Comida");
-        System.out.println("-> Moda");
-        Categoria categoriaElegida= Categoria.valueOf(s.nextLine().toUpperCase());
+        Categoria categoria= elegirCategoria();
 
         System.out.print("Introduzca la cantidad de inversión necesaria para el proyecto: ");
         double cantidad= Double.parseDouble(s.nextLine());
@@ -128,8 +118,7 @@ public final class FuncionesVarias {
         System.out.print("Introduzca la fecha de cierre (dd/MM/yyy): ");
         LocalDate fechaCierre= convertirAFecha(s.nextLine());
 
-        //todo -> ahora se ha añadido Gestor al constructor de Proyecto
-        Proyecto nuevoProyecto= new Proyecto(titulo, descripcion, cantidad, fechaInicio, fechaCierre, categoriaElegida);
+        Proyecto nuevoProyecto= new Proyecto(titulo, descripcion, cantidad, fechaInicio, fechaCierre, categoria, (Gestor)usuario);
 
         for (int i = 1; i <= 3; i++) {
             System.out.print("Descripción de recompensa nº" + i + ": ");
@@ -143,8 +132,21 @@ public final class FuncionesVarias {
         return nuevoProyecto;
     }
 
-//    public static void muestraGrafico(int[] cantidad, int[] cantidadAportada, int proyecto) {
-//        float grafico = (float) (cantidadAportada[proyecto] * 100) / cantidad[proyecto];
+    public static Categoria elegirCategoria(){
+        Scanner s= new Scanner(System.in);
+        System.out.print("Escoja una de las siguientes categorías: ");
+        System.out.println("-> Arte");
+        System.out.println("-> Tecnología");
+        System.out.println("-> Cine");
+        System.out.println("-> Música");
+        System.out.println("-> Juegos");
+        System.out.println("-> Comida");
+        System.out.println("-> Moda");
+        return Categoria.valueOf(s.nextLine().toUpperCase());
+    }
+
+//    public static void muestraGrafico(intcantidad, intcantidadAportada) {
+//        float grafico = (float) cantidadAportada * 100) / cantidad;
 //        System.out.println("Gráfica de financiación");
 //        System.out.print(grafico + "% \u2192 ");
 //        for (int i = 0; i <= grafico; i++) {

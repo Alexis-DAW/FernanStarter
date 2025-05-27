@@ -27,8 +27,7 @@ public class UsuarioControlador {
     }
 
     public void agregarUsuario(Usuario usuario){
-        boolean agregadoCorrectamente = modelo.agregarUsuario(usuario);
-        if (agregadoCorrectamente) vista.operacionExitosa();
+        if (modelo.agregarUsuario(usuario)) vista.operacionExitosa();
         else vista.operacionErronea();
     }
 

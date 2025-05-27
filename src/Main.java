@@ -6,6 +6,7 @@ import java.util.Properties;
 import java.util.Scanner;
 
 import administrador.Administrador;
+import administrador.DAOAdministradorSQL;
 import utilidades.DAOManager;
 import gestor.Gestor;
 
@@ -35,7 +36,7 @@ public class Main {
         ProyectoVista vistaDeProyectos = new ProyectoVista("✅","❌"); //Vista
         ProyectoControlador controladorProyecto = new ProyectoControlador(proyectosDeLaPlataforma, vistaDeProyectos);
 
-//        Administrador adminPrueba = new Administrador("admin", "admin", "admin@gmail.com");
+        Administrador adminPrueba = new Administrador("admin", "admin", "admin@gmail.com");
 //        Gestor gestorPrueba = new Gestor("gestor", "gestor", "gestor@gmail.com");
 //        Inversor inversorPrueba = new Inversor ("inversor", "inversor", "inversor@gmail.com");
 //        controladorUsuario.agregarUsuario(adminPrueba);
@@ -153,7 +154,7 @@ public class Main {
 
                                     switch (entrada) {
                                         case 1 -> {
-                                            controladorProyecto.agregarProyecto(datosProyecto());
+                                            controladorProyecto.agregarProyecto(datosProyecto(administrador));
                                             controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
                                         }
                                         case 2 -> controladorProyecto.mostrarProyectos();
@@ -161,7 +162,7 @@ public class Main {
                                             controladorProyecto.mostrarProyectos();
                                             System.out.println("Introduzca la ID del proyecto a modificar");
                                             int indice = Integer.parseInt(s.nextLine());
-                                            controladorProyecto.modificarProyecto(indice, datosProyecto());
+                                            controladorProyecto.modificarProyecto(indice, datosProyecto(administrador));
                                             controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
                                         }
                                         case 4 -> {
@@ -215,7 +216,7 @@ public class Main {
 
                                     switch (entrada) {
                                         case 1 -> {
-                                            Proyecto nuevoProyecto = datosProyecto();
+                                            Proyecto nuevoProyecto = datosProyecto(gestor);
                                             controladorProyecto.agregarProyecto(nuevoProyecto);
                                             controladorUsuario.agregarProyectoGestor(nuevoProyecto, gestor.getNombre());
                                             controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
@@ -225,7 +226,7 @@ public class Main {
                                             controladorUsuario.mostrarProyectosGestor(gestor.getNombre());
                                             System.out.println("Introduzca la ID del proyecto a modificar");
                                             int indice = Integer.parseInt(s.nextLine());
-                                            controladorUsuario.modificarProyectoGestor(datosProyecto(), indice, gestor.getNombre());
+                                            controladorUsuario.modificarProyectoGestor(datosProyecto(gestor), indice, gestor.getNombre());
                                             controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
                                         }
                                         case 4 -> {

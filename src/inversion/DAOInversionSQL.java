@@ -23,7 +23,7 @@ public class DAOInversionSQL implements DAOInversion {
     }
     @Override
     public boolean delete(int idInversion, DAOManager daoManager){
-        String sql= "DELETE FROM inversion WHERE id= "+ idInversion + ";";
+        String sql= "DELETE FROM inversion WHERE id = "+ idInversion + ";";
         return daoManager.ejecutaSentencia(sql);
     }
     @Override
@@ -73,6 +73,7 @@ public class DAOInversionSQL implements DAOInversion {
 
         // Creamos las clases necesarias para el constructor de Inversion.
         // Para ello, hacemos llamada a los métodos que hemos implementado en el DAOManager.
+        // Se obtendrá un objeto de la clase mediante su clave primaria.
         Inversor inversor= daoManager.getDAOInversor().read(correo_inversor, daoManager);
         Proyecto proyecto= daoManager.getDAOProyecto().read(id_proyecto,daoManager);
         Recompensa recompensa= daoManager.getDAORecompensa().read(id_recompensa, daoManager);

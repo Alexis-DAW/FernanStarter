@@ -16,6 +16,7 @@ public class DAOGestorSQL implements DAOUsuario {
                 + usuario.getCorreo() + "', 'GESTOR');";
         return daoManager.ejecutaSentencia(sql);
     }
+
     @Override
     public boolean update(Usuario usuario, DAOManager daoManager) {
         String sql = "UPDATE usuario SET nombre = '" + usuario.getNombre()
@@ -23,11 +24,13 @@ public class DAOGestorSQL implements DAOUsuario {
                 + "' WHERE correo = '" + usuario.getCorreo() + "' AND tipo = 'GESTOR';";
         return daoManager.ejecutaSentencia(sql);
     }
+
     @Override
     public boolean delete(String correo, DAOManager daoManager) {
         String sql = "DELETE FROM usuario WHERE correo = '" + correo + "' AND tipo = 'GESTOR';";
         return daoManager.ejecutaSentencia(sql);
     }
+
     @Override
     public Gestor read(String correo, DAOManager daoManager) {
         String sql = "SELECT nombre, contrasena FROM usuario WHERE correo = ? AND tipo = 'GESTOR'";

@@ -21,7 +21,7 @@ public class DAOAdministradorSQL implements DAOUsuario {
     public boolean update(Usuario usuario, DAOManager daoManager) {
         String sql = "UPDATE usuario SET nombre = '" + usuario.getNombre()
                 + "', contrasena = '" + usuario.getContrasena()
-                + "' WHERE correo = " + usuario.getCorreo() + " AND tipo = 'ADMINISTRADOR';";
+                + "' WHERE correo = '" + usuario.getCorreo() + "' AND tipo = 'ADMINISTRADOR';";
         return daoManager.ejecutaSentencia(sql);
     }
     @Override
@@ -61,7 +61,6 @@ public class DAOAdministradorSQL implements DAOUsuario {
 
                 lista.add(administrador);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
