@@ -1,16 +1,13 @@
 package proyecto;
 import inversion.Inversion;
 import inversor.Inversor;
-import usuario.Usuario;
 
 import java.io.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
-import static utilidades.FuncionesFechas.convertirAString;
+import static utilidades.FuncionesVarias.*;
+import static utilidades.FuncionesFechas.*;
 
 public final class GestionProyectos implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -27,7 +24,7 @@ public final class GestionProyectos implements Serializable {
      */
     public void agregarProyecto(Proyecto proyecto) {
         proyectosDeLaPlataforma.add(proyecto);
-        nuevoLog("Nuevo proyecto", proyecto.getNombre(), LocalDateTime.now());
+        logFicheros("Nuevo proyecto", proyecto.getNombre());
     }
 
     /**
@@ -55,7 +52,7 @@ public final class GestionProyectos implements Serializable {
         if (indice != -1) {
             proyectosDeLaPlataforma.remove(indice);
             String nombreProyecto= proyectosDeLaPlataforma.get(indice).getNombre();
-            nuevoLog("Eliminación de proyecto", nombreProyecto, LocalDateTime.now());
+            logFicheros("Eliminación de proyecto", nombreProyecto);
             return true;
         }
         return false;
@@ -71,7 +68,7 @@ public final class GestionProyectos implements Serializable {
         int posicion= buscarProyecto(idProyecto);
         if (posicion !=-1){
             proyectosDeLaPlataforma.set(posicion, proyecto);
-            nuevoLog("Modificación de proyecto", proyecto.getNombre(), LocalDateTime.now());
+            logFicheros("Modificación de proyecto", proyecto.getNombre());
             return true;
         }
         return false;
@@ -90,7 +87,7 @@ public final class GestionProyectos implements Serializable {
         }
         boolean invertidoCorrectamente = proyecto.recibirInversion(inversion);
         if (invertidoCorrectamente){
-            nuevoLog("Nueva inversión", inversor.getNombre(), LocalDateTime.now());
+            logFicheros("Nueva inversión", inversor.getNombre());
             inversor.invertir(inversion);
             return true;
         }
@@ -98,20 +95,7 @@ public final class GestionProyectos implements Serializable {
     }
 
     //Esta función registra cada vez que se crea, elimina o se invierte un proyecto
-    public void nuevoLog(String tipoLog, String nombre, LocalDateTime fecha) {
-        try{
-            BufferedWriter bw = new BufferedWriter(new FileWriter("ficheros/log.txt", true));
-            bw.write(tipoLog + " " + nombre + ", " + convertirAString(LocalDateTime.now()));
-            bw.newLine();
-            bw.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("ERROR. Archivo no encontrado.");
-            e.printStackTrace();
-        } catch (IOException e) {
-            System.out.println("Excepción de entrada/salida");
-            e.printStackTrace();
-        }
-    }
+
 
     public boolean guardarProyectos(String ruta) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ruta))) {

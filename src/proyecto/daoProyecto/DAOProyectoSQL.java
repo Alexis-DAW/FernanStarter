@@ -1,16 +1,19 @@
 package proyecto.daoProyecto;
 
-import gestor.DAOGestorSQL;
 import gestor.Gestor;
 import proyecto.Categoria;
 import proyecto.Proyecto;
+import usuario.dao.DAOUsuarioSQL;
 import utilidades.DAOManager;
 
+import java.io.*;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class DAOProyectoSQL implements DAOProyecto {
+
+    private ArrayList<Proyecto> listadoProyectos;
     @Override
     public boolean insert(Proyecto proyecto, DAOManager daoManager) {
         String sql = "INSERT INTO proyecto (nombre, descripcion, cantidad_necesaria, cantidad_financiada, fecha_inicio, fecha_fin, categoria, correo_gestor) " +
@@ -111,8 +114,8 @@ public class DAOProyectoSQL implements DAOProyecto {
         Categoria categoria = Categoria.valueOf(rs.getString("categoria"));
 
         String correoGestor = rs.getString("correo_gestor");
-        DAOGestorSQL daoGestor = new DAOGestorSQL();
-        Gestor gestor = daoGestor.read(correoGestor, daoManager);
+        DAOUsuarioSQL daoUsuario = new DAOUsuarioSQL();
+        Gestor gestor = (Gestor) daoUsuario.read(correoGestor, daoManager);
 
         if (gestor == null) {
             throw new SQLException("No se encontró el gestor con correo: " + correoGestor);
@@ -123,4 +126,26 @@ public class DAOProyectoSQL implements DAOProyecto {
         return p;
     }
 
+    public boolean cargarUsuarios(String ruta){
+        try{
+            ObjectInputStream ois= new ObjectInputStream(new FileInputStream(ruta));
+            listadoProyectos= (ArrayList<Proyecto>) ois.readObject();
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean guardarUsuarios(String ruta, DAOManager daoManager) {
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ruta));
+            ArrayList<Proyecto> listadoProyectos = readAll(daoManager);
+            oos.writeObject(listadoProyectos);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

@@ -6,13 +6,12 @@ import java.util.Properties;
 import java.util.Scanner;
 
 import administrador.Administrador;
-import administrador.DAOAdministradorSQL;
-import gestor.DAOGestorSQL;
-import inversion.DAOInversionSQL;
-import inversor.DAOInversorSQL;
+import inversion.dao.DAOInversionSQL;
 import proyecto.daoProyecto.ControladorProyectoDAO;
 import proyecto.daoProyecto.DAOProyectoSQL;
 import proyecto.daoRecompensa.DAORecompensaSQL;
+import usuario.dao.ControladorUsuarioDAO;
+import usuario.dao.DAOUsuarioSQL;
 import utilidades.DAOManager;
 import gestor.Gestor;
 
@@ -30,43 +29,50 @@ import static utilidades.FuncionesCorreos.autentificacionDeUsuario;
 public class Main {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
-
         DAOManager daoManager = utilidades.DAOManager.getSinglentonInstance();
         try {
             daoManager.open();
             // Obtenemos la conexión para pasársela a los DAOs
             Connection connection = daoManager.getConnection();
 
-            DAOGestorSQL daoGestor = new DAOGestorSQL();
-            DAOInversorSQL daoInversor = new DAOInversorSQL();
-            DAOAdministradorSQL daoAdministrador = new DAOAdministradorSQL();
+            //Creación de las vistas
+            UsuarioVista vistaUsuarios = new UsuarioVista("🟢","🔴");
+            ProyectoVista vistaDeProyectos = new ProyectoVista("🟢","🔴");
+
+            //Creación de los modelos
+            DAOUsuarioSQL daoUsuario= new DAOUsuarioSQL();
             DAOProyectoSQL daoProyecto = new DAOProyectoSQL();
             DAORecompensaSQL daoRecompensa = new DAORecompensaSQL();
             DAOInversionSQL daoInversion = new DAOInversionSQL();
 
-            UsuarioVista vistaUsuarios = new UsuarioVista("🟢","🔴");
-            ProyectoVista vistaDeProyectos = new ProyectoVista("🟢","🔴");
+            //Creación de los controladores
+            ControladorProyectoDAO controladorProyectoDAO = new ControladorProyectoDAO(daoProyecto, vistaDeProyectos, daoManager);
+            ControladorUsuarioDAO controladorUsuarioDAO= new ControladorUsuarioDAO(daoUsuario, vistaUsuarios, daoManager);
 
+            //Modelos y controladores para persistencia en ficheros
             GestionUsuarios listaUsuarios = new GestionUsuarios();
             UsuarioControlador controladorUsuario = new UsuarioControlador(listaUsuarios, vistaUsuarios);
-
             GestionProyectos proyectosDeLaPlataforma = new GestionProyectos();
             ProyectoControlador controladorProyecto = new ProyectoControlador(proyectosDeLaPlataforma, vistaDeProyectos);
 
-            ControladorProyectoDAO controladorProyectoDAO = new ControladorProyectoDAO(daoProyecto, vistaDeProyectos, daoManager);
-
-            //Cargamos nuestro archivo properties.
+            //Creamos nuestro archivo properties
             Properties properties = new Properties();
+            //Cargamos la ruta en donde se guardarán los datos.
             properties.load(new FileReader("configuracion/setup.properties"));
 
-            //Guardamos la ruta en donde se guardarán los datos de los usuarios y proyectos, así como los logs de la plataforma.
-            properties.setProperty("rutaUsuarios","ficheros/usuarios.txt");
-            properties.setProperty("rutaProyectos","ficheros/proyectos.txt");
+            //Ruta de usuarios BBDD
+            properties.setProperty("rutaUsuarios","ficheros/usuariosBBDD.txt");
+            //Ruta de proyectos BBDD
+            properties.setProperty("rutaProyectos","ficheros/proyectosBBDD.txt");
+            //Ruta de los logs
             properties.setProperty("rutaLogs", "ficheros/log.txt");
+
+            //Guardamos las rutas que acabamos de definir en nuestro archivo properties
             properties.store(new FileWriter("./configuracion/setup.properties"), "Configuracion del programa");
 
-            controladorUsuario.cargarUsuarios(properties.getProperty("rutaUsuarios"));
-            controladorProyecto.cargarProyectos(properties.getProperty("rutaProyectos"));
+            //Por último, cargamos los usuarios y proyectos de la BBDD
+            controladorUsuarioDAO.cargarUsuarios(properties.getProperty("rutaUsuarios"));
+            controladorProyectoDAO.cargarProyectos(properties.getProperty("rutaProyectos"));
 
             int opcion;
             do {

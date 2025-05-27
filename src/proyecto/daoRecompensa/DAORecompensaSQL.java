@@ -11,8 +11,7 @@ import java.util.ArrayList;
 public class DAORecompensaSQL implements DAORecompensa {
     @Override
     public boolean insert(Recompensa recompensa, DAOManager daoManager) {
-        String sql = "INSERT INTO recompensa VALUES ('"
-                + recompensa.getId() + "','"
+        String sql = "INSERT INTO recompensa (descripcion, cantidadMinima) VALUES ('"
                 + recompensa.getDescripcion() + "','"
                 + recompensa.getCantidadMinima() + "');";
         return daoManager.ejecutaSentencia(sql);

@@ -1,5 +1,6 @@
-package inversion;
+package inversion.dao;
 
+import inversion.Inversion;
 import utilidades.DAOManager;
 
 import java.util.ArrayList;

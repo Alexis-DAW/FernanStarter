@@ -1,8 +1,7 @@
 package utilidades;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 import static utilidades.FuncionesCadenas.*;
@@ -16,6 +15,33 @@ import gestor.*;
 import inversor.*;
 
 public final class FuncionesVarias {
+
+    public static void logBBDD(String tipo, String tabla) {
+        try{
+            BufferedWriter bw = new BufferedWriter(new FileWriter("ficheros/log.txt", true));
+            bw.write(tipo + " en la " + tabla + ", " + convertirAString(LocalDateTime.now()));
+            bw.newLine();
+            bw.close();
+        } catch (Exception e) {
+            System.out.println("Archivo no encontrado");
+            e.printStackTrace();
+        }
+    }
+
+    public static void logFicheros(String tipoLog, String nombre) {
+        try{
+            BufferedWriter bw = new BufferedWriter(new FileWriter("ficheros/log.txt", true));
+            bw.write(tipoLog + " " + nombre + ", " + convertirAString(LocalDateTime.now()));
+            bw.newLine();
+            bw.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("ERROR. Archivo no encontrado.");
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("Excepción de entrada/salida");
+            e.printStackTrace();
+        }
+    }
 
     public static void configuracion(Usuario usuario) {
         Scanner s = new Scanner(System.in);

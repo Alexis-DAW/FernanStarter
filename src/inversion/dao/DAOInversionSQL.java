@@ -1,11 +1,12 @@
-package inversion;
+package inversion.dao;
 
-import inversor.DAOInversorSQL;
+import inversion.Inversion;
 import inversor.Inversor;
 import proyecto.Proyecto;
 import proyecto.Recompensa;
 import proyecto.daoProyecto.DAOProyectoSQL;
 import proyecto.daoRecompensa.DAORecompensaSQL;
+import usuario.dao.DAOUsuarioSQL;
 import utilidades.DAOManager;
 
 import java.sql.ResultSet;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 public class DAOInversionSQL implements DAOInversion {
     @Override
     public boolean insert(Inversion inversion, DAOManager daoManager){
-        String sql= "INSERT INTO inversion VALUES ('"
+        String sql= "INSERT INTO inversion (correo_inversor, id_proyecto, cantidad, fecha, id_recompensa) VALUES ('"
                 + inversion.getCorreoInversor() + "','"
                 + inversion.getIDProyecto() + "','"
                 + inversion.getCantidad() + "','"
@@ -74,12 +75,15 @@ public class DAOInversionSQL implements DAOInversion {
         double cantidad= rs.getDouble("cantidad");
         int id_recompensa= rs.getInt("id_recompensa");
 
-        DAOInversorSQL daoInversorSQL= new DAOInversorSQL();
-        DAOProyectoSQL daoProyectoSQL= new DAOProyectoSQL();
-        DAORecompensaSQL daoRecompensaSQL= new DAORecompensaSQL();
-        Inversor inversor= daoInversorSQL.read(correo_inversor, daoManager);
-        Proyecto proyecto= daoProyectoSQL.read(id_proyecto,daoManager);
-        Recompensa recompensa= daoRecompensaSQL.read(id_recompensa, daoManager);
+        //Vamos a instanciar objetos de las clases inversor, proyecto y recompensa
+        //Para ello, utilizamos el metodo read con sus respectivas claves primarias
+        DAOUsuarioSQL daoUsuario= new DAOUsuarioSQL();
+        DAOProyectoSQL daoProyecto= new DAOProyectoSQL();
+        DAORecompensaSQL daoRecompensa= new DAORecompensaSQL();
+
+        Inversor inversor= (Inversor) daoUsuario.read(correo_inversor, daoManager);
+        Proyecto proyecto= daoProyecto.read(id_proyecto,daoManager);
+        Recompensa recompensa= daoRecompensa.read(id_recompensa, daoManager);
 
         return new Inversion(inversor, proyecto, cantidad, recompensa);
     }

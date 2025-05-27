@@ -3,6 +3,7 @@ package proyecto.daoProyecto;
 import proyecto.Proyecto;
 import proyecto.ProyectoVista;
 import utilidades.DAOManager;
+import static utilidades.FuncionesVarias.*;
 
 public class ControladorProyectoDAO {
     private DAOProyectoSQL modelo;
@@ -16,29 +17,52 @@ public class ControladorProyectoDAO {
     }
 
     public void insert (Proyecto proyecto){
-        if (modelo.insert(proyecto, daoManager)) vista.operacionExitosa();
+        if (modelo.insert(proyecto, daoManager)){
+            vista.operacionExitosa();
+            logBBDD("Inserción", "proyecto");
+        }
         else vista.operacionErronea();
     }
 
     public void update (Proyecto proyecto){
-        if (modelo.update(proyecto, daoManager)) vista.operacionExitosa();
+        if (modelo.update(proyecto, daoManager)){
+            vista.operacionExitosa();
+            logBBDD("Actualización", "proyecto");
+        }
         else vista.operacionErronea();
     }
 
     public void delete (int idProyecto){
-        if (modelo.delete(idProyecto, daoManager)) vista.operacionExitosa();
+        if (modelo.delete(idProyecto, daoManager)){
+            vista.operacionExitosa();
+            logBBDD("Eliminación", "proyecto");
+        }
         else vista.operacionErronea();
     }
 
     public void read (int idProyecto){
-        if (modelo.read(idProyecto, daoManager) != null) vista.operacionExitosa();
+        if (modelo.read(idProyecto, daoManager) != null){
+            vista.operacionExitosa();
+            logBBDD("Acceso", "proyecto");
+        }
         else vista.operacionErronea();
     }
 
     public void readAll (){
-        if (modelo.readAll(daoManager) != null) vista.operacionExitosa();
+        if (modelo.readAll(daoManager) != null){
+            vista.operacionExitosa();
+            logBBDD("Acceso", "proyecto");
+        }
         else vista.operacionErronea();
     }
 
+    public void cargarProyectos(String ruta){
+        if (modelo.cargarUsuarios(ruta)) vista.operacionExitosa();
+        else vista.operacionErronea();
+    }
 
+    public void guardarProyectos(String ruta){
+        if (modelo.guardarUsuarios(ruta, daoManager)) vista.operacionExitosa();
+        else vista.operacionErronea();
+    }
 }

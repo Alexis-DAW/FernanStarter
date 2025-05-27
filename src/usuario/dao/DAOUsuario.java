@@ -1,4 +1,4 @@
-package administrador;
+package usuario.dao;
 
 import usuario.Usuario;
 import utilidades.DAOManager;

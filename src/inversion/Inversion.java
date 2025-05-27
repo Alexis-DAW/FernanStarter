@@ -26,7 +26,6 @@ public final class Inversion implements Invertible, Serializable {
         this.recompensa = recompensa;
     }
 
-
     public int getID(){ return id; }
 
     public double getCantidad() { return cantidad; }

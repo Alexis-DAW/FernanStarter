@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import static usuario.Tipo.*;
 import static utilidades.FuncionesFechas.convertirAString;
+import static utilidades.FuncionesVarias.logFicheros;
 
 public final class GestionUsuarios implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -107,29 +108,15 @@ public final class GestionUsuarios implements Serializable {
         return inversor.getInversiones();
     }
 
-    public void nuevoLog(String tipo, String nombre) {
-        try{
-            BufferedWriter bw = new BufferedWriter(new FileWriter("ficheros/log.txt", true));
-            bw.write(tipo + " " + nombre + " " + convertirAString(LocalDateTime.now()));
-            bw.newLine();
-            bw.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Archivo no encontrado");
-            e.printStackTrace();
-        } catch (IOException e) {
-            System.out.println("Excepción de entrada/salida");
-            e.printStackTrace();
-        }
-    }
 
     public void inicioSesion(Usuario usuario){
 
-        nuevoLog("Inicio de sesión", usuario.getNombre());
+        logFicheros("Inicio de sesión", usuario.getNombre());
     }
 
     public void cierreSesion(Usuario usuario){
 
-        nuevoLog("Cierre de sesión", usuario.getNombre());
+        logFicheros("Cierre de sesión", usuario.getNombre());
     }
 
     public boolean guardarUsuarios(String ruta) {
@@ -153,8 +140,5 @@ public final class GestionUsuarios implements Serializable {
             return false;
         }
     }
-
-
-
 
 }

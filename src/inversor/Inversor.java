@@ -47,7 +47,4 @@ public final class Inversor extends Usuario implements Serializable {
     public boolean disminuyeInversion(double cantidad, Inversion inversion) {
         return inversion.disminuyeInversion(cantidad);
     }
-
-
-
 }
