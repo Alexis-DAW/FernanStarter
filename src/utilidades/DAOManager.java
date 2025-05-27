@@ -20,7 +20,7 @@ public class DAOManager {
         this.connection = null;
         this.URL= "jdbc:mysql://localhost:3310/fernanstarter";
         this.USER= "root";
-        this.PASS= " ";
+        this.PASS= "";
     }
 
     public static DAOManager getSinglentonInstance(){
