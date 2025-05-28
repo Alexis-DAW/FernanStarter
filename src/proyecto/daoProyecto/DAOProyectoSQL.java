@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 public class DAOProyectoSQL implements DAOProyecto {
 
-    private ArrayList<Proyecto> listadoProyectos;
     @Override
     public boolean insert(Proyecto proyecto, DAOManager daoManager) {
         String sql = "INSERT INTO proyecto (nombre, descripcion, cantidad_necesaria, cantidad_financiada, fecha_inicio, fecha_fin, categoria, correo_gestor) " +
@@ -125,12 +124,6 @@ public class DAOProyectoSQL implements DAOProyecto {
         Proyecto p = new Proyecto(id, nombre, descripcion, cantidadNecesaria, fechaInicio, fechaFin, categoria, gestor);
         p.setCantidadFinanciada(cantidadFinanciada);
         return p;
-    }
-
-    public boolean cargarProyectos(DAOManager daoManager){
-        listadoProyectos= readAll(daoManager);
-        if (listadoProyectos!=null) return true;
-        else return false;
     }
 
     public boolean guardarProyectos(ArrayList<Proyecto> listaProyectos, DAOManager daoManager) {
