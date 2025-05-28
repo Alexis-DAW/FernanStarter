@@ -22,8 +22,9 @@ public class DAOManager {
     public static DAOManager getSinglentonInstance(){
         if (singlenton == null) {
             singlenton = new DAOManager();
+            return singlenton;
         }
-        return singlenton;
+        else return null;
     }
 
     public void open() {
@@ -46,6 +47,13 @@ public class DAOManager {
     }
 
     public Connection getConnection() {
+        try {
+            if (connection == null || connection.isClosed()) {
+                reconectar();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return connection;
     }
 

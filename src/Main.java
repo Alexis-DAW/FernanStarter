@@ -29,7 +29,7 @@ import static utilidades.FuncionesCorreos.autentificacionDeUsuario;
 public class Main {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
-        DAOManager daoManager = utilidades.DAOManager.getSinglentonInstance();
+        DAOManager daoManager = DAOManager.getSinglentonInstance();
         try {
             daoManager.open();
             // Obtenemos la conexión para pasársela a los DAOs
@@ -159,10 +159,11 @@ public class Main {
                                         System.out.println("Introduzca un nombre de usuario para bloquearlo/desbloquearlo");
                                         nombreUsuario= s.nextLine();
                                     }while (controladorUsuarioDAO.getUsuarioPorNombre(nombreUsuario) == null);
+
                                     controladorUsuarioDAO.cambiarEstadoUsuario(nombreUsuario);
 
-                                    controladorUsuario.cambiarEstadoUsuario(nombreUsuario);
-                                    controladorUsuario.guardarUsuarios("ficheros/usuarios.txt");
+//                                    controladorUsuario.cambiarEstadoUsuario(nombreUsuario);
+//                                    controladorUsuario.guardarUsuarios("ficheros/usuarios.txt");
                                 } else if (opcionAdmin == 2) {
                                     System.out.println("TODOS LOS PROYECTOS");
                                     int entrada;
