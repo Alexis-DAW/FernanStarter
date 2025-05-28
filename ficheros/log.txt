@@ -21,3 +21,11 @@ Inicio de sesión Admin Uno, 27/05/2025 21:13:57
 Cierre de sesión Admin Uno, 27/05/2025 21:16:14
 Inicio de sesión Gestor Uno, 27/05/2025 21:16:23
 Nuevo proyecto 111111, 27/05/2025 21:17:08
+Inicio de sesión Gestor Uno, 27/05/2025 22:30:06
+Cierre de sesión Gestor Uno, 27/05/2025 22:30:14
+Inicio de sesión Admin Uno, 27/05/2025 22:30:21
+Inicio de sesión Admin Uno, 28/05/2025 17:56:12
+Inserción en la usuario, 28/05/2025 18:12:06
+Inicio de sesión alexisprueba, 28/05/2025 18:17:11
+Inicio de sesión Admin Uno, 28/05/2025 18:30:34
+Inicio de sesión Admin Uno, 28/05/2025 18:33:38

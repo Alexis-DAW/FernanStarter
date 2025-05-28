@@ -22,8 +22,8 @@ public class DAOManager {
     public static DAOManager getSinglentonInstance(){
         if (singlenton == null) {
             singlenton = new DAOManager();
-            return singlenton;
-        } else return null;
+        }
+        return singlenton;
     }
 
     public void open() {
@@ -49,8 +49,12 @@ public class DAOManager {
         return connection;
     }
 
-    public boolean ejecutaSentencia(String sql){
+    public boolean ejecutaSentencia(String sql) {
         try {
+            if (connection == null || connection.isClosed()) {
+                System.err.println("⚠️ Conexión cerrada. Intentando reabrir...");
+                reconectar(); //
+            }
             Statement stmt = connection.createStatement();
             stmt.executeUpdate(sql);
             stmt.close();
@@ -61,5 +65,15 @@ public class DAOManager {
         }
     }
 
+    public void reconectar() {
+        try {
+            if (connection == null || connection.isClosed()) {
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3310/fernanstarter", "root", "");
+                System.out.println("✅ Conexión reabierta correctamente.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

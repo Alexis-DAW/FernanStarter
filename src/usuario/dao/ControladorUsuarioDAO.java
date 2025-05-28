@@ -112,6 +112,21 @@ public class ControladorUsuarioDAO {
         return usuario.getContrasena();
     }
 
+    public void cambiarEstadoUsuario(String nombreUsuario){
+        Usuario usuario = modelo.buscaPorNombre(nombreUsuario, daoManager);
+        if (usuario == null) {
+            System.err.println("❌ Error: Usuario no encontrado o error de conexión.");
+            return;
+        }
+
+        if(usuario.estaBloqueado()) {
+            modelo.desbloquearUsuario(usuario, daoManager);
+            System.out.println("✅ Usuario desbloqueado");
+        } else {
+            modelo.bloquearUsuario(usuario, daoManager);
+            System.out.println("✅ Usuario bloqueado");
+        }
+    }
 
 
 

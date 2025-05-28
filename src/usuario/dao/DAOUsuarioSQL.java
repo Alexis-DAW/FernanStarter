@@ -104,4 +104,33 @@ public class DAOUsuarioSQL implements DAOUsuario {
         }
         return true;
     }
+
+    public Usuario buscaPorNombre(String nombre, DAOManager daoManager) {
+        String sql = "SELECT * FROM usuario WHERE nombre LIKE ?";
+
+        try (Connection conn = daoManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, nombre);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    Usuario usuario= crearUsuario(rs);
+                    return usuario;
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al leer el usuario con nombre '" + nombre + "': " + e.getMessage());
+        }
+        return null;
+    }
+
+    public boolean bloquearUsuario(Usuario usuario, DAOManager daoManager) {
+        String sql = "UPDATE usuario SET bloqueado = true WHERE nombre = '" + usuario.getNombre() + "';";
+        return daoManager.ejecutaSentencia(sql);
+    }
+
+    public boolean desbloquearUsuario(Usuario usuario, DAOManager daoManager) {
+        String sql = "UPDATE usuario SET bloqueado = false WHERE nombre = '" + usuario.getNombre() + "';";
+        return daoManager.ejecutaSentencia(sql);
+    }
+
 }

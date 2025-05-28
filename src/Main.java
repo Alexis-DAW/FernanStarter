@@ -40,7 +40,7 @@ public class Main {
             ProyectoVista vistaDeProyectos = new ProyectoVista("🟢","🔴");
 
             //Creación de los modelos
-            DAOUsuarioSQL daoUsuario= new DAOUsuarioSQL();
+            DAOUsuarioSQL daoUsuario = new DAOUsuarioSQL();
             DAOProyectoSQL daoProyecto = new DAOProyectoSQL();
             DAORecompensaSQL daoRecompensa = new DAORecompensaSQL();
             DAOInversionSQL daoInversion = new DAOInversionSQL();
@@ -100,7 +100,7 @@ public class Main {
                     Usuario nuevoUsuario = datosUsuario(entrada);
                     controladorUsuario.agregarUsuario(nuevoUsuario);
                     controladorUsuarioDAO.insert(nuevoUsuario);
-                    controladorUsuario.guardarUsuarios(properties.getProperty("rutaUsuarios"));
+//                    controladorUsuario.guardarUsuarios(properties.getProperty("rutaUsuarios"));
                 }
 
                 if (opcion == 2) {
@@ -158,7 +158,8 @@ public class Main {
                                     do{
                                         System.out.println("Introduzca un nombre de usuario para bloquearlo/desbloquearlo");
                                         nombreUsuario= s.nextLine();
-                                    }while (controladorUsuario.devuelveUsuario(nombreUsuario) == null);
+                                    }while (controladorUsuarioDAO.getUsuarioPorNombre(nombreUsuario) == null);
+                                    controladorUsuarioDAO.cambiarEstadoUsuario(nombreUsuario);
 
                                     controladorUsuario.cambiarEstadoUsuario(nombreUsuario);
                                     controladorUsuario.guardarUsuarios("ficheros/usuarios.txt");
@@ -340,7 +341,12 @@ public class Main {
             System.err.println("Error: " + e.getMessage());
             e.printStackTrace();
         } finally {
-            daoManager.close();
+            try{
+                daoManager.close();
+            }catch (Exception e) {
+                System.out.println("Error al cerrar la conexión: ");
+                e.printStackTrace();
+            }
         }
     }
 
