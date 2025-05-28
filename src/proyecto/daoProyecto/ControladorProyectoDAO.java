@@ -2,6 +2,7 @@ package proyecto.daoProyecto;
 
 import proyecto.Proyecto;
 import proyecto.ProyectoVista;
+import usuario.Usuario;
 import utilidades.DAOManager;
 
 import java.util.ArrayList;
@@ -70,12 +71,21 @@ public class ControladorProyectoDAO {
     }
 
     public void cargarProyectos(){
-        if (modelo.cargarProyectos(daoManager)) vista.operacionExitosa();
-        else vista.operacionErronea();
+        ArrayList<Proyecto> cargados = modelo.readAll(daoManager);
+        if (cargados != null) {
+            this.listaProyecto = cargados;
+            vista.operacionExitosa();
+        } else {
+            vista.operacionErronea();
+        }
     }
 
-    public void guardarProyectos(ArrayList<Proyecto> listaProyectos){
-        if (modelo.guardarProyectos(listaProyectos, daoManager)) vista.operacionExitosa();
-        else vista.operacionErronea();
+    public void guardarUsuarios(ArrayList<Proyecto> listaProyecto){
+        if (modelo.guardarProyectos(listaProyecto, daoManager)) {
+            vista.operacionExitosa();
+            this.listaProyecto= listaProyecto;
+        } else {
+            vista.operacionErronea();
+        }
     }
 }
