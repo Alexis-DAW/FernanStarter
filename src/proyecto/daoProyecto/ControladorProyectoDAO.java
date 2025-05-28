@@ -88,4 +88,10 @@ public class ControladorProyectoDAO {
             vista.operacionErronea();
         }
     }
+
+    public void mostrarTodos (){
+        for (Proyecto p : listaProyecto){
+            System.out.println(p);
+        }
+    }
 }

@@ -126,6 +126,7 @@ public class DAOProyectoSQL implements DAOProyecto {
         return p;
     }
 
+
     public boolean guardarProyectos(ArrayList<Proyecto> listaProyectos, DAOManager daoManager) {
         for(Proyecto proyecto: listaProyectos){
             insert(proyecto, daoManager);

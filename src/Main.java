@@ -182,7 +182,7 @@ public class Main {
                                                 controladorProyectoDAO.insert(proyecto);
                                                 controladorProyecto.guardarProyectos("ficheros/proyectos.txt");
                                             }
-                                            case 2 -> controladorProyecto.mostrarProyectos();
+                                            case 2 -> controladorProyectoDAO.mostrarTodos();
                                             case 3 -> {
                                                 controladorProyecto.mostrarProyectos();
                                                 System.out.println("Introduzca la ID del proyecto a modificar");
