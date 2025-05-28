@@ -127,13 +127,13 @@ public class DAOProyectoSQL implements DAOProyecto {
         return p;
     }
 
-    public boolean cargarUsuarios(DAOManager daoManager){
+    public boolean cargarProyectos(DAOManager daoManager){
         listadoProyectos= readAll(daoManager);
-        if(listadoProyectos!=null) return true;
+        if (listadoProyectos!=null) return true;
         else return false;
     }
 
-    public boolean guardarUsuarios(ArrayList<Proyecto> listaProyectos, DAOManager daoManager) {
+    public boolean guardarProyectos(ArrayList<Proyecto> listaProyectos, DAOManager daoManager) {
         for(Proyecto proyecto: listaProyectos){
             insert(proyecto, daoManager);
         }

@@ -12,17 +12,20 @@ public class ControladorProyectoDAO {
     private DAOProyectoSQL modelo;
     private ProyectoVista vista;
     private DAOManager daoManager;
+    private ArrayList<Proyecto> listaProyecto;
 
     public ControladorProyectoDAO(DAOProyectoSQL modelo, ProyectoVista vista, DAOManager daoManager) {
         this.modelo = modelo;
         this.vista = vista;
         this.daoManager = daoManager;
+        this.listaProyecto= new ArrayList<>();
     }
 
     public void insert (Proyecto proyecto){
         if (modelo.insert(proyecto, daoManager)){
             vista.operacionExitosa();
             logBBDD("Inserción", "proyecto");
+            listaProyecto.add(proyecto);
         }
         else vista.operacionErronea();
     }
@@ -31,6 +34,12 @@ public class ControladorProyectoDAO {
         if (modelo.update(proyecto, daoManager)){
             vista.operacionExitosa();
             logBBDD("Actualización", "proyecto");
+            for (int i = 0; i < listaProyecto.size(); i++) {
+                if (listaProyecto.get(i).getId() == proyecto.getId()){
+                    listaProyecto.set(i, proyecto);
+                    break;
+                }
+            }
         }
         else vista.operacionErronea();
     }
@@ -39,6 +48,7 @@ public class ControladorProyectoDAO {
         if (modelo.delete(idProyecto, daoManager)){
             vista.operacionExitosa();
             logBBDD("Eliminación", "proyecto");
+            listaProyecto.removeIf(p -> p.getId() == idProyecto);
         }
         else vista.operacionErronea();
     }
@@ -60,12 +70,12 @@ public class ControladorProyectoDAO {
     }
 
     public void cargarProyectos(){
-        if (modelo.cargarUsuarios(daoManager)) vista.operacionExitosa();
+        if (modelo.cargarProyectos(daoManager)) vista.operacionExitosa();
         else vista.operacionErronea();
     }
 
     public void guardarProyectos(ArrayList<Proyecto> listaProyectos){
-        if (modelo.guardarUsuarios(listaProyectos, daoManager)) vista.operacionExitosa();
+        if (modelo.guardarProyectos(listaProyectos, daoManager)) vista.operacionExitosa();
         else vista.operacionErronea();
     }
 }
